@@ -1,0 +1,117 @@
+.screen-container {
+    height: 100vh; /* Make the container take up the full height of the viewport */
+    max-height: 97%; /* Keep this if you want some margin at the bottom */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align the content at the top */
+    align-items: center; /* Center content horizontally */
+}
+
+.page-container {
+    height: 100vh; /* Make the container take up the full height of the viewport */
+    max-height: 98%; /* Keep this if you want some margin at the bottom */
+    max-width: 1650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align the content at the top */
+    align-items: center; /* Center content horizontally */
+
+    position: relative;
+}
+
+.icongrid {
+    display: grid;
+    width: fit-content; /* This is key */
+    grid-template-columns: repeat(12, 100px);
+    grid-template-rows: repeat(7, 100px);
+}
+
+.box {
+    background-color: rgb(134, 134, 134); /* Added for visibility */
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+}
+
+.page-container.background {
+    display: grid;
+}
+
+.taskbar {
+    display: flex;
+    justify-content: center;
+    height: var(--taskbar-height);
+    border-radius: 15px;
+    margin: 3px;
+    background-color: rgba(80, 80, 80, 0.897);
+    position: absolute;
+    bottom: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.header {
+    height: var(--header-height);
+    width: 100%;
+    margin: 1px;
+    background-color: rgba(68, 68, 68, 0.1);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: flex; /* This ensures that the container behaves as a flexbox */
+    justify-content: space-between; /* This will place the logo on the left and the time on the right */
+    align-items: center; /* This vertically aligns the items within the header */
+    align-self: start;
+}
+
+.hero {
+    width: 100%;
+    align-items: start;
+}
+.bg-main {
+    background-image: url('../assets/backgrounds/white_layers.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align the content at the top */
+    align-items: center; /* Center content horizontally */
+}
+
+.osProfileImage {
+    width: 250px; /* Specify exact width */
+    height: 300px; /* Specify exact height */
+    border-radius: 15px;
+    object-fit: cover; /* Ensures the image is cropped rather than stretched */
+    overflow: hidden; /* Ensures content outside the bounds is hidden */
+    margin-left: 10px;
+    display: grid;
+
+    align-content: center;
+}
+
+.oswidgets {
+    display: grid;
+    width: fit-content; /* Content-based width */
+    grid-template-columns: 200px 1fr 625px; /* First column 200px, second column takes remaining space, third column 300px */
+    column-gap: 75px; /* Adds 10px space between columns */
+    width: 100%;
+    background-color: rgba(68, 68, 68, 0.1);
+}
+
+.osIntroduction {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(61, 57, 57, 0.1);
+    padding: 10px;
+    border-radius: 15px;
+    height: 60%;
+    align-self: center;
+    align-content: center;
+}
+.osWelcome {
+}

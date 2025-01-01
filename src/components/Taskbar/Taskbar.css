@@ -1,0 +1,23 @@
+.taskbar-container {
+    display: grid;
+    /* Use 1fr instead of fixed pixel width to make columns flexible */
+    grid-template-columns: repeat(16, 1fr);
+    align-self: center;
+    height: 100%;
+    gap: 10px;
+    background-color: rgba(42, 165, 42, 0.205);
+}
+
+.taskbar-item {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    background-color: white;
+    height: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    color: black;
+    width: 100%;
+    /* Make the width equal to height */
+    aspect-ratio: 1;
+}
