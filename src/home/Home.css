@@ -115,3 +115,15 @@
 }
 .osWelcome {
 }
+
+.layout {
+    background: white;
+    min-height: 500px;
+    width: 100%;
+}
+
+.GridContainer {
+    width: var(--fswidth);
+    height: 1650px;
+    padding-top: 10px;
+}
