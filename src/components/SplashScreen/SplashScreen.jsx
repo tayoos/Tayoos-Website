@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './SplashScreen.css';
 
-const SplashScreen = ({ videoSrc, isMobile }) => {
+const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
     const videoRef = useRef(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [showSplash, setShowSplash] = useState(true);
@@ -42,6 +42,10 @@ const SplashScreen = ({ videoSrc, isMobile }) => {
             setIsTransitioning(true);
             setTimeout(() => {
                 setShowSplash(false);
+                // Call onEnd after transition completes
+                setTimeout(() => {
+                    onEnd();
+                }, 1000);
             }, 1000);
         };
 
@@ -52,7 +56,6 @@ const SplashScreen = ({ videoSrc, isMobile }) => {
                 console.log('Video playing successfully');
             } catch (error) {
                 console.error('Play error:', error);
-                // If autoplay fails, we might want to show a play button or handle differently
                 handleVideoEnded();
             }
         };
@@ -62,11 +65,9 @@ const SplashScreen = ({ videoSrc, isMobile }) => {
             startPlayback();
         };
 
-        // Reset video element
         video.removeAttribute('src');
         video.load();
 
-        // Configure video
         Object.assign(video, {
             muted: true,
             playsInline: true,
@@ -75,15 +76,12 @@ const SplashScreen = ({ videoSrc, isMobile }) => {
             preload: 'auto',
         });
 
-        // Force webkit attributes
         video.setAttribute('playsinline', '');
         video.setAttribute('webkit-playsinline', '');
 
-        // Add event listeners
         video.addEventListener('loadedmetadata', handleLoadedMetadata);
         video.addEventListener('ended', handleVideoEnded);
 
-        // Set source last
         console.log('Setting video source:', videoSrc);
         video.src = videoSrc;
         video.load();
@@ -96,30 +94,30 @@ const SplashScreen = ({ videoSrc, isMobile }) => {
             video.removeAttribute('src');
             video.load();
         };
-    }, [videoSrc, isReady]);
+    }, [videoSrc, isReady, onEnd]);
+
+    if (!showSplash) return null;
 
     return (
         <div className={`splash-screen ${isTransitioning ? 'transitioning' : ''}`}>
-            {showSplash && (
-                <div className="video-container">
-                    {isReady && (
-                        <video
-                            ref={videoRef}
-                            className={`splash-video ${isFadedIn ? 'fade-in' : ''}`}
-                            muted
-                            playsInline
-                            webkit-playsinline=""
-                            autoPlay
-                            preload="auto"
-                            style={{
-                                pointerEvents: 'none',
-                                userSelect: 'none',
-                                WebkitUserSelect: 'none',
-                            }}
-                        />
-                    )}
-                </div>
-            )}
+            <div className="video-container">
+                {isReady && (
+                    <video
+                        ref={videoRef}
+                        className={`splash-video ${isFadedIn ? 'fade-in' : ''}`}
+                        muted
+                        playsInline
+                        webkit-playsinline=""
+                        autoPlay
+                        preload="auto"
+                        style={{
+                            pointerEvents: 'none',
+                            userSelect: 'none',
+                            WebkitUserSelect: 'none',
+                        }}
+                    />
+                )}
+            </div>
         </div>
     );
 };
@@ -127,6 +125,7 @@ const SplashScreen = ({ videoSrc, isMobile }) => {
 SplashScreen.propTypes = {
     videoSrc: PropTypes.string.isRequired,
     isMobile: PropTypes.bool.isRequired,
+    onEnd: PropTypes.func.isRequired,
 };
 
 export default SplashScreen;

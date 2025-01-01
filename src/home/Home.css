@@ -124,6 +124,7 @@
 
 .GridContainer {
     width: var(--fswidth);
-    height: 1650px;
     padding-top: 10px;
+    align-self: center;
+    align-content: center;
 }
