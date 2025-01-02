@@ -1,0 +1,70 @@
+.taskbar-container {
+    display: grid;
+    /* Use 1fr instead of fixed pixel width to make columns flexible */
+
+    grid-template-columns: repeat(8, 1fr);
+    grid-auto-rows: 1fr; /* Ensures consistent row heights */
+    justify-self: center;
+    height: 100%;
+    gap: 10px;
+    /*background-color: rgba(42, 165, 42, 0.205);*/
+}
+
+.taskbar-item {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    background-color: white;
+    height: var(--taskbar-height);
+    border-radius: 8px;
+    font-size: 16px;
+    color: black;
+    width: 100%;
+    /* Make the width equal to height */
+    aspect-ratio: 1;
+}
+
+/* Default styles already cover large screens. */
+
+/* Styles for screens between 1650px and 1200px */
+@media (max-width: 1650px) and (min-width: 1201px) {
+    .taskbar {
+        height: var(--taskbar-height); /* Adjust taskbar height */
+    }
+
+    .taskbar-item {
+        height: var(--taskbar-height); /* Adjust taskbar height */
+    }
+}
+
+/* For devices with a max width of 1200px (e.g., tablets or smaller desktops) */
+@media (max-width: 1200px) {
+    .taskbar {
+        height: var(--taskbar-height-md); /* Adjust taskbar height */
+    }
+    .taskbar-item {
+        height: var(--taskbar-height-md); /* Adjust taskbar height */
+    }
+}
+
+/* For devices with a max width of 768px (e.g., tablets in portrait mode) */
+@media (max-width: 768px) {
+    .taskbar {
+        height: var(--taskbar-height-sm); /* Compact taskbar for mobile */
+        font-size: 10px; /* Smaller font size */
+    }
+    .taskbar-item {
+        height: var(--taskbar-height-sm); /* Adjust taskbar height */
+    }
+}
+
+/* For devices with a max width of 480px (e.g., most smartphones) */
+@media (max-width: 480px) {
+    .taskbar {
+        height: var(--taskbar-height-xs); /* Compact taskbar for mobile */
+        font-size: 10px; /* Smaller font size */
+    }
+    .taskbar-item {
+        height: var(--taskbar-height-xs); /* Adjust taskbar height */
+    }
+}

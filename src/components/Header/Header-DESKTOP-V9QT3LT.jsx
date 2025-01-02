@@ -11,7 +11,7 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 function Header({ isMobile }) {
     return (
-        <div className="header-container ">
+        <div className="header-subcontainer">
             {/* Logo on the left */}
             <div className="logo-container">
                 <img src={'/logo2mcv4.svg'} alt="Web Logo" className="logomain" />

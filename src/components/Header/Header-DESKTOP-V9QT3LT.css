@@ -1,0 +1,62 @@
+.header-subcontainer {
+    display: flex;
+
+    height: 100%;
+    box-sizing: border-box;
+    height: var(--header-height);
+    width: 100%;
+    gap: 15px;
+    padding-left: 10px;
+    padding-right: 10px; /* Add spacing from edge */
+    align-self: start;
+    flex-direction: row; /* Ensures vertical layout */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    align-items: start;
+}
+
+.logomain {
+    max-height: 95%;
+    width: auto;
+    object-fit: contain;
+    align-items: center;
+    display: flex;
+    align-self: start;
+}
+
+.timedate-container {
+    margin-left: auto; /* Push to far right */
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+}
+
+.contact-button {
+    color: black;
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    font-size: 15px;
+}
+.button-text {
+    color: black;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.button-icon {
+    color: black;
+    font-weight: 900;
+    font-size: 15px;
+}
