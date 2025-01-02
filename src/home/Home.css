@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: flex-start; /* Align the content at the top */
     align-items: center; /* Center content horizontally */
+    justify-content: center;
 }
 
 .page-container {
@@ -15,7 +16,9 @@
     flex-direction: column;
     justify-content: flex-start; /* Align the content at the top */
     align-items: center; /* Center content horizontally */
+    align-self: center;
 
+    margin: 0 auto; /* Center horizontally */
     position: relative;
 }
 
@@ -53,7 +56,7 @@
     padding-bottom: 10px;
 }
 
-.header {
+.header-container {
     height: var(--header-height);
     width: 100%;
     margin: 1px;
@@ -62,8 +65,7 @@
     border-bottom-right-radius: 8px;
     display: flex; /* This ensures that the container behaves as a flexbox */
     justify-content: space-between; /* This will place the logo on the left and the time on the right */
-    align-items: center; /* This vertically aligns the items within the header */
-    align-self: start;
+    justify-self: center;
 }
 
 .hero {
@@ -123,8 +125,125 @@
 }
 
 .GridContainer {
-    width: var(--fswidth);
+    width: 98%;
     padding-top: 10px;
     align-self: center;
     align-content: center;
+    background-color: rgbargba(4, 58, 75, 0.13);
+}
+
+/* Default styles already cover large screens. */
+
+/* Styles for screens between 1650px and 1200px */
+@media (max-width: 1650px) and (min-width: 1201px) {
+    .page-container {
+        max-width: 1100px; /* Slightly reduce max width */
+        padding: 0 30px; /* Add some padding */
+        align-items: center; /* Center content horizontally */
+        align-self: center;
+        align-items: center;
+        margin: 0 auto; /* Center horizontally */
+    }
+
+    .icongrid {
+        grid-template-columns: repeat(10, 90px); /* Adjust grid layout */
+        grid-template-rows: repeat(6, 90px);
+    }
+
+    .oswidgets {
+        grid-template-columns: 200px 1fr; /* Adjust layout to two columns */
+        column-gap: 50px; /* Adjust spacing */
+    }
+
+    .header-container {
+        padding-bottom: 10px;
+        padding: 0 20px; /* Add horizontal padding */
+    }
+
+    .osProfileImage {
+        width: 230px; /* Slightly smaller profile image */
+        height: 280px;
+    }
+
+    .taskbar {
+        height: var(--taskbar-height); /* Adjust taskbar height */
+    }
+}
+
+/* For devices with a max width of 1200px (e.g., tablets or smaller desktops) */
+@media (max-width: 1200px) {
+    .page-container {
+        max-width: 100%; /* Adjust container size for smaller screens */
+        padding: 0 20px; /* Add some padding */
+    }
+
+    .icongrid {
+        grid-template-columns: repeat(8, 80px); /* Adjust grid layout */
+        grid-template-rows: repeat(6, 80px);
+    }
+
+    .oswidgets {
+        grid-template-columns: 1fr; /* Stack widgets vertically */
+        column-gap: 20px;
+    }
+}
+
+/* For devices with a max width of 768px (e.g., tablets in portrait mode) */
+@media (max-width: 768px) {
+    .page-container {
+        max-width: 92%; /* Adjust container size for smaller screens */
+        padding: 0 20px; /* Add some padding */
+    }
+    .taskbar {
+        height: var(--taskbar-height-md); /* Compact taskbar for mobile */
+        font-size: 10px; /* Smaller font size */
+    }
+
+    .header-container {
+        padding: 3px;
+    }
+
+    .osProfileImage {
+        width: 200px; /* Smaller profile image */
+        height: 250px;
+    }
+
+    .oswidgets {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+}
+
+/* For devices with a max width of 480px (e.g., most smartphones) */
+@media (max-width: 480px) {
+    .screen-container,
+    .page-container {
+        max-width: 95%;
+        padding: 0 10px; /* Smaller padding for mobile */
+    }
+
+    .header-container {
+        flex-direction: column;
+        justify-content: center; /* Center header items */
+        text-align: center;
+    }
+
+    .icongrid {
+        grid-template-columns: repeat(4, 60px); /* Smaller grid */
+        grid-template-rows: repeat(5, 60px);
+    }
+
+    .oswidgets {
+        grid-template-columns: 1fr; /* Single column for widgets */
+        row-gap: 10px; /* Space between rows */
+    }
+
+    .osProfileImage {
+        width: 150px;
+        height: 200px;
+    }
+
+    .taskbar {
+        height: var(--taskbar-height-sm); /* Compact taskbar for mobile */
+        font-size: 10px; /* Smaller font size */
+    }
 }

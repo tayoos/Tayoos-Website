@@ -14,7 +14,7 @@ import NCReactGridLayout from '../components/Grid/NCReactGridLayout.jsx';
 
 function Home() {
     const icons = ['😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵', '😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵', '😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵'];
-    const taskbar = ['😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵', '😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵'];
+    const taskbar = ['😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵'];
 
     const [splashComplete, setSplashComplete] = useState(false);
     const [isEntryPoint, setIsEntryPoint] = useState(true);
@@ -34,10 +34,9 @@ function Home() {
             <div className="bg-main">
                 <div className="page-container">
                     {/* Video container on top */}
-                    <div className="hero">
-                        <div className="header">
-                            <Header isMobile={isMobile} />
-                        </div>
+
+                    <div className="header-container">
+                        <Header isMobile={isMobile} />
                     </div>
 
                     {/* Add the grid layout here */}

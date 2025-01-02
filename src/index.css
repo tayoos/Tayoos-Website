@@ -17,6 +17,10 @@
     --screenApp: 70px;
     --taskBarApp: 70px;
     --fswidth: 1650px;
+
+    --taskbar-height-md: 50px;
+    --taskbar-height-sm: 40px;
+    --taskbar-height-xs: 30px;
 }
 
 a {

@@ -1,4 +1,4 @@
-.header-container {
+.header-subcontainer {
     display: flex;
 
     height: 100%;
@@ -11,6 +11,7 @@
     align-self: start;
     flex-direction: row; /* Ensures vertical layout */
 }
+
 .logo-container {
     display: flex;
     align-items: center;
