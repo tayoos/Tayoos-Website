@@ -49,11 +49,7 @@
     background-color: rgba(80, 80, 80, 0.897);
     position: absolute;
     bottom: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 5px;
 }
 
 .header-container {
@@ -72,8 +68,26 @@
     width: 100%;
     align-items: start;
 }
+
+.bg-main,
+.bg-dm {
+    transition: all 0.5s ease-in-out;
+}
+
 .bg-main {
     background-image: url('../assets/backgrounds/white_layers.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align the content at the top */
+    align-items: center; /* Center content horizontally */
+}
+
+.bg-dm {
+    background-image: url('../assets/backgrounds/white_layers_darkmode.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const GetTime = () => {
+const GetTime = (isDarkMode) => {
     const [currentTime, setCurrentTime] = useState('');
 
     const updateTime = () => {

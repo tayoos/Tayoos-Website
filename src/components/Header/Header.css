@@ -60,3 +60,10 @@
     font-weight: 900;
     font-size: 15px;
 }
+
+.header-subcontainer.dark .timedate-container,
+.header-subcontainer.dark .contact-button,
+.header-subcontainer.dark .button-text,
+.header-subcontainer.dark .button-icon {
+    color: white;
+}
