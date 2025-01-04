@@ -9,41 +9,49 @@ const Taskbar = ({ onDarkModeChange, setActiveModal }) => {
             image: './src/assets/icons/profile.png',
             imgdm: './src/assets/icons/profile.png',
             title: 'Experience',
+            Name: 'Experience',
         },
         {
             image: './src/assets/icons/certificates.png',
             imgdm: './src/assets/icons/certificates.png',
             title: 'EducationCertification',
+            Name: 'Education & Certification',
         },
         {
             image: './src/assets/icons/profile.png',
             imgdm: './src/assets/icons/profile.png',
             title: 'Tech-Skills',
+            Name: 'Tech & Skills',
         },
         {
             image: './src/assets/icons/profile.png',
             imgdm: './src/assets/icons/profile.png',
             title: 'Affiliates',
+            Name: 'Affiliates',
         },
         {
             image: './src/assets/icons/mail-light.png',
             imgdm: './src/assets/icons/mail-dark.png',
             title: 'Contact',
+            Name: 'Contact',
         },
         {
             image: './src/assets/icons/linkedin.png',
             imgdm: './src/assets/icons/linkedin.png',
             title: 'LinkedIn',
+            Name: 'LinkedIn',
         },
         {
             image: './src/assets/icons/github-light.png',
             imgdm: './src/assets/icons/github-dark.png',
             title: 'Github',
+            Name: 'Github',
         },
         {
             image: './src/assets/icons/settings-light.png',
             imgdm: './src/assets/icons/settings-dark.png',
             title: 'Settings',
+            Name: 'Dark Mode',
         },
     ];
 
@@ -78,7 +86,10 @@ const Taskbar = ({ onDarkModeChange, setActiveModal }) => {
         <div className="taskbar-container">
             {taskbarItems.map((item, index) => (
                 <div key={index} className="taskbar-item" onClick={() => handleSettingsClick(item.title)}>
-                    <img src={darkMode ? item.imgdm : item.image} alt={item.title} className="taskbar-icon" />
+                    <div className="taskbar-content">
+                        <img src={darkMode ? item.imgdm : item.image} alt={item.title} className="taskbar-icon" />
+                        <span className="taskbar-name">{item.title === 'Settings' ? (darkMode ? 'Light Mode' : 'Dark Mode') : item.Name}</span>
+                    </div>
                 </div>
             ))}
         </div>
