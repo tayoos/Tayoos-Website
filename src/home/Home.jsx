@@ -12,6 +12,12 @@ import 'react-resizable/css/styles.css';
 import NCReactGridLayout from '../components/Grid/NCReactGridLayout.jsx';
 //import ReactGridLayout from '../components/Grid/ReactGridLayout';
 
+import Modal from '../components/Modals/Modal.jsx';
+import ExperienceModal from '../components/Modals/ExperienceModal.jsx';
+import EducationCertificationModal from '../components/Modals/EducationCertificationModal.jsx';
+import AffiliatesModal from '../components/Modals/AffiliatesModal.jsx';
+import TechSkillsModal from '../components/Modals/TechSkillsModal.jsx';
+
 function Home() {
     const icons = ['😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵', '😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵', '😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵'];
     const taskbar = ['😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵'];
@@ -19,6 +25,7 @@ function Home() {
     const [splashComplete, setSplashComplete] = useState(false);
     const [isEntryPoint, setIsEntryPoint] = useState(true);
     const [isDarkMode, setIsDarkMode] = useState(false); // Add state to track dark mode
+    const [activeModal, setActiveModal] = useState(null);
 
     // Get Device Type
     const isMobile = getDeviceType() === 'Mobile';
@@ -30,6 +37,22 @@ function Home() {
     const handleDarkModeChange = (darkMode) => {
         setIsDarkMode(darkMode);
     };
+
+    const getModalContent = () => {
+        switch (activeModal) {
+            case 'Experience':
+                return <ExperienceModal />;
+            case 'EducationCertification':
+                return <EducationCertificationModal />;
+            case 'Tech-Skills':
+                return <TechSkillsModal />;
+            case 'Affiliates':
+                return <AffiliatesModal />;
+            default:
+                return null;
+        }
+    };
+
     return (
         <div className="screen-container">
             {!splashComplete && isEntryPoint && <SplashScreen videoSrc={isMobile ? videoMBLlndng : videoPClndng} isMobile={isMobile} onEnd={handleSplashEnd} />}
@@ -41,14 +64,16 @@ function Home() {
                     </div>
 
                     <div className="GridContainer">
-                        <NCReactGridLayout
-                            cols={16}
-                            isDarkMode={isDarkMode} // Add this line
-                        />
+                        <NCReactGridLayout cols={16} isDarkMode={isDarkMode} />
                     </div>
 
                     <div className="taskbar">
-                        <Taskbar onDarkModeChange={handleDarkModeChange} />
+                        <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} isDarkMode={isDarkMode} />
+                    </div>
+                    <div className="Modals">
+                        <Modal isOpen={activeModal !== null} onClose={() => setActiveModal(null)} title={activeModal}>
+                            {getModalContent()}
+                        </Modal>
                     </div>
                 </div>
             </div>

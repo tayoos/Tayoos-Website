@@ -146,6 +146,50 @@
     background-color: rgbargba(4, 58, 75, 0.13);
 }
 
+@keyframes modalExpand {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+        transform-origin: var(--click-x) var(--click-y);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+        transform-origin: var(--click-x) var(--click-y);
+    }
+}
+
+.Modals {
+    background-color: azure;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    animation: modalExpand 0.3s ease-out;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 /* Default styles already cover large screens. */
 
 /* Styles for screens between 1650px and 1200px */

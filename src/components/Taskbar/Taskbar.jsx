@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import './Taskbar.css';
 
-const Taskbar = ({ onDarkModeChange }) => {
+const Taskbar = ({ onDarkModeChange, setActiveModal }) => {
     const [darkMode, setDarkMode] = useState(false);
-    const [activeModal, setActiveModal] = useState(null);
 
     const taskbarItems = [
         {
@@ -72,21 +71,6 @@ const Taskbar = ({ onDarkModeChange }) => {
                 break;
             default:
                 break;
-        }
-    };
-
-    const getModalContent = () => {
-        switch (activeModal) {
-            case 'Experience':
-                return <ExperienceModal />;
-            case 'EducationCertification':
-                return <EducationModal />;
-            case 'Tech-Skills':
-                return <TechSkillsModal />;
-            case 'Affiliates':
-                return <AffiliatesModal />;
-            default:
-                return null;
         }
     };
 
