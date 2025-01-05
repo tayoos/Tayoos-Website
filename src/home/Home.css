@@ -140,10 +140,10 @@
 
 .GridContainer {
     width: 98%;
+    height: 90%;
     padding-top: 10px;
     align-self: center;
-    align-content: center;
-    background-color: rgbargba(4, 58, 75, 0.13);
+    align-content: flex-start;
 }
 
 @keyframes modalExpand {

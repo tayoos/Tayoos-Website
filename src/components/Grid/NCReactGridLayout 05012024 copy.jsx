@@ -10,11 +10,13 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const NCReactGridLayout = ({ isDarkMode }) => {
     const containerRef = useRef(null);
+
+    // Add rowHeight state
     const [rowHeight, setRowHeight] = useState(40);
     const [currentBreakpoint, setCurrentBreakpoint] = useState('xxl');
     const [layouts, setLayouts] = useState(generateInitialLayout);
     const [containerWidth, setContainerWidth] = useState('1650px');
-    const [maxRows, setMaxRows] = useState(20);
+    const [maxHeight, setMaxHeight] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
 
     const breakpoints = {
@@ -46,7 +48,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
             const width = window.innerWidth;
             let newBreakpoint = 'xs';
 
-            // Determine breakpoint and container width
+            // Update container width and breakpoint
             if (width >= breakpoints.xxl) {
                 setContainerWidth('1650px');
                 newBreakpoint = 'xxl';
@@ -65,7 +67,6 @@ const NCReactGridLayout = ({ isDarkMode }) => {
             }
 
             setCurrentBreakpoint(newBreakpoint);
-            setMaxRows(gridRows[newBreakpoint]);
 
             if (containerRef.current) {
                 const taskbar = document.querySelector('.taskbar');
@@ -73,10 +74,17 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                 const taskbarTop = taskbar ? taskbar.getBoundingClientRect().top : window.innerHeight;
                 const availableHeight = taskbarTop - containerTop;
 
+                // Calculate row height based on available height and current breakpoint's row count
                 const currentRowCount = gridRows[newBreakpoint];
                 const calculatedRowHeight = Math.floor(availableHeight / currentRowCount);
+
+                // Set minimum row height to maintain usability
                 const finalRowHeight = Math.max(calculatedRowHeight, 50);
                 setRowHeight(finalRowHeight);
+
+                // Update maxHeight based on new row height
+                const rowHeightUnits = Math.floor(availableHeight / finalRowHeight);
+                setMaxHeight(rowHeightUnits);
             }
         };
 
@@ -85,17 +93,15 @@ const NCReactGridLayout = ({ isDarkMode }) => {
         return () => window.removeEventListener('resize', updateContainerSize);
     }, []);
 
+    // Update validatePosition to use current breakpoint's constraints
     const validatePosition = (layout) => {
-        return layout.map((item) => {
-            const maxY = gridRows[currentBreakpoint] - item.h;
-            return {
-                ...item,
-                x: Math.max(0, Math.min(item.x, gridCols[currentBreakpoint] - item.w)),
-                y: Math.max(0, Math.min(item.y, maxY)),
-                w: Math.max(item.minW || 1, Math.min(item.w, item.maxW || gridCols[currentBreakpoint])),
-                h: Math.max(item.minH || 1, Math.min(item.h, item.maxH || gridRows[currentBreakpoint])),
-            };
-        });
+        return layout.map((item) => ({
+            ...item,
+            x: Math.max(0, Math.min(item.x, gridCols[currentBreakpoint] - item.w)),
+            y: Math.max(0, Math.min(item.y, gridRows[currentBreakpoint] - item.h)),
+            w: Math.max(item.minW || 1, Math.min(item.w, item.maxW || gridCols[currentBreakpoint])),
+            h: Math.max(item.minH || 1, Math.min(item.h, item.maxH || gridRows[currentBreakpoint])),
+        }));
     };
 
     function generateInitialLayout() {
@@ -134,10 +140,11 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                 maxW: 6,
                 maxH: 6,
             },
+
             {
                 i: '3',
-                x: 8,
-                y: 8, // Adjusted to ensure it stays within bounds
+                x: 20,
+                y: 16,
                 w: 1,
                 h: 2,
                 static: false,
@@ -149,9 +156,9 @@ const NCReactGridLayout = ({ isDarkMode }) => {
         ];
     }
 
+    // Rest of the handlers remain the same
     const handleLayoutChange = (newLayout) => {
-        const validatedLayout = validatePosition(newLayout);
-        setLayouts(validatedLayout);
+        setLayouts(validatePosition(newLayout));
     };
 
     const handleDragStart = () => {
@@ -162,13 +169,11 @@ const NCReactGridLayout = ({ isDarkMode }) => {
     const handleDragStop = (layout) => {
         setIsDragging(false);
         document.body.classList.remove('dragging-active');
-        const validatedLayout = validatePosition(layout);
-        setLayouts(validatedLayout);
+        setLayouts(validatePosition(layout));
     };
 
     const handleResizeStop = (layout) => {
-        const validatedLayout = validatePosition(layout);
-        setLayouts(validatedLayout);
+        setLayouts(validatePosition(layout));
     };
 
     return (
@@ -176,11 +181,11 @@ const NCReactGridLayout = ({ isDarkMode }) => {
             className={`w-full flex justify-center ${isDarkMode ? 'dark' : ''}`}
             ref={containerRef}
             style={{
-                height: `${maxRows * rowHeight}px`,
+                height: `${gridRows[currentBreakpoint] * rowHeight}px`,
                 overflow: 'hidden',
-                position: 'relative', // Added to establish positioning context
             }}
         >
+            <style></style>
             <div
                 style={{
                     width: containerWidth,
@@ -188,7 +193,6 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                     margin: '0 auto',
                     height: '100%',
                     overflow: 'hidden',
-                    position: 'relative', // Added to maintain positioning context
                 }}
             >
                 <ResponsiveGridLayout
@@ -214,9 +218,10 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                     useCSSTransforms={true}
                     compactType={null}
                     margin={[5, 5]}
-                    maxRows={maxRows}
+                    maxRows={gridRows[currentBreakpoint]}
                     width={parseInt(containerWidth)}
                     containerPadding={[0, 0]}
+                    bounds="parent"
                     style={{ height: '100%' }}
                 >
                     <div key="0" className="grid-item">
