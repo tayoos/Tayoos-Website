@@ -119,7 +119,7 @@ const MusicWidget = ({ isDarkMode }) => {
         }
 
         return (
-            <div className="flex flex-col items-center justify-center h-full p-4">
+            <div className="MusicWidgetContainer">
                 <div className="mb-2">
                     <p className="text-sm text-gray-500">{service}</p>
                 </div>

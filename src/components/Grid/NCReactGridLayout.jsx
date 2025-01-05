@@ -4,6 +4,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import PhotoWidget from './Widgets/PhotoWidget';
 import TextCardWidget from './Widgets/TextCardWidget';
 import MusicWidget from './Widgets/MusicWidget';
+import CVWidget from './Widgets/CVWidget';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -131,13 +132,26 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                 i: '2',
                 x: 4,
                 y: 5,
-                w: 5,
-                h: 4,
+                w: 4,
+                h: 2,
                 static: false,
-                minW: 3,
-                minH: 3,
+                minW: 4,
+                minH: 2,
                 maxW: 6,
                 maxH: 6,
+            },
+
+            {
+                i: '3',
+                x: 1,
+                y: 7,
+                w: 1,
+                h: 1,
+                static: false,
+                minW: 1,
+                minH: 1,
+                maxW: 1,
+                maxH: 1,
             },
         ];
     }
@@ -219,6 +233,9 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                     </div>
                     <div key="2" className="grid-item">
                         <MusicWidget />
+                    </div>
+                    <div key="3" className="grid-item">
+                        <CVWidget isDarkMode={isDarkMode} />
                     </div>
                 </ResponsiveGridLayout>
             </div>
