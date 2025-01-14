@@ -1,3 +1,7 @@
+:root {
+    --base-height: 90%;
+}
+
 .screen-container {
     height: 100vh; /* Make the container take up the full height of the viewport */
     max-height: 97%; /* Keep this if you want some margin at the bottom */
@@ -144,6 +148,45 @@
     padding-top: 10px;
     align-self: center;
     align-content: flex-start;
+}
+
+/* Media query for height less than 800px */
+@media (max-height: 1150px) {
+    .GridContainer {
+        height: calc(87vh - (100vh - 1100px) * 0.01); /* Moderate rate of decrease */
+    }
+}
+
+@media (max-height: 1000px) {
+    .GridContainer {
+        height: calc(85vh - (1000px - 1100px) * 0.01); /* Moderate rate of decrease */
+    }
+}
+
+/* Progressively more aggressive scaling as the screen gets smaller */
+@media (max-height: 900px) {
+    .GridContainer {
+        height: calc(84vh - (900px - 100vh) * 0.1);
+    }
+}
+
+@media (max-height: 600px) {
+    .GridContainer {
+        height: calc(78vh - (600px - 100vh) * 0.2);
+    }
+}
+
+@media (max-height: 400px) {
+    .GridContainer {
+        height: calc(67vh - (400px - 100vh) * 0.3);
+    }
+}
+
+/* Minimum height safeguard */
+@media (max-height: 300px) {
+    .GridContainer {
+        height: 58vh;
+    }
 }
 
 @keyframes modalExpand {

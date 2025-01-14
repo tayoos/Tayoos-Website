@@ -1,0 +1,62 @@
+.gridbackground-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: aqua;
+}
+
+.gridindexcontainer {
+    position: relative;
+    min-height: 400px;
+    flex-grow: 1;
+    background-color: aqua;
+}
+
+.actions {
+    visibility: hidden;
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    cursor: pointer;
+}
+
+.actions svg {
+    margin-left: 4px;
+}
+
+.item {
+    background: lightgray;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item .react-resizable-handle {
+    visibility: hidden;
+}
+
+.item div {
+    overflow: hidden;
+    max-height: 100%;
+}
+
+.item:hover .actions {
+    visibility: visible;
+}
+
+.item:hover .react-resizable-handle {
+    visibility: visible;
+}
+
+.add-item {
+    height: 48px;
+    width: 120px;
+    line-height: 48px;
+    background: lightgray;
+    text-align: center;
+    margin-bottom: 40px;
+    float: left;
+}

@@ -125,7 +125,7 @@
 
 .cv-image-container {
     position: relative;
-    width: 100%;
+    width: 70%;
     aspect-ratio: 1 / 1;
 }
 
@@ -167,4 +167,112 @@
 /* Hover styles */
 .cv-widget:hover {
     border-color: #9ca3af;
+}
+
+.weather-widget-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(26, 187, 165, 0.39);
+    color: var(--widget-text, #333);
+    border-radius: 15px;
+    height: 100%; /* Fill the parent container */
+    width: 100%; /* Full width of the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Prevent overflow if content spills */
+}
+
+.weather-widget-horizontal.dark {
+    background-color: var(--widget-dark-background, #3333336c);
+    color: var(--widget-dark-text, #f0f0f0);
+    border-color: rgba(31, 189, 189, 0.281);
+}
+
+.weather-icon-section {
+    flex: 0 0 80px; /* Fixed width for the icon section */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Fill the widget's height */
+}
+
+.weather-icon-large {
+    width: 60px;
+    height: 60px;
+}
+
+.weather-details-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    text-align: left;
+    height: 100%; /* Fill the widget's height */
+}
+
+.weather-temperature {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.weather-condition {
+    font-size: 1.2rem;
+    margin-top: 4px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.weather-description {
+    font-size: 1rem;
+    margin-top: 2px;
+    color: #555;
+    text-transform: capitalize;
+}
+
+/* Timezone Widget */
+.timezone-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(63, 55, 55, 0.39);
+    color: var(--widget-text, #333);
+    border-radius: 15px;
+    height: 100%; /* Fill the parent container */
+    width: 100%; /* Full width of the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    font-family: 'San Francisco', Arial, sans-serif;
+
+    /* Add transition for smooth color change */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.timezone-widget.dark {
+    background-color: rgba(63, 55, 55, 0.39);
+    color: var(--widget-dark-text, #f0f0f0);
+}
+
+.timezone-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: capitalize;
+}
+
+.timezone-time {
+    font-size: 2.5rem; /* Prominent time display */
+    font-weight: bold;
+    letter-spacing: -0.02em;
+}
+
+.timezone-label {
+    font-size: 1.2rem;
+    color: #555;
+    text-transform: uppercase;
+    font-weight: 600;
 }
