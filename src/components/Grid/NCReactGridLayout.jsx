@@ -6,6 +6,7 @@ import MusicWidget from './Widgets/MusicWidget';
 import CVWidget from './Widgets/CVWidget';
 import WeatherWidget from './Widgets/WeatherWidget';
 import TimezoneWidget from './Widgets/TimezoneWidget';
+import StatusCard from './Widgets/StatusCard/StatusCard';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -22,8 +23,8 @@ const NCReactGridLayout = ({ isDarkMode }) => {
         xxl: 50,
         xl: 50,
         md: 50,
-        sm: 40,
-        xs: 30,
+        sm: 50,
+        xs: 50,
     };
 
     const breakpoints = {
@@ -37,9 +38,104 @@ const NCReactGridLayout = ({ isDarkMode }) => {
     const gridCols = {
         xxl: 30,
         xl: 22,
-        md: 13,
-        sm: 6,
+        md: 11,
+        sm: 7,
         xs: 6,
+    };
+
+    // Function to check if a position is within grid boundaries
+    const isWithinBounds = (x, y, w, h, maxCols, maxRows) => {
+        return x >= 0 && y >= 0 && x + w <= maxCols && y + h <= maxRows;
+    };
+
+    // Function to check if a position is occupied
+    const isPositionOccupied = (x, y, w, h, layout, excludeId = null) => {
+        return layout.some((item) => {
+            if (item.i === excludeId) return false;
+            const itemRight = item.x + item.w;
+            const itemBottom = item.y + item.h;
+            const newRight = x + w;
+            const newBottom = y + h;
+
+            return !(x >= itemRight || newRight <= item.x || y >= itemBottom || newBottom <= item.y);
+        });
+    };
+
+    // Function to find the nearest available position
+    const findNearestPosition = (width, height, layout, maxCols, maxRows, startX = 0, startY = 0) => {
+        // Ensure starting position is within bounds
+        startX = Math.min(Math.max(0, startX), maxCols - width);
+        startY = Math.min(Math.max(0, startY), maxRows - height);
+
+        // First try the original position if it's within bounds and not occupied
+        if (isWithinBounds(startX, startY, width, height, maxCols, maxRows) && !isPositionOccupied(startX, startY, width, height, layout)) {
+            return { x: startX, y: startY };
+        }
+
+        let layer = 1;
+        const maxLayer = Math.max(maxCols, maxRows);
+
+        while (layer < maxLayer) {
+            // Search in a spiral pattern from the start position
+            for (let dx = -layer; dx <= layer; dx++) {
+                for (let dy = -layer; dy <= layer; dy++) {
+                    const x = startX + dx;
+                    const y = startY + dy;
+
+                    if (isWithinBounds(x, y, width, height, maxCols, maxRows) && !isPositionOccupied(x, y, width, height, layout)) {
+                        return { x, y };
+                    }
+                }
+            }
+            layer++;
+        }
+
+        // If no position found, search systematically from top-left
+        for (let y = 0; y <= maxRows - height; y++) {
+            for (let x = 0; x <= maxCols - width; x++) {
+                if (!isPositionOccupied(x, y, width, height, layout)) {
+                    return { x, y };
+                }
+            }
+        }
+
+        // Absolute fallback to top-left
+        return { x: 0, y: 0 };
+    };
+
+    // Handle breakpoint change
+    const onBreakpointChange = (newBreakpoint) => {
+        const previousCols = gridCols[currentBreakpoint];
+        const newCols = gridCols[newBreakpoint];
+        setCurrentBreakpoint(newBreakpoint);
+
+        // Check and adjust positions regardless of whether the grid is growing or shrinking
+        const newLayout = [...layouts];
+
+        // Sort items by size (larger items first) to better handle placement
+        const sortedItems = [...layouts].map((item, index) => ({ ...item, originalIndex: index })).sort((a, b) => b.w * b.h - a.w * a.h);
+
+        let needsUpdate = false;
+
+        sortedItems.forEach((item) => {
+            // Check if item is out of bounds in the new grid
+            if (!isWithinBounds(item.x, item.y, item.w, item.h, newCols, maxRows)) {
+                needsUpdate = true;
+                const position = findNearestPosition(item.w, item.h, newLayout, newCols, maxRows, item.x, item.y);
+
+                // Update the item in our layout copy
+                newLayout[item.originalIndex] = {
+                    ...item,
+                    x: position.x,
+                    y: position.y,
+                };
+            }
+        });
+
+        // Only update the layout if changes were needed
+        if (needsUpdate) {
+            setLayouts(newLayout);
+        }
     };
 
     useEffect(() => {
@@ -90,12 +186,12 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                 x: 3,
                 y: 1,
                 w: 5,
-                h: 4,
+                h: 3,
                 static: false,
                 minW: 5,
-                minH: 4,
+                minH: 3,
                 maxW: 6,
-                maxH: 5,
+                maxH: 3,
             },
             {
                 i: '2',
@@ -125,7 +221,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
             {
                 i: '4',
                 x: 10,
-                y: 3,
+                y: 5,
                 w: 3,
                 h: 2,
                 static: false,
@@ -137,6 +233,19 @@ const NCReactGridLayout = ({ isDarkMode }) => {
 
             {
                 i: '5',
+                x: 10,
+                y: 3,
+                w: 3,
+                h: 2,
+                static: false,
+                minW: 3,
+                minH: 2,
+                maxW: 4,
+                maxH: 2,
+            },
+
+            {
+                i: '6',
                 x: 10,
                 y: 1,
                 w: 3,
@@ -271,6 +380,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                         onDragStop={handleDragStop}
                         onResizeStop={handleResizeStop}
                         onDrag={onDrag}
+                        onBreakpointChange={onBreakpointChange}
                         preventCollision={true}
                         allowOverlap={false}
                         useCSSTransforms={true}
@@ -299,6 +409,9 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                         </div>
                         <div key="5" className="grid-item rounded-lg shadow-lg overflow-hidden">
                             <TimezoneWidget isDarkMode={isDarkMode} />
+                        </div>
+                        <div key="6" className="grid-item rounded-lg shadow-lg overflow-hidden">
+                            <StatusCard isDarkMode={isDarkMode} />
                         </div>
                     </ResponsiveGridLayout>
                 </div>

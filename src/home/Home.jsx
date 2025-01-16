@@ -19,9 +19,6 @@ import AffiliatesModal from '../components/Modals/AffiliatesModal.jsx';
 import TechSkillsModal from '../components/Modals/TechSkillsModal.jsx';
 
 function Home() {
-    const icons = ['😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵', '😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵', '😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵'];
-    const taskbar = ['😀', '🚀', '🌟', '🎉', '📚', '💻', '🎨', '🎵'];
-
     const [splashComplete, setSplashComplete] = useState(false);
     const [isEntryPoint, setIsEntryPoint] = useState(true);
     const [isDarkMode, setIsDarkMode] = useState(false); // Add state to track dark mode
@@ -62,9 +59,8 @@ function Home() {
                     <div className="header-container">
                         <Header isMobile={isMobile} isDarkMode={isDarkMode} />
                     </div>
-
-                    <div className="GridContainer">
-                        <NCReactGridLayout cols={16} isDarkMode={isDarkMode} />
+                    <div className={`GridContainer ${isMobile ? 'GridContainer-mobile' : ''}`}>
+                        <NCReactGridLayout isDarkMode={isDarkMode} />
                     </div>
 
                     <div className="taskbar">
