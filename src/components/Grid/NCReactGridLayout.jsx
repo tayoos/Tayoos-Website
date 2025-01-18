@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
+
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
+
+import './NCReactGridLayout.css';
+
 import PhotoWidget from './Widgets/PhotoWidget';
 import TextCardWidget from './Widgets/TextCardWidget';
 import MusicWidget from './Widgets/MusicWidget';
@@ -37,11 +43,121 @@ const NCReactGridLayout = ({ isDarkMode }) => {
 
     const gridCols = {
         xxl: 30,
-        xl: 22,
+        xl: 20,
         md: 11,
         sm: 7,
         xs: 6,
     };
+
+    // Specify xs-specific positions
+    const xxlLayout = layouts.map((item) => {
+        switch (item.i) {
+            case '0':
+                return { ...item, x: 0, y: 0, w: 3 };
+            case '1':
+                return { ...item, x: 3, y: 1, w: 6 };
+            case '2':
+                return { ...item, x: 11, y: 1, w: 5 };
+            case '3':
+                return { ...item, x: 20, y: 11, w: 1 };
+            case '4':
+                return { ...item, x: 16, y: 4, w: 4 };
+            case '5':
+                return { ...item, x: 16, y: 2, w: 4 };
+            case '6':
+                return { ...item, x: 16, y: 0, w: 4 };
+            default:
+                return item;
+        }
+    });
+
+    // Specify xs-specific positions
+    const xl_Layout = layouts.map((item) => {
+        switch (item.i) {
+            case '0':
+                return { ...item, x: 0, y: 0, w: 3 };
+            case '1':
+                return { ...item, x: 3, y: 1, w: 5 };
+            case '2':
+                return { ...item, x: 11, y: 1, w: 5 };
+            case '3':
+                return { ...item, x: 20, y: 11, w: 1 };
+            case '4':
+                return { ...item, x: 16, y: 4, w: 4 };
+            case '5':
+                return { ...item, x: 16, y: 2, w: 4 };
+            case '6':
+                return { ...item, x: 16, y: 0, w: 4 };
+            default:
+                return item;
+        }
+    });
+
+    // Specify xs-specific positions
+    const mdLayout = layouts.map((item) => {
+        switch (item.i) {
+            case '0':
+                return { ...item, x: 0, y: 0, w: 3 };
+            case '1':
+                return { ...item, x: 3, y: 1, w: 5 };
+            case '2':
+                return { ...item, x: 6, y: 7, w: 5 };
+            case '3':
+                return { ...item, x: 11, y: 11, w: 1 };
+            case '4':
+                return { ...item, x: 8, y: 4, w: 3 };
+            case '5':
+                return { ...item, x: 8, y: 2, w: 3 };
+            case '6':
+                return { ...item, x: 8, y: 0, w: 3 };
+            default:
+                return item;
+        }
+    });
+
+    // Specify xs-specific positions
+    const smLayout = layouts.map((item) => {
+        switch (item.i) {
+            case '0':
+                return { ...item, x: 0, y: 0, w: 3 };
+            case '1':
+                return { ...item, x: 0, y: 6, w: 6 };
+            case '2':
+                return { ...item, x: 0, y: 9, w: 5 };
+            case '3':
+                return { ...item, x: 6, y: 9, w: 1 };
+            case '4':
+                return { ...item, x: 4, y: 4, w: 3 };
+            case '5':
+                return { ...item, x: 4, y: 2, w: 3 };
+            case '6':
+                return { ...item, x: 4, y: 0, w: 3 };
+            default:
+                return item;
+        }
+    });
+
+    // Specify xs-specific positions
+    const xsLayout = layouts.map((item) => {
+        switch (item.i) {
+            case '0':
+                return { ...item, x: 0, y: 0, w: 3 };
+            case '1':
+                return { ...item, x: 0, y: 6, w: 6 };
+            case '2':
+                return { ...item, x: 0, y: 9, w: 5 };
+            case '3':
+                return { ...item, x: 6, y: 9, w: 1 };
+            case '4':
+                return { ...item, x: 3, y: 4, w: 3 };
+            case '5':
+                return { ...item, x: 3, y: 2, w: 3 };
+            case '6':
+                return { ...item, x: 3, y: 0, w: 3 };
+            default:
+                return item;
+        }
+    });
 
     // Function to check if a position is within grid boundaries
     const isWithinBounds = (x, y, w, h, maxCols, maxRows) => {
@@ -263,7 +379,6 @@ const NCReactGridLayout = ({ isDarkMode }) => {
         if (!dragBoundaryRef.current) return;
 
         const containerBounds = dragBoundaryRef.current.getBoundingClientRect();
-        const elementBounds = element.getBoundingClientRect();
 
         // Calculate grid metrics
         const cellWidth = cellSizes[currentBreakpoint];
@@ -274,26 +389,22 @@ const NCReactGridLayout = ({ isDarkMode }) => {
         const maxX = gridCols[currentBreakpoint] - newItem.w;
         const maxY = maxRows - newItem.h;
 
-        // Get mouse position relative to container
-        const mouseX = e.clientX - containerBounds.left;
-        const mouseY = e.clientY - containerBounds.top;
-
-        // Calculate the offset from mouse to item edge (to maintain grab position)
-        const offsetX = mouseX - elementBounds.left + containerBounds.left;
-        const offsetY = mouseY - elementBounds.top + containerBounds.top;
-
-        // Calculate new position in grid units
-        let gridX = Math.round((mouseX - offsetX) / (cellWidth + gapSize));
-        let gridY = Math.round((mouseY - offsetY) / (cellHeight + gapSize));
+        // Use the placeholder position if available, otherwise use newItem position
+        // The placeholder represents where the item would be dropped
+        const gridX = placeholder ? placeholder.x : newItem.x;
+        const gridY = placeholder ? placeholder.y : newItem.y;
 
         // Strictly enforce boundaries
-        gridX = Math.max(0, Math.min(gridX, maxX));
-        gridY = Math.max(0, Math.min(gridY, maxY));
+        const constrainedX = Math.max(0, Math.min(gridX, maxX));
+        const constrainedY = Math.max(0, Math.min(gridY, maxY));
 
-        // Update layout with constrained position
-        const updatedLayout = layout.map((item) => (item.i === newItem.i ? { ...item, x: gridX, y: gridY } : item));
+        // Only update if position has changed after constraints
+        if (constrainedX !== gridX || constrainedY !== gridY) {
+            // Update layout with constrained position
+            const updatedLayout = layout.map((item) => (item.i === newItem.i ? { ...item, x: constrainedX, y: constrainedY } : item));
 
-        setLayouts(updatedLayout);
+            setLayouts(updatedLayout);
+        }
 
         // Prevent default to stop any potential dragging beyond bounds
         e.preventDefault();
@@ -365,11 +476,11 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                     <ResponsiveGridLayout
                         className="w-full"
                         layouts={{
-                            xxl: layouts,
-                            xl: layouts,
-                            md: layouts,
-                            sm: layouts,
-                            xs: layouts,
+                            xxl: xxlLayout,
+                            xl: xl_Layout,
+                            md: mdLayout,
+                            sm: smLayout,
+                            xs: xsLayout,
                         }}
                         breakpoints={breakpoints}
                         cols={gridCols}

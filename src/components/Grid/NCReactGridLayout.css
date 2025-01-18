@@ -1,0 +1,7 @@
+.react-grid-item.react-grid-placeholder {
+    background-color: rgba(68, 68, 68, 0);
+    border-color: rgba(39, 39, 39, 0.63);
+    border-radius: 15px;
+    border-width: 2px; /* Adjust as needed */
+    border-style: solid; /* Ensures the border is visible */
+}

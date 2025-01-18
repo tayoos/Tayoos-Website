@@ -13,16 +13,17 @@
 }
 
 .page-container {
-    height: 100vh;
-    max-height: 98%;
+    height: 100vh; /* Make the container take up the full height of the viewport */
+    max-height: 98%; /* Keep this if you want some margin at the bottom */
     max-width: 1650px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: flex-start; /* Align the content at the top */
+    align-items: center; /* Center content horizontally */
     align-self: center;
-    margin: 0 auto;
-    position: relative; /* Keep this */
+
+    margin: 0 auto; /* Center horizontally */
+    position: relative;
 }
 
 .icongrid {
@@ -50,12 +51,9 @@
     border-radius: 15px;
     margin: 3px;
     background-color: rgba(80, 80, 80, 0.897);
-    position: absolute; /* Change from absolute to fixed */
+    position: absolute;
     bottom: 0;
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
     padding: 5px;
-    z-index: 1000; /* Ensure it stays on top */
 }
 
 .header-container {
@@ -192,10 +190,9 @@
 }
 
 .GridContainer-mobile {
-    height: auto;
-    min-height: 100vh;
+    height: 150vh;
     overflow-y: auto;
-    padding-bottom: calc(var(--taskbar-height) + 20px); /* Add padding to prevent content from hiding behind taskbar */
+    padding-bottom: 60px;
 }
 
 @keyframes modalExpand {
@@ -283,7 +280,7 @@
 /* For devices with a max width of 1200px (e.g., tablets or smaller desktops) */
 @media (max-width: 1200px) {
     .page-container {
-        max-width: 95%; /* Adjust container size for smaller screens */
+        max-width: 100%; /* Adjust container size for smaller screens */
         padding: 0 20px; /* Add some padding */
     }
 

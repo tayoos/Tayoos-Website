@@ -25,6 +25,7 @@
 /* Ensure alignment of StatusCircle */
 .status-circle {
     margin-left: auto;
+    z-index: 1000; /* Ensure it stays on top */
 }
 
 /* Status label */

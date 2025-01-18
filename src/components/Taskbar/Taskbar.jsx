@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Taskbar.css';
 
-const Taskbar = ({ onDarkModeChange, setActiveModal }) => {
+const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
     const [darkMode, setDarkMode] = useState(false);
 
     const taskbarItems = [
@@ -61,7 +61,8 @@ const Taskbar = ({ onDarkModeChange, setActiveModal }) => {
             case 'EducationCertification':
             case 'Tech-Skills':
             case 'Affiliates':
-                setActiveModal(title);
+                // Simple toggle: if this modal is open, close it. If it's closed or a different modal is open, open this one
+                setActiveModal((currentModal) => (currentModal === title ? null : title));
                 break;
             case 'Contact':
                 window.location.href = 'mailto:dtoshidero@gmail.com';
@@ -85,7 +86,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal }) => {
     return (
         <div className="taskbar-container">
             {taskbarItems.map((item, index) => (
-                <div key={index} className="taskbar-item" onClick={() => handleSettingsClick(item.title)}>
+                <div key={index} className={`taskbar-item ${activeModal === item.title ? 'active' : ''}`} onClick={() => handleSettingsClick(item.title)}>
                     <div className="taskbar-content">
                         <img src={darkMode ? item.imgdm : item.image} alt={item.title} className="taskbar-icon" />
                         <span className="taskbar-name">{item.title === 'Settings' ? (darkMode ? 'Light Mode' : 'Dark Mode') : item.Name}</span>

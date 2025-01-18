@@ -1,18 +1,46 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { X } from 'lucide-react';
 
-const Modal = ({ isOpen, onClose, children, title }) => {
+const Modal = ({ isOpen, onClose, title, children }) => {
+    const modalRef = useRef(null);
+    const modalContentRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (modalRef.current && !modalContentRef.current?.contains(event.target)) {
+                onClose();
+            }
+        };
+
+        const handleEscape = (event) => {
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('keydown', handleEscape);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleEscape);
+        };
+    }, [isOpen, onClose]);
+
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-gray-800 rounded-lg w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto">
-                <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-white">{title}</h2>
-                    <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                        ✕
+        <div ref={modalRef} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div ref={modalContentRef} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto">
+                <div className="flex items-center justify-between p-4 border-b dark:border-gray-700">
+                    <h2 className="text-xl font-semibold dark:text-white">{title}</h2>
+                    <button onClick={onClose} className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <X className="w-6 h-6" />
                     </button>
                 </div>
-                <div className="p-6">{children}</div>
+                <div className="p-4">{children}</div>
             </div>
         </div>
     );

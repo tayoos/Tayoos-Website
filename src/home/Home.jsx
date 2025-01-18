@@ -31,8 +31,17 @@ function Home() {
         setIsEntryPoint(false);
         setSplashComplete(true);
     };
+
     const handleDarkModeChange = (darkMode) => {
         setIsDarkMode(darkMode);
+    };
+
+    const handleModalToggle = (modalName) => {
+        if (activeModal === modalName) {
+            setActiveModal(null);
+        } else {
+            setActiveModal(modalName);
+        }
     };
 
     const getModalContent = () => {
@@ -49,7 +58,6 @@ function Home() {
                 return null;
         }
     };
-
     return (
         <div className="screen-container">
             {!splashComplete && isEntryPoint && <SplashScreen videoSrc={isMobile ? videoMBLlndng : videoPClndng} isMobile={isMobile} onEnd={handleSplashEnd} />}
@@ -64,7 +72,7 @@ function Home() {
                     </div>
 
                     <div className="taskbar">
-                        <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} isDarkMode={isDarkMode} />
+                        <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} isDarkMode={isDarkMode} />
                     </div>
                     <div className="Modals">
                         <Modal isOpen={activeModal !== null} onClose={() => setActiveModal(null)} title={activeModal}>

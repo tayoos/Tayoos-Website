@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import getLocation from '../../TimeDate/getLocation';
 import './Widgets.css';
+import { MapPin } from 'lucide-react'; // Add this import at the top
 
 const WeatherWidget = ({ isDarkMode }) => {
     const [weatherData, setWeatherData] = useState(null);
@@ -27,6 +28,7 @@ const WeatherWidget = ({ isDarkMode }) => {
 
             const data = await response.json();
             setWeatherData({
+                location: data.name,
                 temperature: Math.round(data.main.temp),
                 condition: data.weather[0].main, // E.g., "Rain", "Clear", "Clouds"
                 icon: data.weather[0].icon, // Weather icon code
@@ -60,7 +62,7 @@ const WeatherWidget = ({ isDarkMode }) => {
         );
     }
 
-    const { temperature, condition, icon, description } = weatherData;
+    const { location, temperature, condition, icon, description } = weatherData;
 
     return (
         <div className={`weather-widget-horizontal ${isDarkMode ? 'dark' : ''}`}>
@@ -68,9 +70,14 @@ const WeatherWidget = ({ isDarkMode }) => {
                 <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={condition} className="weather-icon-large" />
             </div>
             <div className="weather-details-section">
+                <div className="weather-location">
+                    <span className="location-text">{location}</span>
+                    <svg className="location-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M12 2L4 20L12 17L20 20L12 2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                    </svg>
+                </div>
                 <div className="weather-temperature">{temperature}°C</div>
-                <div className="weather-condition">{condition}</div>
-                <div className="weather-description">{description}</div>
+                <div className="weather-condition">{description}</div>
             </div>
         </div>
     );
