@@ -1,5 +1,7 @@
 :root {
     --base-height: 90%;
+    --modal-base-height: 87.3%$;
+    --modal-base-width: 1650px;
 }
 
 .screen-container {
@@ -211,15 +213,17 @@
     }
 }
 
-.Modals {
-    background-color: azure;
-    border-radius: 10px;
+.ModalsContainer {
+    border-radius: 15px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
     animation: modalExpand 0.3s ease-out;
+    width: calc(85vw - (100vw - 1100px) * 0.01); /* Moderate rate of decrease */
+    height: var(--modal-base-height);
+    transition: width 0.3s ease-out, height 0.3s ease-out; /* Animate both width and height */
 }
 
 .modal-overlay {

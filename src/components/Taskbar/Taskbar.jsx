@@ -62,7 +62,9 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
             case 'Tech-Skills':
             case 'Affiliates':
                 // Simple toggle: if this modal is open, close it. If it's closed or a different modal is open, open this one
-                setActiveModal((currentModal) => (currentModal === title ? null : title));
+                // Only update activeModal if it doesn't match the current modal or if it's null
+
+                setActiveModal((currentModal) => (currentModal === null || currentModal !== title ? title : null));
                 break;
             case 'Contact':
                 window.location.href = 'mailto:dtoshidero@gmail.com';

@@ -59,7 +59,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
             case '2':
                 return { ...item, x: 11, y: 1, w: 5 };
             case '3':
-                return { ...item, x: 20, y: 11, w: 1 };
+                return { ...item, x: 20, y: 8, w: 1 };
             case '4':
                 return { ...item, x: 16, y: 4, w: 4 };
             case '5':
@@ -81,7 +81,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
             case '2':
                 return { ...item, x: 11, y: 1, w: 5 };
             case '3':
-                return { ...item, x: 20, y: 11, w: 1 };
+                return { ...item, x: 20, y: 8, w: 1 };
             case '4':
                 return { ...item, x: 16, y: 4, w: 4 };
             case '5':
@@ -103,7 +103,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
             case '2':
                 return { ...item, x: 6, y: 7, w: 5 };
             case '3':
-                return { ...item, x: 11, y: 11, w: 1 };
+                return { ...item, x: 11, y: 8, w: 1 };
             case '4':
                 return { ...item, x: 8, y: 4, w: 3 };
             case '5':

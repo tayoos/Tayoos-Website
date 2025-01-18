@@ -1,0 +1,106 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    width: 91.666667%;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: scaleIn 0.3s ease-out;
+}
+
+.modal-content.close {
+    animation: scaleOut 0.4s ease-in; /* Closing animation */
+}
+
+@keyframes scaleIn {
+    from {
+        transform: translateY(50px) scale(0.8);
+
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleOut {
+    from {
+        transform: translateY(0) scale(1); /* Start from the open state */
+        opacity: 1;
+    }
+    to {
+        transform: translateY(50px) scale(0.8); /* Scale down and move up */
+        opacity: 0;
+    }
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    .modal-content {
+        background-color: rgb(31, 41, 55); /* dark:bg-gray-800 */
+    }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Dark mode border */
+@media (prefers-color-scheme: dark) {
+    .modal-header {
+        border-bottom-color: rgb(55, 65, 81); /* dark:border-gray-700 */
+    }
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+    .modal-title {
+        color: white;
+    }
+}
+
+.modal-close-button {
+    padding: 0.25rem;
+    border-radius: 9999px;
+    transition: background-color 0.2s;
+}
+
+.modal-close-button:hover {
+    background-color: rgb(243, 244, 246); /* hover:bg-gray-100 */
+}
+
+@media (prefers-color-scheme: dark) {
+    .modal-close-button:hover {
+        background-color: rgb(55, 65, 81); /* dark:hover:bg-gray-700 */
+    }
+}
+
+.modal-close-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.modal-body {
+    padding: 1rem;
+}

@@ -74,7 +74,8 @@ function Home() {
                     <div className="taskbar">
                         <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} isDarkMode={isDarkMode} />
                     </div>
-                    <div className="Modals">
+
+                    <div className="ModalsContainer">
                         <Modal isOpen={activeModal !== null} onClose={() => setActiveModal(null)} title={activeModal}>
                             {getModalContent()}
                         </Modal>
