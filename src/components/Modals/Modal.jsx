@@ -2,24 +2,25 @@ import React, { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import './Modal.css';
 
-const Modal = ({ isOpen, onClose, onStateChange, title, children }) => {
+const Modal = ({ isOpen, onClose, title, children }) => {
     const modalRef = useRef(null);
     const modalContentRef = useRef(null);
     const [closing, setClosing] = useState(false);
-    const [isVisible, setIsVisible] = useState(isOpen);
+    const [isVisible, setIsVisible] = useState(false);
 
-    // Update visibility when isOpen changes
     useEffect(() => {
         if (isOpen) {
             setIsVisible(true);
-            onStateChange?.(true);
+        } else if (isVisible && !closing) {
+            closeModal();
         }
-    }, [isOpen, onStateChange]);
+    }, [isOpen]);
 
     const closeModal = () => {
         if (!isVisible || closing) return;
+
         setClosing(true);
-        onStateChange?.(false);
+
         setTimeout(() => {
             setClosing(false);
             setIsVisible(false);
@@ -30,14 +31,13 @@ const Modal = ({ isOpen, onClose, onStateChange, title, children }) => {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (modalRef.current && !modalContentRef.current?.contains(event.target)) {
-                onClose();
-                //closeModal();
+                closeModal();
             }
         };
 
         const handleEscape = (event) => {
             if (event.key === 'Escape') {
-                //closeModal();
+                closeModal();
             }
         };
 
