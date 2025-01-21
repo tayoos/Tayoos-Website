@@ -24,9 +24,10 @@ function Home() {
     const [currentModalContent, setCurrentModalContent] = useState(null);
     const [isModalClosing, setIsModalClosing] = useState(false);
     const [pendingModal, setPendingModal] = useState(null);
-
-    const isMobile = getDeviceType() === 'Mobile';
     const closeTimeoutRef = useRef(null);
+
+    // Get Device Type
+    const isMobile = getDeviceType() === 'Mobile';
 
     const handleSplashEnd = () => {
         setIsEntryPoint(false);
@@ -37,90 +38,20 @@ function Home() {
         setIsDarkMode(darkMode);
     };
 
-    const clearCloseTimeout = () => {
-        if (closeTimeoutRef.current) {
-            clearTimeout(closeTimeoutRef.current);
-            closeTimeoutRef.current = null;
+    const getModalContent = () => {
+        switch (activeModal) {
+            case 'Experience':
+                return <ExperienceModal />;
+            case 'EducationCertification':
+                return <EducationCertificationModal />;
+            case 'Tech-Skills':
+                return <TechSkillsModal />;
+            case 'Affiliates':
+                return <AffiliatesModal />;
+            default:
+                return null;
         }
     };
-
-    const closeModalWithAnimation = (onComplete) => {
-        clearCloseTimeout();
-        setIsModalClosing(true);
-
-        closeTimeoutRef.current = setTimeout(() => {
-            setIsModalClosing(false);
-            setActiveModal(null);
-            setCurrentModalContent(null);
-            if (onComplete) onComplete();
-        }, 400);
-    };
-
-    const handleModalToggle = (modalName) => {
-        if (isModalClosing) return;
-
-        // If clicking the same modal that's currently open, close it
-        if (activeModal === modalName) {
-            closeModalWithAnimation();
-            return;
-        }
-
-        // If clicking a different modal while one is open
-        if (activeModal) {
-            closeModalWithAnimation(() => {
-                setActiveModal(modalName);
-            });
-        } else {
-            // If no modal is open, open the new one immediately
-            setActiveModal(modalName);
-        }
-    };
-
-    const handleModalClose = () => {
-        if (!isModalClosing) {
-            closeModalWithAnimation();
-        }
-    };
-    /*
-    // Handle pending modal after closing animation completes
-    useEffect(() => {
-        if (!isModalClosing && pendingModal) {
-            if (pendingModal !== activeModal) {
-                setActiveModal(pendingModal);
-            }
-            setPendingModal(null);
-        }
-    }, [isModalClosing, pendingModal, activeModal]);
-
-    // Clean up timeouts
-    useEffect(() => {
-        return () => clearCloseTimeout();
-    }, []);'*/
-
-    // Handle modal content updates
-    useEffect(() => {
-        if (!activeModal) {
-            return;
-        }
-
-        if (!isModalClosing) {
-            const newContent = (() => {
-                switch (activeModal) {
-                    case 'Experience':
-                        return <ExperienceModal />;
-                    case 'EducationCertification':
-                        return <EducationCertificationModal />;
-                    case 'Tech-Skills':
-                        return <TechSkillsModal />;
-                    case 'Affiliates':
-                        return <AffiliatesModal />;
-                    default:
-                        return null;
-                }
-            })();
-            setCurrentModalContent(newContent);
-        }
-    }, [activeModal, isModalClosing]);
 
     return (
         <div className="screen-container">
@@ -136,12 +67,12 @@ function Home() {
                     </div>
 
                     <div className="taskbar">
-                        <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={handleModalToggle} activeModal={activeModal} isDarkMode={isDarkMode} />
+                        <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} isDarkMode={isDarkMode} />
                     </div>
 
                     <div className="Modals-Container">
-                        <Modal isOpen={activeModal !== null} onClose={handleModalClose} title={activeModal}>
-                            {currentModalContent}
+                        <Modal modalOpen={activeModal !== null} title={activeModal}>
+                            {getModalContent()}
                         </Modal>
                     </div>
                 </div>

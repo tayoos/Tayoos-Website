@@ -1,5 +1,4 @@
-.modal-overlay {
-    background-color: rgba(0, 255, 255, 0.322);
+.modal-backlay {
     position: fixed;
     inset: 0;
     z-index: 50;
@@ -16,52 +15,77 @@
     margin-right: auto;
 }
 
-@media (max-width: 1650px) {
-    .modal-overlay {
-        width: calc(91vw - (1000px - 100vw) * 0.01); /* Moderate rate of decrease */
+@media (max-width: 1650px) and (min-width: 1201px) {
+    .modal-backlay {
+        max-width: 1100px; /* Slightly reduce max width */
+
+        align-items: center; /* Center content horizontally */
+        align-self: center;
+        align-items: center;
+        margin: 0 auto; /* Center horizontally */
     }
 }
 
+@media (max-width: 1200px) {
+    .modal-backlay {
+        max-width: 95%; /* Adjust container size for smaller screens */
+        padding: 0 20px; /* Add some padding */
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-backlay {
+        max-width: 92%; /* Adjust container size for smaller screens */
+        padding: 0 20px; /* Add some padding */
+    }
+}
 @media (max-height: 1150px) {
-    .modal-overlay {
+    .modal-backlay {
         height: calc(91vh - (1000px - 100vh) * 0.01); /* Moderate rate of decrease */
     }
 }
 
+@media (max-width: 480px) {
+    .modal-backlay {
+        max-width: 95%;
+        padding: 0 10px; /* Smaller padding for mobile */
+    }
+}
+
 @media (max-height: 1000px) {
-    .modal-overlay {
+    .modal-backlay {
         height: calc(91vh - (1000px - 100vh) * 0.1); /* Moderate rate of decrease */
     }
 }
 
 /* Progressively more aggressive scaling as the screen gets smaller */
 @media (max-height: 900px) {
-    .modal-overlay {
+    .modal-backlay {
         height: calc(vh - (900px - 100vh) * 0.1);
     }
 }
 
 @media (max-height: 600px) {
-    .modal-overlay {
+    .modal-backlay {
         height: calc(86vh - (600px - 100vh) * 0.15);
     }
 }
 
 @media (max-height: 400px) {
-    .modal-overlay {
+    .modal-backlay {
         height: calc(80vh - (400px - 100vh) * 0.15);
     }
 }
 
 /* Minimum height safeguard */
 @media (max-height: 300px) {
-    .modal-overlay {
+    .modal-backlay {
         height: calc(70vh - (400px - 100vh) * 0.15);
     }
 }
 
-.modal-content {
-    background-color: rgba(255, 255, 255, 0.562);
+.modals-content {
+    background-color: rgba(255, 255, 255, 0.921);
     border-radius: 0.5rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     width: 91.666667%;

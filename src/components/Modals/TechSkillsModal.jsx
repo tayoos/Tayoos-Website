@@ -16,7 +16,7 @@ const TechSkillsModal = () => {
                 <ul className="list-disc ml-6">
                     <li>React</li>
                     <li>Node.js</li>
-                    <li>Django</li>
+                    <li></li>
                 </ul>
             </div>
         </div>
