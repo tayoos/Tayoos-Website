@@ -1,21 +1,72 @@
 .modal-overlay {
+    background-color: rgba(0, 255, 255, 0.322);
     position: fixed;
     inset: 0;
     z-index: 50;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
+    max-width: 1650px;
+    height: 92%;
+
+    /* Add these properties */
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 1650px) {
+    .modal-overlay {
+        width: calc(91vw - (1000px - 100vw) * 0.01); /* Moderate rate of decrease */
+    }
+}
+
+@media (max-height: 1150px) {
+    .modal-overlay {
+        height: calc(91vh - (1000px - 100vh) * 0.01); /* Moderate rate of decrease */
+    }
+}
+
+@media (max-height: 1000px) {
+    .modal-overlay {
+        height: calc(91vh - (1000px - 100vh) * 0.1); /* Moderate rate of decrease */
+    }
+}
+
+/* Progressively more aggressive scaling as the screen gets smaller */
+@media (max-height: 900px) {
+    .modal-overlay {
+        height: calc(vh - (900px - 100vh) * 0.1);
+    }
+}
+
+@media (max-height: 600px) {
+    .modal-overlay {
+        height: calc(86vh - (600px - 100vh) * 0.15);
+    }
+}
+
+@media (max-height: 400px) {
+    .modal-overlay {
+        height: calc(80vh - (400px - 100vh) * 0.15);
+    }
+}
+
+/* Minimum height safeguard */
+@media (max-height: 300px) {
+    .modal-overlay {
+        height: calc(70vh - (400px - 100vh) * 0.15);
+    }
 }
 
 .modal-content {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.562);
     border-radius: 0.5rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     width: 91.666667%;
-    width: 100%;
-    max-height: 90vh;
+    width: 90%;
+    height: 70vh;
     overflow-y: auto;
     animation: scaleIn 0.3s ease-out;
 }

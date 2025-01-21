@@ -139,12 +139,10 @@ function Home() {
                         <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={handleModalToggle} activeModal={activeModal} isDarkMode={isDarkMode} />
                     </div>
 
-                    <div className="ModalsContainer">
-                        <div className="ModalsContainer">
-                            <Modal isOpen={activeModal !== null} onClose={handleModalClose} title={activeModal}>
-                                {currentModalContent}
-                            </Modal>
-                        </div>
+                    <div className="Modals-Container">
+                        <Modal isOpen={activeModal !== null} onClose={handleModalClose} title={activeModal}>
+                            {currentModalContent}
+                        </Modal>
                     </div>
                 </div>
             </div>
