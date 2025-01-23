@@ -1,0 +1,19 @@
+            <div className="experience-list-modal">
+                {experiences.map((experience) => (
+                    <div key={experience.id} className={`experience-item-modal ${experience.id === experience.id ? 'active' : ''}`} onClick={() => handleExperienceClick(experience)}>
+                        {experience.title}
+                    </div>
+                ))}
+            </div>
+            <div className="experience-detail-modal">
+                <div className="modal-header">
+                    <img src={experience.logo} alt={`${experience.title} logo`} className="company-logo" />
+                    <div className="modal-text">
+                        <h2>{experience.title}</h2>
+                        <h3>{experience.location}</h3>
+                    </div>
+                </div>
+                <div className="skills" dangerouslySetInnerHTML={{ __html: experience.skills }} />
+
+                <div dangerouslySetInnerHTML={{ __html: experience.longdesc }} />
+            </div>

@@ -10,12 +10,6 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import NCReactGridLayout from '../components/Grid/NCReactGridLayout.jsx';
 
-import Modal from '../components/Modals/Modal.jsx';
-import ExperienceModal from '../components/Modals/ExperienceModal.jsx';
-import EducationCertificationModal from '../components/Modals/EducationCertificationModal.jsx';
-import AffiliatesModal from '../components/Modals/AffiliatesModal.jsx';
-import TechSkillsModal from '../components/Modals/TechSkillsModal.jsx';
-
 function Home() {
     const [splashComplete, setSplashComplete] = useState(false);
     const [isEntryPoint, setIsEntryPoint] = useState(true);
@@ -38,21 +32,6 @@ function Home() {
         setIsDarkMode(darkMode);
     };
 
-    const getModalContent = () => {
-        switch (activeModal) {
-            case 'Experience':
-                return <ExperienceModal />;
-            case 'EducationCertification':
-                return <EducationCertificationModal />;
-            case 'Tech-Skills':
-                return <TechSkillsModal />;
-            case 'Affiliates':
-                return <AffiliatesModal />;
-            default:
-                return null;
-        }
-    };
-
     return (
         <div className="screen-container">
             {!splashComplete && isEntryPoint && <SplashScreen videoSrc={isMobile ? videoMBLlndng : videoPClndng} isMobile={isMobile} onEnd={handleSplashEnd} />}
@@ -68,12 +47,6 @@ function Home() {
 
                     <div className="taskbar">
                         <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} isDarkMode={isDarkMode} />
-                    </div>
-
-                    <div className="Modals-Container">
-                        <Modal modalOpen={activeModal !== null} title={activeModal}>
-                            {getModalContent()}
-                        </Modal>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { ModalContext } from '../../utitlites/ModalContext.jsx';
+
 import './Taskbar.css';
+
+import ExperienceModal from '../../content/Experiences/ExperienceModal.jsx';
+import EducationCertificationModal from '../../content/EducationCertification/EducationCertificationModal.jsx';
+import TechSkillsModal from '../../content/TechSkills/TechSkillsModal.jsx';
+import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
 
 const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
     const [darkMode, setDarkMode] = useState(false);
+    const { openModal, isCurrentModal, modalContent } = useContext(ModalContext);
 
     const taskbarItems = [
         {
@@ -56,15 +64,25 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
     ];
 
     const handleSettingsClick = (title) => {
+        const itemName = taskbarItems.find((item) => item.title === title)?.Name; // Get the Name based on the title
+        if (!itemName) return; // Exit if no matching item is found
         switch (title) {
             case 'Experience':
-            case 'EducationCertification':
-            case 'Tech-Skills':
-            case 'Affiliates':
-                // Simple toggle: if this modal is open, close it. If it's closed or a different modal is open, open this one
-                // Only update activeModal if it doesn't match the current modal or if it's null
+                console.log('itemName', itemName);
+                openModal(<ExperienceModal />, itemName);
 
-                setActiveModal((currentModal) => (currentModal === null || currentModal !== title ? title : null));
+                break;
+            case 'EducationCertification':
+                openModal(<EducationCertificationModal />, itemName);
+
+                break;
+            case 'Tech-Skills':
+                openModal(<TechSkillsModal />, itemName);
+
+                break;
+            case 'Affiliates':
+                openModal(<AffiliatesModal />, itemName);
+
                 break;
             case 'Contact':
                 window.location.href = 'mailto:dtoshidero@gmail.com';
