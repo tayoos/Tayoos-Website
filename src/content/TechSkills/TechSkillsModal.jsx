@@ -20,6 +20,8 @@ import GitIcon from '../../assets/tech/git.png';
 import HTMLIcon from '../../assets/tech/HTML.png';
 import MscPatranIcon from '../../assets/tech/Python.png';
 
+import ErrorBoundary from '../../ErrorBoundary';
+
 const FallbackComponent = ({ error }) => {
     return (
         <div role="alert" className="p-4 bg-red-100 text-red-800">

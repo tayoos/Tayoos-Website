@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import './ExperienceModal.css';
 
 import logoCapgem from '../../assets/images/logos/Capgem.png';
 import logoJacobs from '../../assets/images/logos/Jacobs.png';
@@ -6,8 +8,6 @@ import logoAlten from '../../assets/images/logos/Alten.png';
 import logoRollsRoyce from '../../assets/images/logos/RollsRoyce.png';
 
 const ExperienceModal = () => {
-    const [activeExperienceId, setActiveExperienceId] = useState(null);
-
     const experiences = [
         {
             id: 1,
@@ -91,14 +91,14 @@ const ExperienceModal = () => {
             location: 'Bristol, England United Kingdom',
             shortdesc: 'Developed verification strategies for the Electric Propulsion Unit system and led key sub-systems in the E-Fan X project.',
             longdesc: `
-            <p>• Defined verification strategies aligning with customer, business, and aviation authority (EASA) requirements for the Electric Propulsion Unit system.</p>
-            <p>• Hosted workshops with system designers to define verification methods for various sub-systems.</p>
-            <p>• Developed and sequenced the verification strategy.</p>
-            <p>• Took ownership of delivering key sub-systems including Fan Systems, Structures & Flow paths, and Bypass & Exhausts:</p>
+            <p>Defined verification strategies aligning with customer, business, and aviation authority (EASA) requirements for the Electric Propulsion Unit system.</p>
+            <p>Hosted workshops with system designers to define verification methods for various sub-systems.</p>
+            <p>Developed and sequenced the verification strategy.</p>
+            <p>Took ownership of delivering key sub-systems including Fan Systems, Structures & Flow paths, and Bypass & Exhausts:</p>
             <ul>
                 <li>Led working groups and conducted meetings to ensure project delivery.</li>
             </ul>
-            <p>• Acquired technical knowledge and capabilities, establishing standardized baselines for program and project management in a global, multifaceted company.</p>
+            <p>Acquired technical knowledge and capabilities, establishing standardized baselines for program and project management in a global, multifaceted company.</p>
         `,
             skills: 'Verification Strategies · Systems Engineering · Client Interaction · Workshop Facilitation · Sub-system Management',
             Tools: 'IBM DOORS · MATLAB · Excel · VBA',
@@ -106,33 +106,35 @@ const ExperienceModal = () => {
         },
     ];
 
+    const [selectedExperience, setSelectedExperience] = useState(experiences[0]);
+
     const handleExperienceClick = (experience) => {
-        openModal(<ExperienceModalContent experience={experience} />);
+        setSelectedExperience(experience);
     };
 
     return (
         <div className="ExperienceContainer">
             <div className="experience-list-modal">
                 {experiences.map((experience) => (
-                    <div key={experience.id} className={`experience-item-modal ${experience.id === experience.id ? 'active' : ''}`} onClick={() => handleExperienceClick(experience)}>
+                    <div key={experience.id} className={`experience-item-modal ${selectedExperience.id === experience.id ? 'active' : ''}`} onClick={() => handleExperienceClick(experience)}>
                         {experience.title}
                     </div>
                 ))}
             </div>
-            <div className="experience-detail-modal">
-                <div className="modal-header">
-                    <img src={experience.logo} alt={`${experience.title} logo`} className="company-logo" />
-                    <div className="modal-text">
-                        <h2>{experience.title}</h2>
-                        <h3>{experience.location}</h3>
+            {selectedExperience && (
+                <div className="experience-detail-modal">
+                    <div className="experience-modal-header">
+                        <img src={selectedExperience.logo} alt={`${selectedExperience.title} logo`} className="company-logo" />
+                        <div className="experience-modal-text">
+                            <h2>{selectedExperience.title}</h2>
+                            <h3>{selectedExperience.location}</h3>
+                        </div>
                     </div>
+                    <div className="skills" dangerouslySetInnerHTML={{ __html: selectedExperience.skills }} />
+                    <div className="ExperienceLongDesc" dangerouslySetInnerHTML={{ __html: selectedExperience.longdesc }} />
                 </div>
-                <div className="skills" dangerouslySetInnerHTML={{ __html: experience.skills }} />
-
-                <div dangerouslySetInnerHTML={{ __html: experience.longdesc }} />
-            </div>
+            )}
         </div>
     );
 };
-
 export default ExperienceModal;

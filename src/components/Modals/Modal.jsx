@@ -51,7 +51,7 @@ const Modal = () => {
                         <X className="modal-close-icon" />
                     </button>
                 </div>
-                <div className="modal-body">{modalContent}</div>
+                <div className="modals-body">{modalContent}</div>
             </div>
         </div>
     );

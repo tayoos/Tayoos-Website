@@ -66,12 +66,14 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
     width: 1485px;
-    height: 70vh;
-    overflow-y: auto;
+    height: 70vh; /* Fixed height relative to the viewport */
+    overflow-y: hidden; /* Prevent scrollbars on the modal container */
     animation: scaleIn 0.3s ease-out;
 
     /* Add transition for smooth resizing */
     transition: max-width 0.3s ease, padding 0.3s ease;
+    display: flex; /* Ensures children layout properly */
+    flex-direction: column; /* Stacks children vertically */
 }
 
 @media (max-width: 1650px) and (min-width: 1201px) {
@@ -158,8 +160,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 1rem; /* Padding inside the header */
     border-bottom: 1px solid #e5e7eb;
+
+    margin: 0; /* Remove any external margin */
 }
 
 /* Dark mode border */
@@ -201,6 +205,13 @@
     height: 1.5rem;
 }
 
-.modal-body {
-    padding: 1rem;
+.modals-body {
+    display: flex; /* Ensure flexbox is used if it's a container */
+    flex-direction: column; /* Arrange items vertically */
+    align-items: flex-start; /* Align items to the top (cross-axis) */
+    justify-content: flex-start; /* Align items to the top (main-axis) */
+    width: 100%; /* Occupy full width of the parent */
+    height: 100%; /* Stretch to fill the parent container's height */
+    overflow-y: auto; /* Allow vertical scrolling if needed */
+    box-sizing: border-box; /* Includes padding/border in dimensions */
 }
