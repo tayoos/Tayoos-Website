@@ -6,7 +6,7 @@ import Device, { getDeviceType } from '../../utitlites/Device.jsx';
 import './Modal.css';
 
 const Modal = () => {
-    const { openModal, closeModal, modalContent, isModalOpen, isCurrentModal, modalTransition, modalActiveClose, modalTitle, darkMode, ListView, resetListView, triggerListView, currentModalSize } = useContext(ModalContext);
+    const { openModal, closeModal, modalContent, isModalOpen, isCurrentModal, modalTransition, modalActiveClose, modalTitle, darkMode, ListView, resetListView, triggerListView } = useContext(ModalContext);
     const [modalOpen, setModalOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const [isMobileView, setIsMobileView] = useState(false);
@@ -64,7 +64,7 @@ const Modal = () => {
 
     return (
         <div className={`modal-backlay ${modalOpen ? 'open' : ''} ${isClosing ? 'close' : ''} `}>
-            <div className={`modals-content ${modalOpen ? 'open' : ''} ${isClosing ? 'close' : ''} ${modalActiveClose ? 'close' : ''}  ${modalTransition ? 'transition' : ''} ${darkMode ? 'dark' : ''} ${currentModalSize === 'Small' ? 'small' : ''}`}>
+            <div className={`modals-content ${modalOpen ? 'open' : ''} ${isClosing ? 'close' : ''} ${modalActiveClose ? 'close' : ''}  ${modalTransition ? 'transition' : ''} ${darkMode ? 'dark' : ''}`}>
                 <div className={`modal-header ${darkMode ? 'dark' : ''}`}>
                     <h2 className={`modal-title ${darkMode ? 'dark' : ''}`}>{modalTitle}</h2>
                     <div className="modal-nav-buttons">

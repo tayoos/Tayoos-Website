@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import './Home.css';
 import Taskbar from '../components/Taskbar/Taskbar.jsx';
 import SplashScreen from '../components/SplashScreen/SplashScreen.jsx';
@@ -10,10 +10,12 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import NCReactGridLayout from '../components/Grid/NCReactGridLayout.jsx';
 
+import { ModalContext } from '../utitlites/ModalContext.jsx';
+
 function Home() {
     const [splashComplete, setSplashComplete] = useState(false);
     const [isEntryPoint, setIsEntryPoint] = useState(true);
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const { darkMode, toggleDarkMode } = useContext(ModalContext);
     const [activeModal, setActiveModal] = useState(null);
     const [currentModalContent, setCurrentModalContent] = useState(null);
     const [isModalClosing, setIsModalClosing] = useState(false);
@@ -29,24 +31,24 @@ function Home() {
     };
 
     const handleDarkModeChange = (darkMode) => {
-        setIsDarkMode(darkMode);
+        toggleDarkMode(darkMode);
     };
 
     return (
         <div className="screen-container">
             {!splashComplete && isEntryPoint && <SplashScreen videoSrc={isMobile ? videoMBLlndng : videoPClndng} isMobile={isMobile} onEnd={handleSplashEnd} />}
 
-            <div className={isDarkMode ? 'bg-dm' : 'bg-main'}>
+            <div className={darkMode ? 'bg-dm' : 'bg-main'}>
                 <div className="page-container">
                     <div className="header-container">
-                        <Header isMobile={isMobile} isDarkMode={isDarkMode} />
+                        <Header isMobile={isMobile} darkMode={darkMode} />
                     </div>
                     <div className={`GridContainer ${isMobile ? 'GridContainer-mobile' : ''}`}>
-                        <NCReactGridLayout isDarkMode={isDarkMode} />
+                        <NCReactGridLayout darkMode={darkMode} />
                     </div>
 
                     <div className="taskbar">
-                        <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} isDarkMode={isDarkMode} />
+                        <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} darkMode={darkMode} />
                     </div>
                 </div>
             </div>

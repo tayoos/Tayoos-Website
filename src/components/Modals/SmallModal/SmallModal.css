@@ -80,10 +80,6 @@
     background-color: rgba(128, 128, 128, 0.98); /* Grey with 0.98 transparency */
 }
 
-.modals-content.small {
-    width: 800px;
-}
-
 @media (max-width: 1650px) and (min-width: 1201px) {
     .modals-content {
         max-width: 1100px; /* Slightly reduce max width */

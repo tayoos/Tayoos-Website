@@ -17,6 +17,7 @@ const AffiliatesModal = () => {
                     <li>Local Developer Meetup</li>
                 </ul>
             </div>
+            <p className="text-lg font-semibold mb-2">More to Come</p>
         </div>
     );
 };

@@ -7,20 +7,20 @@ import GetDate from '../TimeDate/getDate';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
-function Header({ isMobile, isDarkMode }) {
+function Header({ isMobile, darkMode }) {
     return (
-        <div className={`header-subcontainer ${isDarkMode ? 'dark' : ''}`}>
+        <div className={`header-subcontainer ${darkMode ? 'dark' : ''}`}>
             {/* Logo on the left */}
             <div className="logo-container">
                 <img src={'/logo2mcv4.svg'} alt="Web Logo" className="logomain" />
             </div>
 
             {/* Time on the right, only show when not on mobile */}
-            <div className="timedate-container">
+            <div className={`timedate-container ${darkMode ? 'dark' : ''}`}>
                 {!isMobile && (
                     <>
-                        <GetTime isDarkMode={isDarkMode} />
-                        <GetDate isDarkMode={isDarkMode} />
+                        <GetTime isDarkMode={darkMode} />
+                        <GetDate isDarkMode={darkMode} />
                     </>
                 )}
             </div>

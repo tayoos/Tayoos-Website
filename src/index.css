@@ -21,6 +21,18 @@
     --taskbar-height-md: 60px;
     --taskbar-height-sm: 50px;
     --taskbar-height-xs: 40px;
+
+    --standard-font-size: 14px;
+    --larger-font-size: 16px;
+
+    --standard-font-weight: 500;
+    --important-font-colour: #aeaeca;
+    --primary-text-color: #000000;
+    --darkmode-text-color: #ffffffb9;
+    --darkmode-bright-text-color: #ffffff;
+    --darkmode-alt-text-color: #ffffff;
+    --darkmode-alt-text-color2: #eeeeeeea;
+    --standard-button-colour: #d95fe962;
 }
 
 a {

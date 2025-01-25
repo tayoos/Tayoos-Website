@@ -9,6 +9,16 @@
     margin: 0;
 }
 
+@media (max-width: 1650px) {
+    .-ExperienceContainer {
+        width: 100%;
+    }
+}
+
+.ExperienceContainer.dark {
+    border: 1px solid #2c2c2c;
+}
+
 .experience-list-modal {
     max-width: 20%; /* Sidebar width as a percentage of the modal */
     border-right: 1px solid #e0e0e0;
@@ -18,6 +28,15 @@
     height: 100%; /* Fills the height of the parent container */
     overflow-y: auto; /* Enables vertical scrolling */
     overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+.experience-list-modal.dark {
+    background-color: rgba(128, 128, 128, 0.98); /* Grey with 0.98 transparency */
+}
+
+.ExperienceContainer,
+.ExperienceContainer.dark {
+    transition: all 0.5s ease-in-out;
 }
 
 .experience-item-modal {
@@ -34,6 +53,11 @@
     box-sizing: border-box; /* Includes padding in size calculations */
 }
 
+.experience-item-modal.dark {
+    border-bottom: 1px solid #3f3f3f;
+    color: #ffffff;
+}
+
 .experience-detail-modal {
     padding: 10px;
     max-width: 80%; /* Main content width as a percentage of the modal */
@@ -46,13 +70,26 @@
     background-color: #f0f0f0;
 }
 
+.experience-item-modal.dark:hover {
+    background-color: rgba(88, 88, 88, 0.98); /* Grey with 0.98 transparency */
+}
+
 .experience-item-modal.active {
     background-color: #e6f2ff;
     border-left: solid #78099452;
     font-weight: bold;
 }
 
-/* Optional: Handle responsive adjustments within the modal */
+.experience-item-modal.dark.active {
+    background-color: #555555;
+}
+
+@media (max-width: 1650px) {
+    .experience-item-modal {
+        height: 70px;
+        font-size: 12px;
+    }
+}
 @media (max-width: 1200px) {
     .experience-item-modal {
         height: 85px;
@@ -82,26 +119,15 @@
     }
 }
 
-.experience-item-modal:hover {
-    background-color: #f0f0f0;
-}
-
-.experience-item-modal.active {
-    background-color: #e6f2ff;
-    border-left: solid #78099452;
-    font-weight: bold;
-}
-
-.experience-detail-modal {
-    padding: 10px;
-    max-width: 80%;
-    box-sizing: border-box; /* Ensure padding doesn't increase the size */
-}
-
 .experience-modal-header {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    align-items: flex-start; /* Align items at the top */
+    margin-bottom: 5px;
+
+    padding: 5px; /* Add spacing inside the container */
+
+    box-sizing: border-box; /* Includes padding in dimensions */
+    gap: 10px; /* Space between logo and text */
 }
 
 .company-logo {
@@ -109,11 +135,14 @@
     height: 60px;
     object-fit: contain;
     margin-right: 20px;
+    align-self: center;
 }
 
 .experience-modal-text {
     display: flex;
     flex-direction: column;
+    text-align: left;
+    height: auto; /* Allow content to determine height */
 }
 
 .experience-modal-text h2 {
@@ -130,12 +159,12 @@
 }
 
 .skills {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding: 10px;
     /*background-color: #f4f4f4;*/
-    border-radius: 4px;
+
     width: fit-content;
-    border-radius: 10px;
+
     margin-top: 5px;
     justify-self: center;
     font-weight: 500;
@@ -146,3 +175,93 @@
     align-self: flex-start; /* Aligns this element within a flex container if applicable */
     width: 100%; /* Ensure the element spans its container for proper text alignment */
 }
+
+.experience-modal-text.dark,
+.experience-modal-text.dark h2,
+.experience-modal-text.dark h3,
+.ExperienceLongDesc.dark {
+    color: #ffffffd3;
+}
+.skills.dark {
+    color: #dddadae7;
+}
+
+.skills,
+.skills.dark {
+    transition: all 0.5s ease-in-out;
+}
+
+.back-button,
+.close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.experience-detail-modal-mobile {
+    padding: 10px;
+}
+
+.experience-list-modal.mobile {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.experience-list-modal-mobile {
+    width: 100%;
+    margin: 0;
+    display: block;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+.experience-item-modal-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    box-sizing: border-box; /* Includes padding in size calculations */
+}
+
+.experience-modal-mobile-title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.experience-modal-mobile-title.dark {
+    color: #cfcfcf;
+}
+
+.experience-list-modal-mobile :hover {
+    background-color: #f0f0f0;
+}
+
+.experience-list-modal-mobile.dark :hover {
+    background-color: rgba(88, 88, 88, 0.98); /* Grey with 0.98 transparency */
+}
+
+.experience-item-modal-mobile .short-description {
+    margin: 0 0 10px 0;
+    color: #666;
+}
+
+.experience-item-modal-mobile.dark .short-description.dark {
+    color: #fafafa;
+}
+
+.experience-item-modal-mobile .location {
+    margin: 0;
+    font-size: 14px;
+    color: #888;
+}
+
+.location.dark {
+    color: #fafafa85;
+}
+
+/*Animations */

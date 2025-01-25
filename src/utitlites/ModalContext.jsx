@@ -10,29 +10,38 @@ export const ModalProvider = ({ children }) => {
     const [modalTransition, setModalTransition] = useState(false); // Tracks the currently active modal
     const [modalActiveClose, setModalActiveClose] = useState(false); // Tracks the currently active modal
     const [modalTitle, setModalTitle] = useState(''); // Tracks the modal title
+    const [darkMode, setDarkMode] = useState(false); // Tracks darkMode state
+    const [currentModalSize, setCurrentModalSize] = useState('Normal'); // Track the current modal size
+    const [ListView, setListView] = useState(true); // track whether back to list should be triggered
 
-    const openModal = (content, title) => {
-        setModalTitle(title); // Set the modal title dynamically
-        // If the same modal is clicked, close it
-        if (isModalOpen && content.type.name === isCurrentModal.type.name) {
+    const openModal = (content, title, modalSize = 'Normal', isModalBackAction = false) => {
+        console.log('content', content);
+        console.log('triggerListView', ListView);
+        setModalTitle(title);
+        setCurrentModalSize(modalSize); // Store the current modal size
+        // If the same modal type is clicked, close it
+        if (isModalOpen && content.type.name === isCurrentModal?.type?.name && !isModalBackAction) {
             setModalActiveClose(true);
             setTimeout(() => {
                 closeModal();
                 setModalActiveClose(false);
-            }, 200); // Match this with CSS animation duration
+            }, 200);
             return;
         }
-        // If the alternative modal was clicked but modal open
-        if (isModalOpen && content.type.name !== isCurrentModal.type.name) {
+
+        // If a different modal type is open
+        if (isModalOpen && content.type.name !== isCurrentModal?.type?.name) {
             setModalTransition(true);
+
             setTimeout(() => {
                 setModalContent(content);
                 setIsModalOpen(true);
                 setIsCurrentModal(content);
                 setModalTransition(false);
-            }, 200); // Match this with CSS animation duration
+            }, 100);
             return;
         }
+
         // Open new modal
         setModalContent(content);
         setIsModalOpen(true);
@@ -46,5 +55,22 @@ export const ModalProvider = ({ children }) => {
         setModalTitle(''); // Reset the modal title
     };
 
-    return <ModalContext.Provider value={{ openModal, closeModal, modalContent, isModalOpen, isCurrentModal, modalTransition, modalActiveClose, modalTitle }}>{children}</ModalContext.Provider>;
+    //trigger back to list
+    const triggerListView = () => {
+        console.log('triggerListView called', ListView);
+        setListView(true);
+    };
+
+    //  reset back to list trigger
+    const resetListView = () => {
+        console.log('resetListView called', ListView);
+        setListView(false);
+    };
+
+    // Add a method to update darkMode
+    const toggleDarkMode = (mode) => {
+        setDarkMode(mode !== undefined ? mode : !darkMode);
+    };
+
+    return <ModalContext.Provider value={{ openModal, closeModal, modalContent, isModalOpen, isCurrentModal, modalTransition, modalActiveClose, modalTitle, darkMode, toggleDarkMode, triggerListView, ListView, resetListView, currentModalSize }}>{children}</ModalContext.Provider>;
 };

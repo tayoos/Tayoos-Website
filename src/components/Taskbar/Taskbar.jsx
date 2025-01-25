@@ -9,8 +9,7 @@ import TechSkillsModal from '../../content/TechSkills/TechSkillsModal.jsx';
 import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
 
 const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
-    const [darkMode, setDarkMode] = useState(false);
-    const { openModal, isCurrentModal, modalContent } = useContext(ModalContext);
+    const { openModal, isCurrentModal, modalContent, darkMode, toggleDarkMode } = useContext(ModalContext);
 
     const taskbarItems = [
         {
@@ -73,7 +72,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
 
                 break;
             case 'EducationCertification':
-                openModal(<EducationCertificationModal />, itemName);
+                openModal(<EducationCertificationModal />, itemName, 'Small');
 
                 break;
             case 'Tech-Skills':
@@ -95,7 +94,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
                 break;
             case 'Settings':
                 const newDarkMode = !darkMode;
-                setDarkMode(newDarkMode);
+                toggleDarkMode(newDarkMode);
                 onDarkModeChange(newDarkMode);
                 break;
             default:

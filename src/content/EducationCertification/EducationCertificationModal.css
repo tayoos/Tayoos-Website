@@ -1,0 +1,129 @@
+.education-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.education-modal-container.dark {
+    background-color: rgba(42, 53, 53, 0.212);
+}
+
+.education-modal-list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    width: 100%;
+}
+
+.education-modal-item {
+    padding-top: 4px;
+    padding-bottom: 10px;
+    margin: 0px 10px;
+    border-bottom: 1px solid #979797;
+    transition: background-color 0.2s;
+}
+.degree-item {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.144);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid purple;
+    margin: 10px 10px;
+    padding: 5px 10px;
+}
+
+.degree-item.dark {
+    background-color: rgba(255, 255, 255, 0.144);
+}
+.diploma-item {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.144);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid orange;
+    margin: 10px 10px;
+    padding: 5px 10px;
+}
+
+.diploma-item.dark {
+    background-color: rgba(255, 255, 255, 0.144);
+}
+
+.certificate-item {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.048);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid rgb(0, 225, 255);
+    margin: 10px 10px;
+    padding: 5px 10px;
+}
+
+.certificate-item.dark {
+    background-color: rgba(255, 255, 255, 0.041);
+}
+
+.education-modal-title {
+    font-size: var(--larger-font-size);
+    font-weight: var(--standard-font-weight);
+    color: var(--standard-font-colour);
+}
+
+.education-modal-title.dark {
+    color: var(--darkmode-text-color);
+}
+
+.education-certification-button {
+    background-color: rgba(199, 199, 199, 0.212);
+    color: var(--primary-text-color);
+    border: 1px solid #57575765;
+    border-radius: 14px;
+    padding: 3px 0px;
+
+    font-size: var(--standard-font-size);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0.6;
+    text-wrap: nowrap;
+    width: 100px;
+
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+}
+.education-certification-button:hover {
+    background-color: var(--standard-button-colour);
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    opacity: 1;
+    text-decoration: none;
+}
+
+.education-certification-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.education-certification-button.dark {
+    color: var(--darkmode-bright-text-color);
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+}
+
+.button-icon {
+    margin-left: 4px;
+}
+
+.button-icon.dark {
+    color: white;
+}
+
+.education-modal-grad.dark {
+    color: var(--darkmode-text-color);
+}
