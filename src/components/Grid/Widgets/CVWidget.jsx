@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Widgets.css';
 
-const CVWidget = ({ isDarkMode }) => {
+const CVWidget = ({ darkMode }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     // Define paths directly in the component
@@ -18,7 +18,7 @@ const CVWidget = ({ isDarkMode }) => {
     };
 
     return (
-        <div className={`cv-widget ${isDarkMode ? 'dark' : ''} ${isHovered ? 'hovered' : ''}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onDoubleClick={handleDownload}>
+        <div className={`cv-widget ${darkMode ? 'dark' : ''} ${isHovered ? 'hovered' : ''}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onDoubleClick={handleDownload}>
             <div className="cv-image-container">
                 <img src={iconsrc} alt="CV" className="cv-image" />
             </div>

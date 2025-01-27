@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SpotifyService from '../../../utitlites/Services/SpotifyService';
 import AppleMusicService from '../../../utitlites/Services/AppleMusicService';
 
-const MusicWidget = ({ isDarkMode }) => {
+const MusicWidget = ({ darkMode }) => {
     const [spotifyTrack, setSpotifyTrack] = useState(null);
     const [appleTrack, setAppleTrack] = useState(null);
     const [displayTrack, setDisplayTrack] = useState('spotify');
@@ -132,7 +132,7 @@ const MusicWidget = ({ isDarkMode }) => {
         );
     };
 
-    return <div className={`w-full h-full ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-sm overflow-hidden`}>{renderTrackInfo()}</div>;
+    return <div className={`w-full h-full ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} rounded-lg shadow-sm overflow-hidden`}>{renderTrackInfo()}</div>;
 };
 
 export default MusicWidget;

@@ -5,7 +5,7 @@ import './Taskbar.css';
 
 import ExperienceModal from '../../content/Experiences/ExperienceModal.jsx';
 import EducationCertificationModal from '../../content/EducationCertification/EducationCertificationModal.jsx';
-import TechSkillsModal from '../../content/TechSkills/TechSkillsModal.jsx';
+import TechModal from '../../content/TechSkills/TechModal.jsx';
 import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
 
 const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
@@ -76,11 +76,11 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
 
                 break;
             case 'Tech-Skills':
-                openModal(<TechSkillsModal />, itemName);
+                openModal(<TechModal />, itemName);
 
                 break;
             case 'Affiliates':
-                openModal(<AffiliatesModal />, itemName);
+                openModal(<AffiliatesModal />, itemName, 'Small');
 
                 break;
             case 'Contact':

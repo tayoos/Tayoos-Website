@@ -16,13 +16,14 @@ import StatusCard from './Widgets/StatusCard/StatusCard';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const NCReactGridLayout = ({ isDarkMode }) => {
+const NCReactGridLayout = ({ darkMode }) => {
     const containerRef = useRef(null);
     const dragBoundaryRef = useRef(null);
     const [currentBreakpoint, setCurrentBreakpoint] = useState('xxl');
     const [layouts, setLayouts] = useState(generateInitialLayout);
     const [containerWidth, setContainerWidth] = useState('1650px');
     const [maxRows, setMaxRows] = useState(22);
+
     const [isDragging, setIsDragging] = useState(false);
 
     const cellSizes = {
@@ -303,7 +304,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                 y: 1,
                 w: 5,
                 h: 3,
-                static: true,
+                static: false,
                 minW: 3,
                 minH: 3,
                 maxW: 6,
@@ -315,7 +316,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                 y: 5,
                 w: 4,
                 h: 2,
-                static: true,
+                static: false,
                 minW: 3,
                 minH: 2,
                 maxW: 6,
@@ -327,7 +328,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                 y: 10,
                 w: 1,
                 h: 2,
-                static: true,
+                static: false,
                 minW: 1,
                 minH: 1,
                 maxW: 2,
@@ -456,7 +457,7 @@ const NCReactGridLayout = ({ isDarkMode }) => {
     return (
         <div
             ref={containerRef}
-            className={`w-full flex justify-center ${isDarkMode ? 'dark' : ''}`}
+            className={`w-full flex justify-center ${darkMode ? 'dark' : ''}`}
             style={{
                 height: '100%',
                 position: 'relative',
@@ -507,22 +508,22 @@ const NCReactGridLayout = ({ isDarkMode }) => {
                             <PhotoWidget />
                         </div>
                         <div key="1" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <TextCardWidget isDarkMode={isDarkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" />
+                            <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" />
                         </div>
                         <div key="2" className="grid-item rounded-lg shadow-lg overflow-hidden">
                             <MusicWidget />
                         </div>
                         <div key="3" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <CVWidget isDarkMode={isDarkMode} />
+                            <CVWidget darkMode={darkMode} />
                         </div>
                         <div key="4" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <WeatherWidget isDarkMode={isDarkMode} />
+                            <WeatherWidget darkMode={darkMode} />
                         </div>
                         <div key="5" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <TimezoneWidget isDarkMode={isDarkMode} />
+                            <TimezoneWidget darkMode={darkMode} />
                         </div>
                         <div key="6" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <StatusCard isDarkMode={isDarkMode} />
+                            <StatusCard darkMode={darkMode} />
                         </div>
                     </ResponsiveGridLayout>
                 </div>

@@ -5,6 +5,10 @@
     border-radius: 15px;
 }
 
+.SCwidget-container.dark {
+    color: var(--darkmode-text-color);
+}
+
 .SCwidget-header {
     display: flex;
     justify-content: space-between;
@@ -20,6 +24,10 @@
 .SCwidget-status-label {
     font-size: 14px;
     font-weight: bold;
+}
+
+.SCwidget-status-label.dark {
+    color: var(--darkmode-text-color);
 }
 
 /* Ensure alignment of StatusCircle */

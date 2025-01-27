@@ -15,9 +15,7 @@ export const ModalProvider = ({ children }) => {
     const [ListView, setListView] = useState(true); // track whether back to list should be triggered
 
     const openModal = (content, title, modalSize = 'Normal', isModalBackAction = false) => {
-        console.log('content', content);
-        console.log('triggerListView', ListView);
-        setModalTitle(title);
+        setModalTitle(title); // Store the current Modal title
         setCurrentModalSize(modalSize); // Store the current modal size
         // If the same modal type is clicked, close it
         if (isModalOpen && content.type.name === isCurrentModal?.type?.name && !isModalBackAction) {
@@ -32,13 +30,11 @@ export const ModalProvider = ({ children }) => {
         // If a different modal type is open
         if (isModalOpen && content.type.name !== isCurrentModal?.type?.name) {
             setModalTransition(true);
+            setModalContent(content);
+            setIsModalOpen(true);
+            setIsCurrentModal(content);
+            setModalTransition(false);
 
-            setTimeout(() => {
-                setModalContent(content);
-                setIsModalOpen(true);
-                setIsCurrentModal(content);
-                setModalTransition(false);
-            }, 100);
             return;
         }
 
@@ -57,13 +53,11 @@ export const ModalProvider = ({ children }) => {
 
     //trigger back to list
     const triggerListView = () => {
-        console.log('triggerListView called', ListView);
         setListView(true);
     };
 
     //  reset back to list trigger
     const resetListView = () => {
-        console.log('resetListView called', ListView);
         setListView(false);
     };
 

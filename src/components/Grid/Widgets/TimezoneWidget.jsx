@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Widgets.css';
 
-const TimezoneWidget = ({ isDarkMode }) => {
+const TimezoneWidget = ({ darkMode }) => {
     const [currentTime, setCurrentTime] = useState('');
     const [timeZone, setTimeZone] = useState('');
 
@@ -22,10 +22,10 @@ const TimezoneWidget = ({ isDarkMode }) => {
     }, []);
 
     return (
-        <div className={`timezone-widget ${isDarkMode ? 'dark' : ''}`}>
+        <div className={`timezone-widget ${darkMode ? 'dark' : ''}`}>
             <div className="timezone-details">
                 <div className="timezone-time">{currentTime}</div>
-                <div className="timezone-label">{timeZone}</div>
+                <div className={`timezone-label ${darkMode ? 'dark' : ''}`}>{timeZone}</div>
             </div>
         </div>
     );

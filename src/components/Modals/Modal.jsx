@@ -64,7 +64,7 @@ const Modal = () => {
 
     return (
         <div className={`modal-backlay ${modalOpen ? 'open' : ''} ${isClosing ? 'close' : ''} `}>
-            <div className={`modals-content ${modalOpen ? 'open' : ''} ${isClosing ? 'close' : ''} ${modalActiveClose ? 'close' : ''}  ${modalTransition ? 'transition' : ''} ${darkMode ? 'dark' : ''} ${currentModalSize === 'Small' ? 'small' : ''}`}>
+            <div className={`modals-content ${modalOpen ? 'open' : ''} ${isClosing ? 'close' : ''} ${modalActiveClose ? 'close' : ''}  ${modalTransition ? 'transition' : ''} ${darkMode ? 'dark' : ''} ${currentModalSize === 'Small' ? 'small' : ''} ${currentModalSize === 'Medium' ? 'medium' : ''}`}>
                 <div className={`modal-header ${darkMode ? 'dark' : ''}`}>
                     <h2 className={`modal-title ${darkMode ? 'dark' : ''}`}>{modalTitle}</h2>
                     <div className="modal-nav-buttons">

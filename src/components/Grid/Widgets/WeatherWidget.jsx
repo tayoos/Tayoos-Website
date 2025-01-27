@@ -3,7 +3,7 @@ import getLocation from '../../TimeDate/getLocation';
 import './Widgets.css';
 import { MapPin } from 'lucide-react'; // Add this import at the top
 
-const WeatherWidget = ({ isDarkMode }) => {
+const WeatherWidget = ({ darkMode }) => {
     const [weatherData, setWeatherData] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -48,7 +48,7 @@ const WeatherWidget = ({ isDarkMode }) => {
 
     if (loading) {
         return (
-            <div className={`weather-widget-horizontal ${isDarkMode ? 'dark' : ''}`}>
+            <div className={`weather-widget-horizontal ${darkMode ? 'dark' : ''}`}>
                 <span>Loading...</span>
             </div>
         );
@@ -56,7 +56,7 @@ const WeatherWidget = ({ isDarkMode }) => {
 
     if (!weatherData) {
         return (
-            <div className={`weather-widget-horizontal ${isDarkMode ? 'dark' : ''}`}>
+            <div className={`weather-widget-horizontal ${darkMode ? 'dark' : ''}`}>
                 <span>Weather unavailable</span>
             </div>
         );
@@ -65,7 +65,7 @@ const WeatherWidget = ({ isDarkMode }) => {
     const { location, temperature, condition, icon, description } = weatherData;
 
     return (
-        <div className={`weather-widget-horizontal ${isDarkMode ? 'dark' : ''}`}>
+        <div className={`weather-widget-horizontal ${darkMode ? 'dark' : ''}`}>
             <div className="weather-icon-section">
                 <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={condition} className="weather-icon-large" />
             </div>

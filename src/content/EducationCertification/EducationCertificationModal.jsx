@@ -6,7 +6,6 @@ import './EducationCertificationModal.css';
 
 const EducationCertificationModal = () => {
     const { darkMode } = useContext(ModalContext);
-    const [selectedEducation, setSelectedEducation] = useState(null);
 
     const educations = [
         {
@@ -121,7 +120,7 @@ const EducationCertificationModal = () => {
                         <div className={`education-modal-title  ${darkMode ? 'dark' : ''}`}>{ed.title}</div>
                         <div className="graduation-and-button">
                             <div className={`education-modal-grad ${darkMode ? 'dark' : ''}`}>
-                                {ed.school && !ed.location && <span className="education-location">{ed.school} | </span>}
+                                {ed.school && !ed.location && <span className={`education-location ${darkMode ? 'dark' : ''}`}>{ed.school} | </span>}
                                 {ed.graduation}
                             </div>
                             {ed.link && (

@@ -1,0 +1,108 @@
+.TechModal-container {
+    width: 100%;
+    padding: 1rem;
+    padding-left: 30px;
+    padding-right: 30px;
+    perspective: 1000px;
+    box-sizing: border-box;
+}
+
+.TechModal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .TechModal-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .TechModal-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .TechModal-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .TechModal-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+.TechModal-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.TechModal-squircle {
+    width: 75px;
+    height: 75px;
+    border-radius: 17px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+}
+
+.TechModal-icon-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateZ(20px);
+    border-radius: 17px;
+}
+
+.TechModal-icon-wrapper.fill {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.TechModal-icon-wrapper.fill img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.TechModal-image {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    justify-content: center;
+    align-items: center;
+}
+
+.TechModal-name {
+    margin-top: 0.75rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.TechModal-name.dark {
+    color: var(--darkmode-text-color);
+}
+
+.TechModal-certification {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}

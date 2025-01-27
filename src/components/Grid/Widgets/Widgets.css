@@ -124,6 +124,10 @@
     padding: 0; /* Remove paddings on child elements, if needed */
 }
 
+.cv-widget.dark {
+    color: var(--darkmode-text-color);
+}
+
 .cv-image-container {
     position: relative;
     width: 70%;
@@ -295,4 +299,8 @@
     color: #555;
     text-transform: uppercase;
     font-weight: 600;
+}
+
+.timezone-label.dark {
+    color: var(--widget-dark-text, #f0f0f09a);
 }
