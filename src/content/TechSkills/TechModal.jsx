@@ -15,37 +15,39 @@ import UMLIcon from '../../assets/tech/UML2.png';
 import AnsysIcon from '../../assets/tech/Ansys.png';
 import MATLABIcon from '../../assets/tech/MATLAB.png';
 import SimulinkIcon from '../../assets/tech/Simulink2.png';
-import ConfluenceIcon from '../../assets/tech/Confluence.jpg';
+import ConfluenceIcon from '../../assets/tech/Confluence2.png';
 import CSSIcon from '../../assets/tech/css.png';
 import DockerIcon from '../../assets/tech/Docker.png';
 import GitIcon from '../../assets/tech/git.png';
-import MscPatranIcon from '../../assets/tech/Python.png';
+import MscPatranIcon from '../../assets/tech/MSCPatran2.png';
 import TypeScriptIcon from '../../assets/tech/TypeScript3.png';
 import TailwindCSSIcon from '../../assets/tech/tailwind.png';
+import CEAIcon from '../../assets/tech/CEA.png';
 
 const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
 
     const techItems = [
-        { name: 'SolidWorks', icon: SWIcon, certification: '', fill: '' },
-        { name: 'Excel/VBA', icon: VBAIcon, certification: '', fill: 'true' },
-        { name: 'CAMEO SM', icon: CameoIcon, certification: '', fill: '' },
-        { name: 'Sparx EA', icon: SparxEAIcon, certification: '', fill: '' },
-        { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '' },
-        { name: 'JavaScript', icon: JavaScriptIcon, certification: '', fill: 'true' },
-        { name: 'Python', icon: PythonIcon, certification: '', fill: '' },
-        { name: 'SysML', icon: SysMLIcon, certification: '', fill: '' },
-        { name: 'UML', icon: UMLIcon, certification: '', fill: '' },
-        { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true' },
-        { name: 'MATLAB', icon: MATLABIcon, certification: '', fill: '' },
-        { name: 'Simulink', icon: SimulinkIcon, certification: '', fill: '' },
-        { name: 'Confluence', icon: ConfluenceIcon, certification: '', fill: '' },
-        { name: 'CSS', icon: CSSIcon, certification: '', fill: '' },
-        { name: 'Docker', icon: DockerIcon, certification: '', fill: '' },
-        { name: 'git', icon: GitIcon, certification: '', fill: '' },
-        { name: 'Msc Patran', icon: MscPatranIcon, certification: '', fill: '' },
-        { name: 'TypeScript', icon: TypeScriptIcon, certification: '', fill: 'true' },
-        { name: 'TailwindCSS', icon: TailwindCSSIcon, certification: '', fill: '' },
+        { name: 'SolidWorks', icon: SWIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Excel/VBA', icon: VBAIcon, certification: '', fill: 'true', bcolor: 'vbagreen' },
+        { name: 'CAMEO SM', icon: CameoIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Cameo EA', icon: CEAIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Sparx EA', icon: SparxEAIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'JavaScript', icon: JavaScriptIcon, certification: '', fill: 'true', bcolor: 'jsyellow' },
+        { name: 'Python', icon: PythonIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'SysML', icon: SysMLIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'UML', icon: UMLIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true', bcolor: 'ansysblack' },
+        { name: 'MATLAB', icon: MATLABIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Simulink', icon: SimulinkIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Confluence', icon: ConfluenceIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'CSS', icon: CSSIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Docker', icon: DockerIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'git', icon: GitIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Msc Patran', icon: MscPatranIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'TypeScript', icon: TypeScriptIcon, certification: '', fill: 'true', bcolor: 'tsblue' },
+        { name: 'TailwindCSS', icon: TailwindCSSIcon, certification: '', fill: '', bcolor: '' },
     ];
 
     const variants = {
@@ -72,14 +74,14 @@ const TechModal = () => {
         <div className={`TechModal-container ${darkMode ? 'dark' : ''}`}>
             <motion.div className="TechModal-grid" initial="hidden" animate="visible" variants={variants} exit="exit">
                 {techItems.map((item, index) => (
-                    <TechItem key={index} name={item.name} icon={item.icon} certification={item.certification} fill={item.fill} darkMode={darkMode} variants={variants} />
+                    <TechItem key={index} name={item.name} icon={item.icon} certification={item.certification} fill={item.fill} bcolor={item.bcolor} darkMode={darkMode} variants={variants} />
                 ))}
             </motion.div>
         </div>
     );
 };
 
-const TechItem = ({ name, icon, certification, fill, darkMode, variants }) => {
+const TechItem = ({ name, icon, certification, fill, bcolor, darkMode, variants }) => {
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
     const itemRef = useRef(null);
     const circleRef = useRef(null);
@@ -108,7 +110,7 @@ const TechItem = ({ name, icon, certification, fill, darkMode, variants }) => {
         <motion.div ref={itemRef} className={`TechModal-item ${darkMode ? 'dark' : ''}`} variants={variants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <motion.div
                 ref={circleRef}
-                className={`TechModal-squircle ${darkMode ? 'dark' : ''}`}
+                className={`TechModal-squircle ${darkMode ? 'dark' : ''} ${bcolor ? bcolor : ''}`}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 animate={{

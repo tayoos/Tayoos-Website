@@ -49,12 +49,29 @@
     height: 75px;
     border-radius: 17px;
     background: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
+    align-content: center;
     transform-style: preserve-3d;
     transition: transform 0.1s ease-out;
+}
+
+.TechModal-squircle.jsyellow {
+    background-color: #ffd600;
+}
+
+.TechModal-squircle.ansysblack {
+    background-color: black;
+}
+
+.TechModal-squircle.vbagreen {
+    background-color: #2b7224;
+}
+
+.TechModal-squircle.tsblue {
+    background-color: #3178c6;
 }
 
 .TechModal-icon-wrapper {
@@ -81,6 +98,7 @@
     border-radius: 15px;
     justify-content: center;
     align-items: center;
+    align-content: center;
 }
 
 .TechModal-image {

@@ -35,12 +35,12 @@ function Home() {
     };
 
     return (
-        <div className="screen-container">
+        <div className={`screen-container ${isMobile ? 'Mobile' : ''}`}>
             {!splashComplete && isEntryPoint && <SplashScreen videoSrc={isMobile ? videoMBLlndng : videoPClndng} isMobile={isMobile} onEnd={handleSplashEnd} />}
 
-            <div className={darkMode ? 'bg-dm' : 'bg-main'}>
-                <div className="page-container">
-                    <div className="header-container">
+            <div className={`${darkMode ? 'bg-dm' : 'bg-main'} ${isMobile ? 'Mobile' : ''}`}>
+                <div className={`page-container ${isMobile ? 'Mobile' : ''}`}>
+                    <div className={`header-container ${isMobile ? 'Mobile' : ''}`}>
                         <Header isMobile={isMobile} darkMode={darkMode} />
                     </div>
                     <div className={`GridContainer ${isMobile ? 'GridContainer-mobile' : ''}`}>

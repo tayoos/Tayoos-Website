@@ -76,7 +76,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
 
                 break;
             case 'Tech-Skills':
-                openModal(<TechModal />, itemName);
+                openModal(<TechModal />, itemName, 'Medium');
 
                 break;
             case 'Affiliates':

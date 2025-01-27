@@ -5,13 +5,19 @@
 }
 
 .screen-container {
-    height: 100vh; /* Make the container take up the full height of the viewport */
-    max-height: 97%; /* Keep this if you want some margin at the bottom */
+    height: 100vh; /* Full viewport height */
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align the content at the top */
-    align-items: center; /* Center content horizontally */
-    justify-content: center;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    flex-direction: column; /* Stack items vertically if needed */
+}
+
+.screen-container.Mobile {
+    max-height: 100%; /* Ensure the mobile container adapts to the screen */
+    overflow-y: scroll; /* Ensure it scrolls on mobile */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+    max-width: 100%;
+    background-color: red;
 }
 
 .page-container {
@@ -25,6 +31,11 @@
     align-self: center;
     margin: 0 auto;
     position: relative; /* Keep this */
+}
+
+.page-container.Mobile {
+    overflow-y: scroll; /* Ensure it scrolls on mobile */
+    width: 100%;
 }
 
 .icongrid {
@@ -72,6 +83,9 @@
     justify-self: center;
 }
 
+.header-container.Mobile {
+}
+
 .hero {
     width: 100%;
     align-items: start;
@@ -104,6 +118,11 @@
     flex-direction: column;
     justify-content: flex-start; /* Align the content at the top */
     align-items: center; /* Center content horizontally */
+}
+
+.bg-main.Mobile,
+.bg-dm.Mobile {
+    max-width: 100%;
 }
 
 .osProfileImage {
@@ -191,13 +210,6 @@
     .GridContainer {
         height: 58vh;
     }
-}
-
-.GridContainer-mobile {
-    height: auto;
-    min-height: 100vh;
-    overflow-y: auto;
-    padding-bottom: calc(var(--taskbar-height) + 20px); /* Add padding to prevent content from hiding behind taskbar */
 }
 
 @keyframes modalExpand {
