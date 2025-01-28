@@ -7,11 +7,45 @@
     gap: 10px;
 }
 
+.taskbar-container-mobile {
+    display: grid;
+    grid-template-columns: repeat(2, 4fr);
+    grid-auto-rows: 1fr;
+    padding: 10px;
+    border-radius: 17px;
+    gap: 10px;
+    background-color: rgba(80, 80, 80, 0.897);
+
+    /* Position at bottom of parent */
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.taskbar-container-mobile.menu {
+    background-color: transparent;
+}
+
 .taskbar-item {
     display: flex;
     justify-self: center;
     align-self: center;
     height: var(--taskbar-height);
+    border-radius: 8px;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: visible; /* Changed from hidden to visible to show the name above */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.taskbar-item-mobile {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    height: var(--taskbar-height-md);
     border-radius: 8px;
     width: 100%;
     aspect-ratio: 1;
@@ -38,6 +72,12 @@
 .taskbar-icon {
     max-width: 100%;
     height: var(--taskbar-height);
+    object-fit: fill;
+}
+
+.taskbar-icon-mobile {
+    max-width: 100%;
+    height: var(--taskbar-height-md);
     object-fit: fill;
 }
 
@@ -124,18 +164,48 @@
 
 .tblaunchpad {
     background-color: transparent;
-    width: var(--taskbar-height-sm);
-    height: var(--taskbar-height-sm);
+    width: var(--taskbar-height-md);
+    height: var(--taskbar-height-md);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 0px;
     padding: 0;
+    border: none;
+    overflow: visible; /* Allow content to extend beyond the parent's bounds */
 }
 
 .launchpad {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: background-color 0.3s ease-in-out; /* Add transition for smooth fade */
+}
+
+.tblaunchpad:hover,
+.tblaunchpad:focus {
+    border: none; /* Ensure no border appears when hovered or focused */
+    outline: none; /* Remove the default focus outline */
+}
+
+/* Add keyframes for the opening animation */
+@keyframes openAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0.5); /* Start small */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1); /* End at full size */
+    }
+}
+
+@keyframes drawerSlideUp {
+    0% {
+        transform: translateY(100%); /* Start below the screen (off-screen) */
+        opacity: 0; /* Start as invisible */
+    }
+    100% {
+        transform: translateY(0); /* Move to its final position (visible) */
+        opacity: 1; /* Fade in */
+    }
 }

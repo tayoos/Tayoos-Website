@@ -81,10 +81,9 @@
     z-index: 1000; /* Ensure it stays on top */
 }
 
-.taskbar.tb-bg {
+.taskbar.taskbarmb {
     background-color: transparent;
 }
-
 .header-container {
     height: var(--header-height);
     width: 100%;
@@ -226,6 +225,14 @@
     .GridContainer {
         height: 58vh;
     }
+}
+
+.GridContainer-mobile {
+    width: 98%;
+    height: 90%;
+    padding-top: 10px;
+    align-self: center;
+    align-content: flex-start;
 }
 
 @keyframes modalExpand {

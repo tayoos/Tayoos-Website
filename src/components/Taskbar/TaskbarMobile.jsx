@@ -1,12 +1,18 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { ModalContext } from '../../utitlites/ModalContext.jsx';
 import { Menu } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import launchpad from '../../assets/icons/launchpad2.png';
 import launchpaddark from '../../assets/icons/launchpad-dark2.png';
 import './Taskbar.css';
 
-const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
+import ExperienceModal from '../../content/Experiences/ExperienceModal.jsx';
+import EducationCertificationModal from '../../content/EducationCertification/EducationCertificationModal.jsx';
+import TechModal from '../../content/TechSkills/TechModal.jsx';
+import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
+
+const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) => {
     const { openModal, isCurrentModal, modalContent, darkMode, toggleDarkMode, menuOpen, setMenuOpen } = useContext(ModalContext);
 
     const taskbarRef = useRef(null);
@@ -81,8 +87,8 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
     }, []);
 
     const handleSettingsClick = (title) => {
-        const itemName = taskbarItems.find((item) => item.title === title)?.Name;
-        if (!itemName) return;
+        const itemName = taskbarItems.find((item) => item.title === title)?.Name; // Get the Name based on the title
+        if (!itemName) return; // Exit if no matching item is found
 
         switch (title) {
             case 'Experience':
@@ -117,7 +123,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
 
         // Don't automatically close menu after clicking modal items
         // This allows users to open multiple modals without re-opening the menu
-        if (title === 'Contact' || title === 'LinkedIn' || title === 'Github' || title === 'Settings') {
+        if (title) {
             setMenuOpen(false);
         }
     };
@@ -129,30 +135,67 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
 
     return (
         <div className="relative" ref={taskbarRef}>
-            {isMobile && !menuOpen && (
-                <button onClick={toggleMenu} className="tblaunchpad">
-                    <img src={darkMode ? launchpaddark : launchpad} className="launchpad" alt="Menu" />
-                </button>
-            )}
+            <AnimatePresence>
+                {isMobile && !menuOpen && (
+                    <motion.button onClick={toggleMenu} className="tblaunchpad" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+                        <img src={darkMode ? launchpaddark : launchpad} className="launchpad" alt="Menu" />
+                    </motion.button>
+                )}
+            </AnimatePresence>
 
-            <div className={`taskbar-container ${isMobile ? 'mobile' : ''} ${isMobile && menuOpen ? 'mobile-open' : isMobile ? 'mobile-closed' : ''}`}>
-                {(!isMobile || menuOpen) &&
-                    taskbarItems.map((item, index) => (
-                        <div
-                            key={index}
-                            className={`taskbar-item ${activeModal === item.title ? 'active' : ''}`}
-                            onClick={(e) => {
-                                e.stopPropagation(); // Prevent closing when clicking items
-                                handleSettingsClick(item.title);
-                            }}
-                        >
-                            <div className="taskbar-content">
-                                <img src={darkMode ? item.imgdm : item.image} alt={item.title} className="taskbar-icon" />
-                                <span className="taskbar-name">{item.title === 'Settings' ? (darkMode ? 'Light Mode' : 'Dark Mode') : item.Name}</span>
-                            </div>
-                        </div>
-                    ))}
-            </div>
+            <AnimatePresence>
+                {(!isMobile || menuOpen) && (
+                    <motion.div
+                        className={`taskbar-container-mobile ${!menuOpen ? 'menu' : ''} ${isMobile ? 'mobile' : ''} ${isMobile && menuOpen ? 'mobile-open' : isMobile ? 'mobile-closed' : ''}`}
+                        initial={{
+                            scale: 0.8,
+                            opacity: 0,
+                            y: 100, // Start from below
+                            x: '-50%', // Keep horizontal centering
+                        }}
+                        animate={{
+                            scale: 1,
+                            opacity: 1,
+                            y: 0, // Move to original position
+                            x: '-50%', // Keep horizontal centering
+                        }}
+                        exit={{
+                            scale: 0.8,
+                            opacity: 0,
+                            y: 100,
+                            x: '-50%',
+                        }}
+                        transition={{
+                            type: 'spring',
+                            stiffness: 300,
+                            damping: 25,
+                            duration: 0.3,
+                        }}
+                    >
+                        {taskbarItems.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                className={`taskbar-item-mobile ${activeModal === item.title ? 'active' : ''}`}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    delay: index * 0.05,
+                                    duration: 0.1,
+                                }}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleSettingsClick(item.title);
+                                }}
+                            >
+                                <div className="taskbar-content">
+                                    <img src={darkMode ? item.imgdm : item.image} alt={item.title} className="taskbar-icon-mobile" />
+                                    <span className="taskbar-name">{item.title === 'Settings' ? (darkMode ? 'Light Mode' : 'Dark Mode') : item.Name}</span>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
