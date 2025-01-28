@@ -1,16 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { ModalContext } from '../../utitlites/ModalContext.jsx';
+import { Menu } from 'lucide-react';
 
+import launchpad from '../../assets/icons/launchpad2.png';
+import launchpaddark from '../../assets/icons/launchpad-dark2.png';
 import './Taskbar.css';
 
-import ExperienceModal from '../../content/Experiences/ExperienceModal.jsx';
-import EducationCertificationModal from '../../content/EducationCertification/EducationCertificationModal.jsx';
-import TechModal from '../../content/TechSkills/TechModal.jsx';
-import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
-
 const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
-    const { openModal, isCurrentModal, modalContent, darkMode, toggleDarkMode } = useContext(ModalContext);
-    const [menuOpen, setMenuOpen] = useState(false);
+    const { openModal, isCurrentModal, modalContent, darkMode, toggleDarkMode, menuOpen, setMenuOpen } = useContext(ModalContext);
+
+    const taskbarRef = useRef(null);
+
     const taskbarItems = [
         {
             image: './src/assets/icons/profile.png',
@@ -62,26 +62,40 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
         },
     ];
 
+    // Handle clicks outside the taskbar
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (taskbarRef.current && !taskbarRef.current.contains(event.target)) {
+                setMenuOpen(false);
+            }
+        };
+
+        // Handle both touch and click events
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('touchstart', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+        };
+    }, []);
+
     const handleSettingsClick = (title) => {
-        const itemName = taskbarItems.find((item) => item.title === title)?.Name; // Get the Name based on the title
-        if (!itemName) return; // Exit if no matching item is found
+        const itemName = taskbarItems.find((item) => item.title === title)?.Name;
+        if (!itemName) return;
+
         switch (title) {
             case 'Experience':
-                console.log('itemName', itemName);
                 openModal(<ExperienceModal />, itemName);
-
                 break;
             case 'EducationCertification':
                 openModal(<EducationCertificationModal />, itemName, 'Small');
-
                 break;
             case 'Tech-Skills':
                 openModal(<TechModal />, itemName, 'Medium');
-
                 break;
             case 'Affiliates':
                 openModal(<AffiliatesModal />, itemName, 'Small');
-
                 break;
             case 'Contact':
                 window.location.href = 'mailto:dtoshidero@gmail.com';
@@ -100,18 +114,45 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
             default:
                 break;
         }
+
+        // Don't automatically close menu after clicking modal items
+        // This allows users to open multiple modals without re-opening the menu
+        if (title === 'Contact' || title === 'LinkedIn' || title === 'Github' || title === 'Settings') {
+            setMenuOpen(false);
+        }
+    };
+
+    const toggleMenu = (e) => {
+        e.stopPropagation(); // Prevent event from bubbling up
+        setMenuOpen(!menuOpen);
     };
 
     return (
-        <div className="taskbar-container">
-            {taskbarItems.map((item, index) => (
-                <div key={index} className={`taskbar-item ${activeModal === item.title ? 'active' : ''}`} onClick={() => handleSettingsClick(item.title)}>
-                    <div className="taskbar-content">
-                        <img src={darkMode ? item.imgdm : item.image} alt={item.title} className="taskbar-icon" />
-                        <span className="taskbar-name">{item.title === 'Settings' ? (darkMode ? 'Light Mode' : 'Dark Mode') : item.Name}</span>
-                    </div>
-                </div>
-            ))}
+        <div className="relative" ref={taskbarRef}>
+            {isMobile && !menuOpen && (
+                <button onClick={toggleMenu} className="tblaunchpad">
+                    <img src={darkMode ? launchpaddark : launchpad} className="launchpad" alt="Menu" />
+                </button>
+            )}
+
+            <div className={`taskbar-container ${isMobile ? 'mobile' : ''} ${isMobile && menuOpen ? 'mobile-open' : isMobile ? 'mobile-closed' : ''}`}>
+                {(!isMobile || menuOpen) &&
+                    taskbarItems.map((item, index) => (
+                        <div
+                            key={index}
+                            className={`taskbar-item ${activeModal === item.title ? 'active' : ''}`}
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent closing when clicking items
+                                handleSettingsClick(item.title);
+                            }}
+                        >
+                            <div className="taskbar-content">
+                                <img src={darkMode ? item.imgdm : item.image} alt={item.title} className="taskbar-icon" />
+                                <span className="taskbar-name">{item.title === 'Settings' ? (darkMode ? 'Light Mode' : 'Dark Mode') : item.Name}</span>
+                            </div>
+                        </div>
+                    ))}
+            </div>
         </div>
     );
 };

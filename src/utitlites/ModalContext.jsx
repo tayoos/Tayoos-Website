@@ -13,6 +13,7 @@ export const ModalProvider = ({ children }) => {
     const [darkMode, setDarkMode] = useState(false); // Tracks darkMode state
     const [currentModalSize, setCurrentModalSize] = useState('Normal'); // Track the current modal size
     const [ListView, setListView] = useState(true); // track whether back to list should be triggered
+    const [menuOpen, setMenuOpen] = useState(false); // track whether back to list should be triggered
 
     const openModal = (content, title, modalSize = 'Normal', isModalBackAction = false) => {
         setModalTitle(title); // Store the current Modal title
@@ -66,5 +67,5 @@ export const ModalProvider = ({ children }) => {
         setDarkMode(mode !== undefined ? mode : !darkMode);
     };
 
-    return <ModalContext.Provider value={{ openModal, closeModal, modalContent, isModalOpen, isCurrentModal, modalTransition, modalActiveClose, modalTitle, darkMode, toggleDarkMode, triggerListView, ListView, resetListView, currentModalSize }}>{children}</ModalContext.Provider>;
+    return <ModalContext.Provider value={{ openModal, closeModal, modalContent, isModalOpen, isCurrentModal, modalTransition, modalActiveClose, modalTitle, darkMode, toggleDarkMode, triggerListView, ListView, resetListView, currentModalSize, menuOpen, setMenuOpen }}>{children}</ModalContext.Provider>;
 };

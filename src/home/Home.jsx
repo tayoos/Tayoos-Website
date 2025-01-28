@@ -15,7 +15,7 @@ import { ModalContext } from '../utitlites/ModalContext.jsx';
 function Home() {
     const [splashComplete, setSplashComplete] = useState(false);
     const [isEntryPoint, setIsEntryPoint] = useState(true);
-    const { darkMode, toggleDarkMode } = useContext(ModalContext);
+    const { darkMode, toggleDarkMode, menuOpen } = useContext(ModalContext);
     const [activeModal, setActiveModal] = useState(null);
     const [currentModalContent, setCurrentModalContent] = useState(null);
     const [isModalClosing, setIsModalClosing] = useState(false);
@@ -23,7 +23,8 @@ function Home() {
     const closeTimeoutRef = useRef(null);
 
     // Get Device Type
-    const isMobile = getDeviceType() === 'Mobile';
+    //const isMobile = getDeviceType() === 'Mobile';
+    const isMobile = false;
 
     const handleSplashEnd = () => {
         setIsEntryPoint(false);
@@ -44,12 +45,10 @@ function Home() {
                         <Header isMobile={isMobile} darkMode={darkMode} />
                     </div>
                     <div className={`GridContainer ${isMobile ? 'GridContainer-mobile' : ''}`}>
-                        <NCReactGridLayout darkMode={darkMode} />
+                        <NCReactGridLayout darkMode={darkMode} isMobile={isMobile} />
                     </div>
 
-                    <div className="taskbar">
-                        <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} darkMode={darkMode} />
-                    </div>
+                    <div className={`taskbar`}>{isMobile ? <TaskbarMobile onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} /> : <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} />}</div>
                 </div>
             </div>
         </div>

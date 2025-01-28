@@ -12,14 +12,25 @@
     flex-direction: column; /* Stack items vertically if needed */
 }
 
+/* Modified Mobile class with fixes for horizontal scrolling */
 .screen-container.Mobile {
-    max-height: 100%; /* Ensure the mobile container adapts to the screen */
-    overflow-y: scroll; /* Ensure it scrolls on mobile */
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
-    max-width: 100%;
-    background-color: red;
+    width: 100%; /* Use 100% instead of 100vw to prevent overflow */
+    max-width: 100%; /* Ensure container doesn't exceed viewport width */
+    margin: 0 auto; /* Center the container */
+    padding: 0; /* Remove any padding that might cause overflow */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto; /* Allow vertical scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    display: flex;
+    position: relative; /* Establish positioning context */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
+/* Ensure children of Mobile container don't cause overflow */
+.screen-container.Mobile > * {
+    max-width: 100%;
+    width: 100%;
+}
 .page-container {
     height: 100vh;
     max-height: 98%;
@@ -35,7 +46,6 @@
 
 .page-container.Mobile {
     overflow-y: scroll; /* Ensure it scrolls on mobile */
-    width: 100%;
 }
 
 .icongrid {
@@ -69,6 +79,10 @@
     transform: translateX(-50%); /* Center horizontally */
     padding: 5px;
     z-index: 1000; /* Ensure it stays on top */
+}
+
+.taskbar.tb-bg {
+    background-color: transparent;
 }
 
 .header-container {
@@ -122,7 +136,9 @@
 
 .bg-main.Mobile,
 .bg-dm.Mobile {
-    max-width: 100%;
+    width: 100vw; /* Full viewport width on mobile */
+    height: 100vh; /* Full viewport height on mobile */
+    max-width: none; /* Remove width restrictions */
 }
 
 .osProfileImage {

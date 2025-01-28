@@ -99,7 +99,7 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
     if (!showSplash) return null;
 
     return (
-        <div className={`splash-screen ${isTransitioning ? 'transitioning' : ''}`}>
+        <div className={`splash-screen ${isTransitioning ? 'transitioning' : ''} ${isMobile ? 'Mobile' : ''}`}>
             <div className="video-container">
                 {isReady && (
                     <video

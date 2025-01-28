@@ -13,6 +13,7 @@ import CVWidget from './Widgets/CVWidget';
 import WeatherWidget from './Widgets/WeatherWidget';
 import TimezoneWidget from './Widgets/TimezoneWidget';
 import StatusCard from './Widgets/StatusCard/StatusCard';
+import Device, { getDeviceType } from '../../utitlites/Device';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -25,6 +26,9 @@ const NCReactGridLayout = ({ darkMode }) => {
     const [maxRows, setMaxRows] = useState(22);
 
     const [isDragging, setIsDragging] = useState(false);
+
+    // Get Device Type
+    const isMobile = getDeviceType() === 'Mobile';
 
     const cellSizes = {
         xxl: 50,
