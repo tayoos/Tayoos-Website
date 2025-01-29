@@ -22,129 +22,165 @@ const mobileWidgetConfig = {
             show: true,
             static: true,
             w: 3,
-            h: 3,
+            h: 4,
             minW: 3,
             minH: 3,
             maxW: 3,
             maxH: 3,
             order: 1,
+            initialX: 0, // Left side
+            initialY: 3,
         },
         1: {
             // TextCardWidget
             show: true,
-            static: false,
-            w: 4,
+            static: true,
+            w: 6,
             h: 3,
             minW: 4,
             minH: 2,
             maxW: 7,
             maxH: 4,
             order: 2,
+            initialX: 0, // Right of photo
+            initialY: 0,
         },
         2: {
             // MusicWidget
             show: true,
             static: true,
-            w: 7,
+            w: 4,
             h: 2,
             minW: 4,
             minH: 2,
             maxW: 7,
             maxH: 3,
             order: 3,
+            initialX: 0, // Full width
+            initialY: 7,
         },
         3: {
             // CVWidget
             show: true,
-            static: false,
-            w: 7,
+            static: true,
+            w: 1,
             h: 2,
             minW: 4,
             minH: 2,
             maxW: 7,
             maxH: 3,
             order: 4,
+            initialX: 6,
+            initialY: 7,
         },
         4: {
             // WeatherWidget
             show: true,
             static: true,
-            w: 7,
+            w: 3,
             h: 2,
             minW: 4,
             minH: 2,
             maxW: 7,
             maxH: 3,
             order: 5,
+            initialX: 3, // Right side
+            initialY: 5,
         },
         5: {
             // TimezoneWidget
             show: false,
             static: true,
-            w: 7,
-            h: 2,
-            minW: 4,
-            minH: 2,
+            w: 1,
+            h: 1,
+            minW: 1,
+            minH: 1,
             maxW: 7,
             maxH: 3,
             order: 6,
+            initialX: 0,
+            initialY: 8,
         },
         6: {
             // StatusCard
             show: true,
-            static: false,
-            w: 7,
+            static: true,
+            w: 3,
             h: 2,
             minW: 4,
             minH: 2,
             maxW: 7,
             maxH: 3,
             order: 7,
+            initialX: 3, // Full width
+            initialY: 3,
         },
     },
 };
-const NCReactGridLayoutMobile = ({ darkMode }) => {
+const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
     const containerRef = useRef(null);
     const dragBoundaryRef = useRef(null);
-    const [maxRows, setMaxRows] = useState(22);
+    const [maxRows, setMaxRows] = useState(12);
     const [isDragging, setIsDragging] = useState(false);
     const [layouts, setLayouts] = useState(generateInitialLayout());
 
     // Mobile Grid Configuration
     const mobileGridConfig = {
-        cols: 7,
+        cols: 6,
         cellSize: 50,
         gapSize: 20,
         containerPadding: 5,
     };
 
     function generateInitialLayout() {
-        let currentY = 0;
-        const visibleWidgets = Object.entries(mobileWidgetConfig.widgets)
+        return Object.entries(mobileWidgetConfig.widgets)
             .filter(([_, config]) => config.show)
-            .sort((a, b) => a[1].order - b[1].order);
-
-        return visibleWidgets.map(([key, config]) => ({
-            i: key,
-            x: 0,
-            y: currentY,
-            w: config.w,
-            h: config.h,
-            static: config.static,
-            minW: config.minW,
-            minH: config.minH,
-            maxW: config.maxW,
-            maxH: config.maxH,
-        }));
+            .sort((a, b) => a[1].order - b[1].order)
+            .map(([key, config]) => ({
+                i: key,
+                x: config.initialX,
+                y: config.initialY,
+                w: config.w,
+                h: config.h,
+                static: config.static,
+                minW: config.minW,
+                minH: config.minH,
+                maxW: config.maxW,
+                maxH: config.maxH,
+            }));
     }
 
     // Update maxRows based on container height
+    /* useEffect(() => {
+        const updateMaxRows = () => {
+            if (containerRef.current) {
+                const containerHeight = containerRef.current.offsetHeight;
+                const { cellSize, gapSize, containerPadding } = mobileGridConfig;
+                const availableHeight = containerHeight - containerPadding * 2;
+                const maxPossibleRows = Math.floor((availableHeight + gapSize) / (cellSize + gapSize));
+                setMaxRows(Math.max(1, maxPossibleRows));
+            }
+        };
+
+        const resizeObserver = new ResizeObserver(updateMaxRows);
+        if (containerRef.current) {
+            resizeObserver.observe(containerRef.current);
+        }
+
+        return () => {
+            if (containerRef.current) {
+                resizeObserver.unobserve(containerRef.current);
+            }
+        };
+    }, []);*/
+
     useEffect(() => {
         const updateMaxRows = () => {
             if (containerRef.current) {
                 const containerHeight = containerRef.current.offsetHeight;
                 const { cellSize, gapSize, containerPadding } = mobileGridConfig;
                 const availableHeight = containerHeight - containerPadding * 2;
+                // Modify this calculation to change how height is determined
                 const maxPossibleRows = Math.floor((availableHeight + gapSize) / (cellSize + gapSize));
                 setMaxRows(Math.max(1, maxPossibleRows));
             }
@@ -283,10 +319,11 @@ const NCReactGridLayoutMobile = ({ darkMode }) => {
             ref={containerRef}
             className={`w-full flex justify-center ${darkMode ? 'dark' : ''}`}
             style={{
-                height: '100%',
+                //height: '100%',
+                height: '87%', // Takes 90% of viewport height
                 position: 'relative',
                 padding: `${mobileGridConfig.containerPadding}px`,
-                minWidth: `${calculateContainerWidth()}px`, // Add minimum width
+                minWidth: `${calculateContainerWidth()}px`, // Add minimum width,
             }}
         >
             <div
@@ -317,7 +354,7 @@ const NCReactGridLayoutMobile = ({ darkMode }) => {
                     maxRows={maxRows}
                 >
                     {renderWidget('0', <PhotoWidget />)}
-                    {renderWidget('1', <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" />)}
+                    {renderWidget('1', <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" isMobile={isMobile} />)}
                     {renderWidget('2', <MusicWidget />)}
                     {renderWidget('3', <CVWidget darkMode={darkMode} />)}
                     {renderWidget('4', <WeatherWidget darkMode={darkMode} />)}

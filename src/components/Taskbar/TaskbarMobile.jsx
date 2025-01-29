@@ -101,7 +101,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
                 openModal(<TechModal />, itemName, 'Medium');
                 break;
             case 'Affiliates':
-                openModal(<AffiliatesModal />, itemName, 'Small');
+                openModal(<AffiliatesModal isMobile={isMobile} />, itemName, 'Small');
                 break;
             case 'Contact':
                 window.location.href = 'mailto:dtoshidero@gmail.com';

@@ -26,8 +26,22 @@ function Home() {
     const closeTimeoutRef = useRef(null);
 
     // Get Device Type
-    //const isMobile = getDeviceType() === 'Mobile';
-    const isMobile = true;
+    const isMobile = getDeviceType() === 'Mobile';
+    //const isMobile = true;
+
+    // First, create a function to set the --vh property
+    function setVH() {
+        // Get the actual viewport height
+        const vh = window.innerHeight * 0.01;
+        // Set the value in the --vh custom property
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    // Set the height initially
+    setVH();
+
+    // Update the height whenever the window is resized
+    window.addEventListener('resize', setVH);
 
     const handleSplashEnd = () => {
         setIsEntryPoint(false);
@@ -47,7 +61,7 @@ function Home() {
                     <div className={`header-container ${isMobile ? 'Mobile' : ''}`}>
                         <Header isMobile={isMobile} darkMode={darkMode} />
                     </div>
-                    <div className={`GridContainer ${isMobile ? 'GridContainer' : ''}`}>{isMobile ? <NCReactGridLayoutMobile darkMode={darkMode} /> : <NCReactGridLayout darkMode={darkMode} />}</div>
+                    <div className={`GridContainer ${isMobile ? 'GridContainer-mobile' : ''}`}>{isMobile ? <NCReactGridLayoutMobile darkMode={darkMode} isMobile={isMobile} /> : <NCReactGridLayout darkMode={darkMode} />}</div>
 
                     <div className={`taskbar ${isMobile ? 'taskbarmb' : ''}`}>{isMobile ? <TaskbarMobile onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} isMobile={isMobile} /> : <Taskbar onDarkModeChange={handleDarkModeChange} setActiveModal={setActiveModal} activeModal={activeModal} />}</div>
                 </div>

@@ -79,7 +79,7 @@ const Modal = () => {
                         </button>
                     </div>
                 </div>
-                <div className={`modals-body ${darkMode ? 'dark' : ''}`}>{modalContent}</div>
+                <div className={`modals-content-body ${darkMode ? 'dark' : ''}`}>{modalContent}</div>
             </div>
         </div>
     );

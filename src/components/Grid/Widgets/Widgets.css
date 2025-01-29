@@ -43,8 +43,11 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     overflow: hidden;
     padding-bottom: 0px;
+    padding-top: 0px;
+    margin-top: 0;
     border-radius: 15px;
     background-color: rgba(138, 138, 138, 0.05);
+    box-sizing: border-box;
 }
 
 .MusicWidgetContainer {
@@ -59,20 +62,30 @@
 }
 
 .text-card > *:not(:last-child) {
+    margin-bottom: 0.5rem; /* Adjust the margin as needed */
+}
+
+.text-card.Mobile > *:not(:last-child) {
     margin-bottom: 1rem; /* Adjust the margin as needed */
+    padding-bottom: 15px;
 }
 
 .text-card-title {
     font-size: 1.125rem;
     font-weight: 500;
     font-size: 24px;
-    color: #111827;
+    color: #111827cc;
+    margin-top: 25px;
+}
+
+.text-card-title.Mobile {
+    font-size: 1.2rem;
 }
 
 .text-card-content {
     width: 100%;
     flex: 1;
-
+    margin-top: 0;
     overflow: auto;
     display: flex;
     align-items: flex-start;
@@ -82,7 +95,7 @@
     font-size: 14px;
 }
 
-.text-card-content {
+.text-card .text-card-content {
     color: #4b5563;
 }
 
@@ -117,6 +130,7 @@
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     position: relative;
+    color: rgb(99, 99, 99);
 }
 
 .cv-widget > * {

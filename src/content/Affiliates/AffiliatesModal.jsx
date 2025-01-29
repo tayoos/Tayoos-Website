@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ModalContext } from '../../utitlites/ModalContext';
 import './AffiliatesModal.css';
 
-const AffiliatesModal = () => {
+const AffiliatesModal = ({ isMobile }) => {
     const { darkMode } = useContext(ModalContext);
     const Affiliates = [
         // Volunteering & Community Engagement
@@ -31,7 +31,7 @@ const AffiliatesModal = () => {
         /*
         {
             id: 10,
-            title: 'EF',
+            title: 'EF - Example',
             companyPurpose: 'A forward-thinking technology consultancy dedicated to driving innovation and contributing to the development of the next generation of transformative solutions, empowering businesses and shaping the future through cutting-edge expertise and collaboration.',
             affiliationType: 'Strategic Partner',
             type: 'Operating Businesses & Partner Organisations',
@@ -85,8 +85,8 @@ const AffiliatesModal = () => {
                 return (
                     <div className="affiliates-list-item-content">
                         <div className="affiliates-list-item-main">
-                            <div className="affiliates-list-item-title">{affiliate.title}</div>
-                            <div className="affiliates-list-item-type">{affiliate.affiliationType}</div>
+                            <div className={`affiliates-list-item-title ${darkMode ? 'dark' : ''}`}>{affiliate.title}</div>
+                            <div className={`affiliates-list-item-type ${darkMode ? 'dark' : ''}`}>{affiliate.affiliationType}</div>
                         </div>
                     </div>
                 );
@@ -94,8 +94,8 @@ const AffiliatesModal = () => {
                 return (
                     <div className="affiliates-list-item-content">
                         <div className="affiliates-list-item-main">
-                            <div className="affiliates-list-item-title">{affiliate.title}</div>
-                            <div className="affiliates-list-item-type">{affiliate.MembershipType}</div>
+                            <div className={`affiliates-list-item-title ${darkMode ? 'dark' : ''}`}>{affiliate.title}</div>
+                            <div className={`affiliates-list-item-type ${darkMode ? 'dark' : ''}`}>{affiliate.MembershipType}</div>
                         </div>
                     </div>
                 );
@@ -104,34 +104,34 @@ const AffiliatesModal = () => {
                     <div className="affiliates-list-item-content">
                         <div className="affiliates-list-item-header">
                             {' '}
-                            <div className="affiliates-list-item-title-OB">{affiliate.title}</div>
-                            <div className="affiliates-list-item-type-OB">{affiliate.affiliationType}</div>
+                            <div className={`affiliates-list-item-title-OB ${darkMode ? 'dark' : ''}`}>{affiliate.title}</div>
+                            <div className={`affiliates-list-item-type-OB ${darkMode ? 'dark' : ''}`}>{affiliate.affiliationType}</div>
                         </div>
-                        <div className="affiliates-list-item-purpose">{affiliate.companyPurpose}</div>
+                        <div className={`affiliates-list-item-purpose ${darkMode ? 'dark' : ''}`}>{affiliate.companyPurpose}</div>
                     </div>
                 );
             default:
                 return (
                     <div className="affiliates-list-item-content">
-                        <div className="affiliates-list-item-title">{affiliate.title}</div>
+                        <div className={`affiliates-list-item-title ${darkMode ? 'dark' : ''}`}>{affiliate.title}</div>
                     </div>
                 );
         }
     };
 
     return (
-        <motion.div className={`affiliates-modal-container ${darkMode ? 'dark' : ''}`} initial="hidden" animate="visible" variants={variants}>
+        <motion.div className={`affiliates-modal-container ${darkMode ? 'dark' : ''} ${isMobile ? 'Mobile' : ''}`} initial="hidden" animate="visible" variants={variants}>
             {affiliationTypes.map((type) => {
                 const affiliatesInType = Affiliates.filter((affiliate) => affiliate.type === type);
 
                 return (
                     <motion.div key={type} className="affiliates-section" variants={sectionVariants}>
-                        <motion.h2 className="affiliates-section-title" variants={itemVariants}>
+                        <motion.h2 className={`affiliates-section-title ${darkMode ? 'dark' : ''}`} variants={itemVariants}>
                             {type}
                         </motion.h2>
-                        <motion.ul className="affiliates-list" variants={sectionVariants}>
+                        <motion.ul className={`affiliates-list ${darkMode ? 'dark' : ''}`} variants={sectionVariants}>
                             {affiliatesInType.map((affiliate) => (
-                                <motion.li key={affiliate.id} className="affiliates-list-item" variants={itemVariants}>
+                                <motion.li key={affiliate.id} className={`affiliates-list-item ${darkMode ? 'dark' : ''} ${isMobile ? 'Mobile' : ''}`} variants={itemVariants}>
                                     {renderAffiliateContent(affiliate)}
                                 </motion.li>
                             ))}

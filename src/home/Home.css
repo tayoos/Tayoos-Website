@@ -12,18 +12,21 @@
     flex-direction: column; /* Stack items vertically if needed */
 }
 
-/* Modified Mobile class with fixes for horizontal scrolling */
+/* Ensure the container starts at the very top */
 .screen-container.Mobile {
-    width: 100%; /* Use 100% instead of 100vw to prevent overflow */
-    max-width: 100%; /* Ensure container doesn't exceed viewport width */
-    margin: 0 auto; /* Center the container */
-    padding: 0; /* Remove any padding that might cause overflow */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    overflow-y: auto; /* Allow vertical scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    width: 100%;
+    max-width: 100%;
+    margin: 0; /* Remove all margins */
+    padding: 0;
+    overflow-x: hidden;
     display: flex;
-    position: relative; /* Establish positioning context */
-    box-sizing: border-box; /* Include padding in width calculation */
+    position: fixed; /* Change to fixed to ensure it starts at top of viewport */
+    top: 0; /* Explicitly set top position */
+    left: 0; /* Ensure no horizontal offset */
+    box-sizing: border-box;
+    /*overflow-y: hidden;*/
+
+    max-height: calc(var(--vh, 1vh) * 100);
 }
 
 /* Ensure children of Mobile container don't cause overflow */
@@ -45,7 +48,7 @@
 }
 
 .page-container.Mobile {
-    overflow-y: scroll; /* Ensure it scrolls on mobile */
+    max-height: calc(var(--vh, 1vh) * 100);
 }
 
 .icongrid {
@@ -83,6 +86,8 @@
 
 .taskbar.taskbarmb {
     background-color: transparent;
+    margin-bottom: 0;
+    height: var(--taskbar-height-md);
 }
 .header-container {
     height: var(--header-height);
@@ -136,8 +141,7 @@
 .bg-main.Mobile,
 .bg-dm.Mobile {
     width: 100vw; /* Full viewport width on mobile */
-    height: 100vh; /* Full viewport height on mobile */
-    max-width: none; /* Remove width restrictions */
+    height: 100%;
 }
 
 .osProfileImage {
@@ -229,10 +233,11 @@
 
 .GridContainer-mobile {
     width: 98%;
-    height: 90%;
+
     padding-top: 10px;
     align-self: center;
     align-content: flex-start;
+    overflow-y: hidden; /* Prevents scrolling and hides overflow content */
 }
 
 @keyframes modalExpand {

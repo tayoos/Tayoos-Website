@@ -74,6 +74,9 @@
     transition: max-width 0.3s ease, padding 0.3s ease;
     display: flex; /* Ensures children layout properly */
     flex-direction: column; /* Stacks children vertically */
+
+    padding: 0; /* Remove any padding */
+    box-sizing: border-box;
 }
 
 .modals-content.dark {
@@ -177,6 +180,7 @@
     font-size: 1.5rem;
     font-weight: 600;
     height: fit-content;
+    color: #2c2c2c;
 }
 
 .modal-title.dark {
@@ -258,13 +262,16 @@
     border-color: transparent; /* Ensure border remains transparent */
 }
 
-.modals-body {
+.modals-content-body {
     display: flex; /* Ensure flexbox is used if it's a container */
     flex-direction: column; /* Arrange items vertically */
     align-items: flex-start; /* Align items to the top (cross-axis) */
     justify-content: flex-start; /* Align items to the top (main-axis) */
     width: 100%; /* Occupy full width of the parent */
     height: 100%; /* Stretch to fill the parent container's height */
+
     overflow-y: auto; /* Allow vertical scrolling if needed */
     box-sizing: border-box; /* Includes padding/border in dimensions */
+
+    margin: 0;
 }

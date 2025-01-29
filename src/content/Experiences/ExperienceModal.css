@@ -128,6 +128,9 @@
 
     box-sizing: border-box; /* Includes padding in dimensions */
     gap: 10px; /* Space between logo and text */
+    color: black;
+    padding-bottom: 15px;
+    border-bottom: #2c2c2c2a solid 1px;
 }
 
 .company-logo {
@@ -143,6 +146,7 @@
     flex-direction: column;
     text-align: left;
     height: auto; /* Allow content to determine height */
+    color: #333;
 }
 
 .experience-modal-text h2 {
@@ -174,6 +178,7 @@
     text-align: left; /* Aligns text */
     align-self: flex-start; /* Aligns this element within a flex container if applicable */
     width: 100%; /* Ensure the element spans its container for proper text alignment */
+    color: #333;
 }
 
 .experience-modal-text.dark,
@@ -201,6 +206,7 @@
 
 .experience-detail-modal-mobile {
     padding: 10px;
+    overflow-y: auto;
 }
 
 .experience-list-modal.mobile {
@@ -231,6 +237,7 @@
 .experience-modal-mobile-title {
     margin: 0 0 10px 0;
     font-size: 16px;
+    color: var(--secondary-text-color);
 }
 
 .experience-modal-mobile-title.dark {

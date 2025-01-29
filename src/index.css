@@ -28,7 +28,9 @@
     --standard-font-weight: 500;
     --important-font-colour: #aeaeca;
     --primary-text-color: #000000;
+    --secondary-text-color: #213547;
     --darkmode-text-color: #ffffffb9;
+    --darkmode-dark-text-color: #c5c5c5;
     --darkmode-bright-text-color: #ffffff;
     --darkmode-alt-text-color: #ffffff;
     --darkmode-alt-text-color2: #eeeeeeea;

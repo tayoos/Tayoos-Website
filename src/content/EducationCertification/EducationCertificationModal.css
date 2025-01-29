@@ -30,6 +30,7 @@
     border-left: 4px solid purple;
     margin: 10px 10px;
     padding: 5px 10px;
+    color: var(--secondary-text-color);
 }
 
 .degree-item.dark {
@@ -42,6 +43,7 @@
     border-left: 4px solid orange;
     margin: 10px 10px;
     padding: 5px 10px;
+    color: var(--secondary-text-color);
 }
 
 .diploma-item.dark {
@@ -55,6 +57,7 @@
     border-left: 4px solid rgb(0, 225, 255);
     margin: 10px 10px;
     padding: 5px 10px;
+    color: var(--secondary-text-color);
 }
 
 .certificate-item.dark {
@@ -77,7 +80,6 @@
     border: 1px solid #57575765;
     border-radius: 14px;
     padding: 3px 0px;
-
     font-size: var(--standard-font-size);
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
@@ -85,12 +87,12 @@
     opacity: 0.6;
     text-wrap: nowrap;
     width: 100px;
-
     display: flex;
-    justify-self: center;
     justify-content: center;
     align-items: center;
+    margin: 0 auto; /* This centers the button horizontally */
 }
+
 .education-certification-button:hover {
     background-color: var(--standard-button-colour);
     background-color: transparent;

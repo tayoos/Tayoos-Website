@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Widgets.css';
 
-const TextCardWidget = ({ title = 'Title', body = 'Content goes here', darkMode }) => {
+const TextCardWidget = ({ title = 'Title', body = 'Content goes here', darkMode, isMobile }) => {
     const [displayedTitle, setDisplayedTitle] = useState('');
     const [displayedBody, setDisplayedBody] = useState('');
     const [titleDone, setTitleDone] = useState(false);
@@ -36,10 +36,10 @@ const TextCardWidget = ({ title = 'Title', body = 'Content goes here', darkMode 
     }, [body, titleDone]);
 
     return (
-        <div className={`text-card ${darkMode ? 'dark' : ''}`}>
-            <h3 className="text-card-title">{displayedTitle}</h3>
+        <div className={`text-card ${darkMode ? 'dark' : ''} ${isMobile ? 'Mobile' : ''}`}>
+            <h3 className={`text-card-title ${isMobile ? 'Mobile' : ''}`}>{displayedTitle}</h3>
 
-            <p className="text-card-content">{displayedBody}</p>
+            <p className={`text-card-content ${isMobile ? 'Mobile' : ''}`}>{displayedBody}</p>
         </div>
     );
 };

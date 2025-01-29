@@ -3,6 +3,7 @@
     background: rgba(255, 255, 255, 0.39); /* Slightly transparent background */
     height: 100%;
     border-radius: 15px;
+    color: rgba(0, 0, 0, 0.664);
 }
 
 .SCwidget-container.dark {
