@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import SpotifyService from '../../../utitlites/Services/SpotifyService';
 import AppleMusicService from '../../../utitlites/Services/AppleMusicService';
 
+import SpotifyIcon from '../../../assets/icons/Spotify.png';
+import SpotifyDarkIcon from '../../../assets/icons/Spotify-dark.png';
+import AppleMusicIcon from '../../../assets/icons/AppleMusic.png';
+import AppleMusicDarkIcon from '../../../assets/icons/AppleMusic-dark.png';
+
 const MusicWidget = ({ darkMode }) => {
     const [spotifyTrack, setSpotifyTrack] = useState(null);
     const [appleTrack, setAppleTrack] = useState(null);
@@ -101,7 +106,7 @@ const MusicWidget = ({ darkMode }) => {
         if (!isConfigured) {
             return (
                 <div className="flex flex-col items-center justify-center h-full p-4">
-                    <p className="text-gray-500 text-center">Please configure your music service credentials in the environment variables.</p>
+                    <p className="text-gray-500 text-center">Error in Music Configuration</p>
                 </div>
             );
         }
@@ -119,14 +124,29 @@ const MusicWidget = ({ darkMode }) => {
         }
 
         return (
-            <div className="MusicWidgetContainer">
-                <div className="mb-2">
-                    <p className="text-sm text-gray-500">{service}</p>
+            <div className={`MusicWidgetContainer`}>
+                <div className={`AlbumArt`}>
+                    <img src={currentTrack.albumArtwork} alt="Album Artwork" className="AlbumImage" />
                 </div>
-                <div className="text-center">
+                <div className={`MusicCoreContent`}>
+                    <p className="text-sm text-gray-500">{service}</p>
                     <h3 className="font-medium text-lg mb-1">{currentTrack.title}</h3>
                     <p className="text-gray-600">{currentTrack.artist}</p>
-                    <p className="text-gray-500 text-sm mt-1">{currentTrack.album}</p>
+                </div>
+                <div className={`ServiceLogo`}>
+                    <img
+                        src={
+                            service === 'Spotify'
+                                ? darkMode
+                                    ? SpotifyDarkIcon // version for dark mode
+                                    : SpotifyIcon // version for light mode
+                                : darkMode
+                                ? AppleMusicDarkIcon // ersion for dark mode
+                                : AppleMusicIcon // version for light mode
+                        }
+                        alt={`${service} Logo`}
+                        className="ServiceImage"
+                    />
                 </div>
             </div>
         );

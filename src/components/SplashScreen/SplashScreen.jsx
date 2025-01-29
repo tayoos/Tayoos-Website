@@ -10,12 +10,12 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
     const [isFadedIn, setIsFadedIn] = useState(false);
 
     useEffect(() => {
-        console.log('Initial mount effect');
+        //console.log('Initial mount effect');
         const readyTimer = setTimeout(() => {
-            console.log('Ready timer fired');
+            //console.log('Ready timer fired');
             setIsReady(true);
             setTimeout(() => {
-                console.log('Fade in timer fired');
+                // console.log('Fade in timer fired');
                 setIsFadedIn(true);
             }, 100);
         }, 1000);
@@ -25,20 +25,20 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
 
     useEffect(() => {
         if (!isReady) {
-            console.log('Not ready yet');
+            //console.log('Not ready yet');
             return;
         }
 
         const video = videoRef.current;
         if (!video) {
-            console.log('No video ref');
+            //console.log('No video ref');
             return;
         }
 
-        console.log('Setting up video');
+        //console.log('Setting up video');
 
         const handleVideoEnded = () => {
-            console.log('Video ended');
+            //console.log('Video ended');
             setIsTransitioning(true);
             setTimeout(() => {
                 setShowSplash(false);
@@ -51,17 +51,17 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
 
         const startPlayback = async () => {
             try {
-                console.log('Attempting to play video');
+                // console.log('Attempting to play video');
                 await video.play();
-                console.log('Video playing successfully');
+                //console.log('Video playing successfully');
             } catch (error) {
-                console.error('Play error:', error);
+                //console.error('Play error:', error);
                 handleVideoEnded();
             }
         };
 
         const handleLoadedMetadata = () => {
-            console.log('Video metadata loaded');
+            //console.log('Video metadata loaded');
             startPlayback();
         };
 
@@ -82,12 +82,12 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
         video.addEventListener('loadedmetadata', handleLoadedMetadata);
         video.addEventListener('ended', handleVideoEnded);
 
-        console.log('Setting video source:', videoSrc);
+        //console.log('Setting video source:', videoSrc);
         video.src = videoSrc;
         video.load();
 
         return () => {
-            console.log('Cleanup effect');
+            // console.log('Cleanup effect');
             video.removeEventListener('loadedmetadata', handleLoadedMetadata);
             video.removeEventListener('ended', handleVideoEnded);
             video.pause();

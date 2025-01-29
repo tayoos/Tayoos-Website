@@ -15,6 +15,8 @@ import NCReactGridLayoutMobile from '../components/Grid/NCReactGridLayoutMobile.
 
 import { ModalContext } from '../utitlites/ModalContext.jsx';
 
+import SpotifyService from '../utitlites/Services/SpotifyService.jsx';
+
 function Home() {
     const [splashComplete, setSplashComplete] = useState(false);
     const [isEntryPoint, setIsEntryPoint] = useState(true);
@@ -58,7 +60,7 @@ function Home() {
 
             <div className={`${darkMode ? 'bg-dm' : 'bg-main'} ${isMobile ? 'Mobile' : ''}`}>
                 <div className={`page-container ${isMobile ? 'Mobile' : ''}`}>
-                    <div className={`header-container ${isMobile ? 'Mobile' : ''}`}>
+                    <div className={`header-container ${isMobile ? 'Mobile' : ''} ${darkMode ? 'dark' : ''} `}>
                         <Header isMobile={isMobile} darkMode={darkMode} />
                     </div>
                     <div className={`GridContainer ${isMobile ? 'GridContainer-mobile' : ''}`}>{isMobile ? <NCReactGridLayoutMobile darkMode={darkMode} isMobile={isMobile} /> : <NCReactGridLayout darkMode={darkMode} />}</div>

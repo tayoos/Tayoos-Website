@@ -101,6 +101,10 @@
     justify-self: center;
 }
 
+.header-container.dark {
+    background-color: rgba(184, 184, 184, 0.24);
+}
+
 .header-container.Mobile {
 }
 

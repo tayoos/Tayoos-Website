@@ -35,6 +35,10 @@
     --darkmode-alt-text-color: #ffffff;
     --darkmode-alt-text-color2: #eeeeeeea;
     --standard-button-colour: #d95fe962;
+
+    --tech-font-size: 14px;
+    --tech-alt-font-size: 12px;
+    --tech-icon-font-size: 16px;
 }
 
 a {

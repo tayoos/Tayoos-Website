@@ -2,8 +2,9 @@ import React, { useRef, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import './TechModal.css';
 import { ModalContext } from '../../utitlites/ModalContext';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
-import SWIcon from '../../assets/tech/SW2.jpg';
+import SWIcon from '../../assets/tech/SW2.png';
 import VBAIcon from '../../assets/tech/VBA.png';
 import CameoIcon from '../../assets/tech/Cameo_sm-m.png';
 import SparxEAIcon from '../../assets/tech/SparxEA.png';
@@ -23,18 +24,19 @@ import MscPatranIcon from '../../assets/tech/MSCPatran2.png';
 import TypeScriptIcon from '../../assets/tech/TypeScript3.png';
 import TailwindCSSIcon from '../../assets/tech/tailwind.png';
 import CEAIcon from '../../assets/tech/CEA.png';
+import SAPIcon from '../../assets/tech/SAP.png';
 
 const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
 
     const techItems = [
-        { name: 'SolidWorks', icon: SWIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'SolidWorks', icon: SWIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'Excel/VBA', icon: VBAIcon, certification: '', fill: 'true', bcolor: 'vbagreen' },
         { name: 'CAMEO SM', icon: CameoIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Cameo EA', icon: CEAIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Sparx EA', icon: SparxEAIcon, certification: '', fill: '', bcolor: '' },
         { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'JavaScript', icon: JavaScriptIcon, certification: '', fill: 'true', bcolor: 'jsyellow' },
+        { name: 'JavaScript', icon: JavaScriptIcon, certification: '', fill: 'true', bcolor: 'jsyellow', ccourse: 'true' },
         { name: 'Python', icon: PythonIcon, certification: '', fill: '', bcolor: '' },
         { name: 'SysML', icon: SysMLIcon, certification: '', fill: '', bcolor: '' },
         { name: 'UML', icon: UMLIcon, certification: '', fill: '', bcolor: '' },
@@ -42,12 +44,13 @@ const TechModal = () => {
         { name: 'MATLAB', icon: MATLABIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Simulink', icon: SimulinkIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Confluence', icon: ConfluenceIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'CSS', icon: CSSIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'CSS', icon: CSSIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'Docker', icon: DockerIcon, certification: '', fill: '', bcolor: '' },
         { name: 'git', icon: GitIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Msc Patran', icon: MscPatranIcon, certification: '', fill: '', bcolor: '' },
         { name: 'TypeScript', icon: TypeScriptIcon, certification: '', fill: 'true', bcolor: 'tsblue' },
         { name: 'TailwindCSS', icon: TailwindCSSIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'SAP', icon: SAPIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BXTG7GSFBM22' },
     ];
 
     const variants = {
@@ -74,14 +77,14 @@ const TechModal = () => {
         <div className={`TechModal-container ${darkMode ? 'dark' : ''}`}>
             <motion.div className="TechModal-grid" initial="hidden" animate="visible" variants={variants} exit="exit">
                 {techItems.map((item, index) => (
-                    <TechItem key={index} name={item.name} icon={item.icon} certification={item.certification} fill={item.fill} bcolor={item.bcolor} darkMode={darkMode} variants={variants} />
+                    <TechItem key={index} name={item.name} icon={item.icon} certification={item.certification || ''} fill={item.fill || ''} bcolor={item.bcolor} link={item.link || ''} ccourse={item.ccourse || ''} darkMode={darkMode} variants={variants} />
                 ))}
             </motion.div>
         </div>
     );
 };
 
-const TechItem = ({ name, icon, certification, fill, bcolor, darkMode, variants }) => {
+const TechItem = ({ name, icon, certification, fill, bcolor, darkMode, variants, link, ccourse }) => {
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
     const itemRef = useRef(null);
     const circleRef = useRef(null);
@@ -128,7 +131,35 @@ const TechItem = ({ name, icon, certification, fill, bcolor, darkMode, variants 
                 </div>
             </motion.div>
             <p className={`TechModal-name ${darkMode ? 'dark' : ''}`}>{name}</p>
-            {certification && <div className={`TechModal-certification ${darkMode ? 'dark' : ''}`}>{certification}</div>}
+            <div className={`TechModal-attibutes-container ${darkMode ? 'dark' : ''}`}>
+                {certification && link && (
+                    <a href={link} target="_blank" rel="noopener noreferrer" className="TechModal-certification">
+                        <span className="certified-label">CERTIFIED</span>
+                        <VerifiedIcon className="certified-icon" />
+                    </a>
+                )}
+
+                {certification && !link && (
+                    <a href={link} target="_blank" rel="noopener noreferrer" className="TechModal-certification non-clickable">
+                        <span className="certified-label">CERTIFIED</span>
+                        <VerifiedIcon className="certified-icon" />
+                    </a>
+                )}
+
+                {ccourse && link && (
+                    <a href={link} target="_blank" rel="noopener noreferrer" className="TechModal-ccourse">
+                        <span className="completed-label">COURSE</span>
+                        <VerifiedIcon className="completed-icon" />
+                    </a>
+                )}
+
+                {ccourse && !link && (
+                    <div className="TechModal-ccourse non-clickable">
+                        <span className="completed-label">COURSE</span>
+                        <VerifiedIcon className="completed-icon" />
+                    </div>
+                )}
+            </div>
         </motion.div>
     );
 };

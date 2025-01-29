@@ -112,8 +112,9 @@
 .TechModal-name {
     margin-top: 0.75rem;
     text-align: center;
-    font-size: 0.875rem;
+    font-size: var(--tech-font-size);
     color: var(--secondary-text-color);
+    margin-bottom: 0;
 }
 
 .TechModal-name.dark {
@@ -121,7 +122,67 @@
 }
 
 .TechModal-certification {
-    font-size: 0.75rem;
-    color: #6b7280;
-    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: gold;
+    font-size: var(--tech-alt-font-size);
+    position: relative;
+
+    text-shadow: 0 0 20px gold; /* Adds glow to the text*/
+}
+
+.TechModal-certification:hover {
+    text-shadow: 0 0 50px gold;
+}
+
+/* Add this to override the cursor for non-clickable items*/
+.TechModal-certification.non-clickable {
+    cursor: default;
+}
+
+.certified-label {
+    margin-right: 4px;
+}
+
+.certified-icon {
+    font-size: var(--tech-icon-font-size) !important;
+}
+
+.TechModal-ccourse {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: violet;
+    font-size: var(--tech-alt-font-size);
+    position: relative;
+
+    text-shadow: 0 0 20px violet; /* Adds glow to the text*/
+}
+
+.TechModal-ccourse:hover {
+    text-shadow: 0 0 50px violet;
+}
+
+/* Add this to override the cursor for non-clickable items*/
+.TechModal-ccourse.non-clickable {
+    cursor: default;
+}
+
+.completed-label {
+    margin-right: 4px;
+}
+
+.completed-icon {
+    font-size: var(--tech-icon-font-size) !important;
+}
+.TechModal-ccourse,
+.TechModal-certification {
+    margin-top: 0;
+    padding: 0;
+}
+
+.TechModal-attibutes-container {
+    height: var(--tech-alt-font-size);
+    margin-bottom: 12px;
 }

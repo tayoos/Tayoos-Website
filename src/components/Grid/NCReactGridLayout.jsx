@@ -515,7 +515,7 @@ const NCReactGridLayout = ({ darkMode }) => {
                             <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" />
                         </div>
                         <div key="2" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <MusicWidget />
+                            <MusicWidget darkMode={darkMode} />
                         </div>
                         <div key="3" className="grid-item rounded-lg shadow-lg overflow-hidden">
                             <CVWidget darkMode={darkMode} />

@@ -20,7 +20,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
     const taskbarItems = [
         {
             image: './src/assets/icons/profile.png',
-            imgdm: './src/assets/icons/profile.png',
+            imgdm: './src/assets/icons/profile-dark.png',
             title: 'Experience',
             Name: 'Experience',
         },
@@ -37,8 +37,8 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
             Name: 'Tech & Skills',
         },
         {
-            image: './src/assets/icons/profile.png',
-            imgdm: './src/assets/icons/profile.png',
+            image: './src/assets/icons/Affiliates.png',
+            imgdm: './src/assets/icons/Affiliates-dark.png',
             title: 'Affiliates',
             Name: 'Affiliates',
         },
