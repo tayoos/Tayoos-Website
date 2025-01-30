@@ -1,5 +1,12 @@
+# Environment variables
 env
 .env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+node_modules
 
 # Logs
 logs
@@ -10,17 +17,22 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
+
+# Build files
+build/
+dist/
 dist-ssr
 *.local
+
+# OS files
+.DS_Store
+Thumbs.db
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 src/assets/Files/CurriculumVitae-DavidOshidero.docx
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
