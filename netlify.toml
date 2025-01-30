@@ -1,5 +1,5 @@
 [build]
+  node_version = "18"
   command = "npm run build"
-  functions = "functions"
   publish = "dist"
 
