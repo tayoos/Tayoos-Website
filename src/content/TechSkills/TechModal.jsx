@@ -13,7 +13,7 @@ import JavaScriptIcon from '../../assets/tech/Javascript.png';
 import PythonIcon from '../../assets/tech/Python.png';
 import SysMLIcon from '../../assets/tech/SysML.png';
 import UMLIcon from '../../assets/tech/UML2.png';
-import AnsysIcon from '../../assets/tech/Ansys.png';
+import AnsysIcon from '../../assets/tech/ANSYS.png';
 import MATLABIcon from '../../assets/tech/MATLAB.png';
 import SimulinkIcon from '../../assets/tech/Simulink2.png';
 import ConfluenceIcon from '../../assets/tech/Confluence2.png';
