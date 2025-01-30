@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Widgets.css';
+import './TextCardWidget.css';
 
 const TextCardWidget = ({ title = 'Title', body = 'Content goes here', darkMode, isMobile }) => {
     const [displayedTitle, setDisplayedTitle] = useState('');

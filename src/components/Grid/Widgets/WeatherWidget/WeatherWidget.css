@@ -1,0 +1,125 @@
+.weather-widget-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(26, 187, 165, 0.39);
+    background: linear-gradient(to bottom, rgba(26, 187, 165, 0.199), rgba(26, 187, 165, 0.521), rgba(26, 187, 165, 0.2));
+    color: var(--widget-text, #333);
+    border-radius: 15px;
+    height: 100%; /* Fill the parent container */
+    width: 100%; /* Full width of the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Prevent overflow if content spills */
+}
+
+.weather-widget-horizontal.dark {
+    background-color: var(--widget-dark-background, #3333336c);
+    color: var(--widget-dark-text, #f0f0f0);
+    border-color: rgba(31, 189, 189, 0.281);
+}
+
+.weather-icon-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Fill the widget's height */
+    max-width: 150px;
+}
+
+.weather-icon-large {
+    width: 100px;
+    height: 100px;
+}
+
+.weather-details-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    text-align: left;
+    height: 100%;
+    padding-left: 30px;
+}
+
+.weather-temperature {
+    font-size: 1.8rem;
+    font-weight: bold;
+    justify-self: center;
+}
+
+.weather-condition {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    font-weight: 500;
+    text-transform: capitalize;
+    position: absolute; /* Add this */
+    bottom: 4px; /* Add this */
+    line-height: 1; /* or use the same as font-size */
+    text-transform: capitalize !important;
+}
+
+.location-symbol {
+    margin-right: 4px;
+    transform: rotate(45deg) translateY(-2px); /* To get the correct orientation */
+    display: inline-block;
+    gap: 8px; /* Space between the SVG and text */
+    align-items: center;
+
+    width: 16px; /* Adjust SVG size */
+    height: 16px; /* Adjust SVG size */
+}
+
+.location-text {
+    font-size: 16px; /* Ensure text size matches SVG */
+    line-height: 1; /* Align text with SVG */
+}
+
+.weather-location {
+    display: flex;
+    align-items: center;
+
+    gap: 5px; /* Space between the SVG and text */
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Media query for height less than 800px */
+@media (max-width: 768px) {
+    .weather-icon-large {
+        width: 85px;
+        height: 85px;
+    }
+
+    .weather-details-section {
+        padding-left: 10px;
+    }
+}
+
+@media (max-width: 650px) {
+    .weather-icon-large {
+        width: 75px;
+        height: 75px;
+    }
+
+    .weather-details-section {
+        padding-left: 5px;
+    }
+}
+
+@media (max-width: 570px) {
+    .weather-icon-large {
+        width: 75px;
+        height: 75px;
+    }
+
+    .weather-details-section {
+        padding-left: 0px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .AlbumArt {
+        height: 110px;
+        width: 110px;
+    }
+}

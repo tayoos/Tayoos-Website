@@ -19,10 +19,10 @@ function Header({ isMobile, darkMode }) {
             <div className={`timedate-container ${darkMode ? 'dark' : ''}`}>
                 {!isMobile && (
                     <>
-                        <GetTime isDarkMode={darkMode} />
-                        <GetDate isDarkMode={darkMode} />
+                        <GetTime />
                     </>
                 )}
+                <GetDate isMobile={isMobile} />
             </div>
         </div>
     );

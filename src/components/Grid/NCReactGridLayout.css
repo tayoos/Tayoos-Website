@@ -5,3 +5,8 @@
     border-width: 2px; /* Adjust as needed */
     border-style: solid; /* Ensures the border is visible */
 }
+
+/* Hide the resize handle */
+.react-resizable-handle {
+    display: none !important;
+}

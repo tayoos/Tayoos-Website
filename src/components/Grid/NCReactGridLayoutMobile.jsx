@@ -6,10 +6,10 @@ import 'react-resizable/css/styles.css';
 import './NCReactGridLayout.css';
 
 import PhotoWidget from './Widgets/PhotoWidget';
-import TextCardWidget from './Widgets/TextCardWidget';
-import MusicWidget from './Widgets/MusicWidget';
+import TextCardWidget from './Widgets/TextCardWidget/TextCardWidget';
+import MusicWidget from './Widgets/MusicWidget/MusicWidget';
 import CVWidget from './Widgets/CVWidget';
-import WeatherWidget from './Widgets/WeatherWidget';
+import WeatherWidget from './Widgets/WeatherWidget/WeatherWidget';
 import TimezoneWidget from './Widgets/TimezoneWidget';
 import StatusCard from './Widgets/StatusCard/StatusCard';
 
@@ -49,7 +49,7 @@ const mobileWidgetConfig = {
             // MusicWidget
             show: true,
             static: true,
-            w: 4,
+            w: 5,
             h: 2,
             minW: 4,
             minH: 2,
@@ -355,7 +355,7 @@ const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
                 >
                     {renderWidget('0', <PhotoWidget />)}
                     {renderWidget('1', <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" isMobile={isMobile} />)}
-                    {renderWidget('2', <MusicWidget />)}
+                    {renderWidget('2', <MusicWidget darkMode={darkMode} />)}
                     {renderWidget('3', <CVWidget darkMode={darkMode} />)}
                     {renderWidget('4', <WeatherWidget darkMode={darkMode} />)}
                     {renderWidget('5', <TimezoneWidget darkMode={darkMode} />)}

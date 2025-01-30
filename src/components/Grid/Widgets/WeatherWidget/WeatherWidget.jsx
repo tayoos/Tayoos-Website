@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import getLocation from '../../TimeDate/getLocation';
-import './Widgets.css';
+import getLocation from '../../../TimeDate/getLocation';
+import './WeatherWidget.css';
 import { MapPin } from 'lucide-react'; // Add this import at the top
+
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 const WeatherWidget = ({ darkMode }) => {
     const [weatherData, setWeatherData] = useState(null);
@@ -30,9 +34,9 @@ const WeatherWidget = ({ darkMode }) => {
             setWeatherData({
                 location: data.name,
                 temperature: Math.round(data.main.temp),
-                condition: data.weather[0].main, // E.g., "Rain", "Clear", "Clouds"
-                icon: data.weather[0].icon, // Weather icon code
-                description: data.weather[0].description, // E.g., "light rain"
+                condition: data.weather[0].main,
+                icon: data.weather[0].icon,
+                description: capitalizeFirstLetter(data.weather[0].description), // Capitalize the first letter
             });
             setLoading(false);
         } catch (error) {

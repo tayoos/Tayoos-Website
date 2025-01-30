@@ -7,10 +7,10 @@ import 'react-resizable/css/styles.css';
 import './NCReactGridLayout.css';
 
 import PhotoWidget from './Widgets/PhotoWidget';
-import TextCardWidget from './Widgets/TextCardWidget';
-import MusicWidget from './Widgets/MusicWidget';
+import TextCardWidget from './Widgets/TextCardWidget/TextCardWidget';
+import MusicWidget from './Widgets/MusicWidget/MusicWidget';
 import CVWidget from './Widgets/CVWidget';
-import WeatherWidget from './Widgets/WeatherWidget';
+import WeatherWidget from './Widgets/WeatherWidget/WeatherWidget';
 import TimezoneWidget from './Widgets/TimezoneWidget';
 import StatusCard from './Widgets/StatusCard/StatusCard';
 import Device, { getDeviceType } from '../../utitlites/Device';
@@ -54,7 +54,7 @@ const NCReactGridLayout = ({ darkMode }) => {
         xs: 6,
     };
 
-    // Specify xs-specific positions
+    // Specify xxl-specific positions
     const xxlLayout = layouts.map((item) => {
         switch (item.i) {
             case '0':
@@ -62,7 +62,7 @@ const NCReactGridLayout = ({ darkMode }) => {
             case '1':
                 return { ...item, x: 3, y: 1, w: 6 };
             case '2':
-                return { ...item, x: 11, y: 1, w: 5 };
+                return { ...item, x: 9, y: 1, w: 5 };
             case '3':
                 return { ...item, x: 20, y: 8, w: 1 };
             case '4':
@@ -76,7 +76,7 @@ const NCReactGridLayout = ({ darkMode }) => {
         }
     });
 
-    // Specify xs-specific positions
+    // Specify xl-specific positions
     const xl_Layout = layouts.map((item) => {
         switch (item.i) {
             case '0':
@@ -84,7 +84,7 @@ const NCReactGridLayout = ({ darkMode }) => {
             case '1':
                 return { ...item, x: 3, y: 1, w: 5 };
             case '2':
-                return { ...item, x: 11, y: 1, w: 5 };
+                return { ...item, x: 9, y: 1, w: 5 };
             case '3':
                 return { ...item, x: 20, y: 8, w: 1 };
             case '4':
@@ -98,15 +98,15 @@ const NCReactGridLayout = ({ darkMode }) => {
         }
     });
 
-    // Specify xs-specific positions
+    // Specify md-specific positions
     const mdLayout = layouts.map((item) => {
         switch (item.i) {
             case '0':
                 return { ...item, x: 0, y: 0, w: 3 };
             case '1':
-                return { ...item, x: 3, y: 1, w: 5 };
+                return { ...item, x: 3, y: 1, w: 6 };
             case '2':
-                return { ...item, x: 6, y: 7, w: 5 };
+                return { ...item, x: 3, y: 4, w: 5 };
             case '3':
                 return { ...item, x: 11, y: 8, w: 1 };
             case '4':
@@ -120,17 +120,17 @@ const NCReactGridLayout = ({ darkMode }) => {
         }
     });
 
-    // Specify xs-specific positions
+    // Specify sm-specific positions
     const smLayout = layouts.map((item) => {
         switch (item.i) {
             case '0':
-                return { ...item, x: 0, y: 0, w: 3 };
+                return { ...item, x: 0, y: 0, w: 4 };
             case '1':
-                return { ...item, x: 0, y: 6, w: 4 };
+                return { ...item, x: 0, y: 8, w: 5 };
             case '2':
                 return { ...item, x: 4, y: 6, w: 3 };
             case '3':
-                return { ...item, x: 6, y: 8, w: 1 };
+                return { ...item, x: 6, y: 9, w: 1 };
             case '4':
                 return { ...item, x: 4, y: 4, w: 3 };
             case '5':
@@ -323,8 +323,8 @@ const NCReactGridLayout = ({ darkMode }) => {
                 static: false,
                 minW: 3,
                 minH: 2,
-                maxW: 6,
-                maxH: 6,
+                maxW: 5,
+                maxH: 2,
             },
             {
                 i: '3',
@@ -334,8 +334,8 @@ const NCReactGridLayout = ({ darkMode }) => {
                 h: 2,
                 static: false,
                 minW: 1,
-                minH: 1,
-                maxW: 2,
+                minH: 2,
+                maxW: 1,
                 maxH: 2,
             },
 

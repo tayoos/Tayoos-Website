@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import SpotifyService from '../../../utitlites/Services/SpotifyService';
-import AppleMusicService from '../../../utitlites/Services/AppleMusicService';
+import SpotifyService from '../../../../utitlites/Services/SpotifyService';
+import AppleMusicService from '../../../../utitlites/Services/AppleMusicService';
 
-import SpotifyIcon from '../../../assets/icons/Spotify.png';
-import SpotifyDarkIcon from '../../../assets/icons/Spotify-dark.png';
-import AppleMusicIcon from '../../../assets/icons/AppleMusic.png';
-import AppleMusicDarkIcon from '../../../assets/icons/AppleMusic-dark.png';
+import SpotifyIcon from '../../../../assets/icons/Spotify.png';
+import SpotifyDarkIcon from '../../../../assets/icons/Spotify-dark.png';
+import AppleMusicIcon from '../../../../assets/icons/AppleMusic.png';
+import AppleMusicDarkIcon from '../../../../assets/icons/AppleMusic-dark.png';
+
+import './MusicWidget.css';
 
 const MusicWidget = ({ darkMode }) => {
     const [spotifyTrack, setSpotifyTrack] = useState(null);
@@ -124,21 +126,24 @@ const MusicWidget = ({ darkMode }) => {
         }
 
         return (
-            <div className={`MusicWidgetContainer`}>
+            <div className={`MusicWidgetContainer ${darkMode ? 'dark' : ''}`}>
                 <div className={`AlbumArt`}>
                     <img src={currentTrack.albumArtwork} alt="Album Artwork" className="AlbumImage" />
                 </div>
                 <div className={`MusicCoreContent`}>
-                    <p className="text-sm text-gray-500">{service}</p>
-                    <h3 className="font-medium text-lg mb-1">{currentTrack.title}</h3>
-                    <p className="text-gray-600">{currentTrack.artist}</p>
+                    <div className="AlbumNameContainer">
+                        <h3 className="AlbumName">{currentTrack.title}</h3>
+                    </div>
+                    <div className="AlbumArtistContainer">
+                        <p className="AlbumArtist">{currentTrack.artist}</p>
+                    </div>
                 </div>
                 <div className={`ServiceLogo`}>
                     <img
                         src={
                             service === 'Spotify'
                                 ? darkMode
-                                    ? SpotifyDarkIcon // version for dark mode
+                                    ? SpotifyIcon // version for dark mode
                                     : SpotifyIcon // version for light mode
                                 : darkMode
                                 ? AppleMusicDarkIcon // ersion for dark mode

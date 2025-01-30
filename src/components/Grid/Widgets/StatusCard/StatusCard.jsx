@@ -16,7 +16,7 @@ const TextCardWidget = ({ title = 'Title', body = 'Content goes here', isDarkMod
                 <StatusCircle color={statusLightColor} />
             </div>
             <div className="Stext-card">
-                <p className="Stext-card-content">Advanced MBSE&S Engineer</p>
+                <p className="Stext-card-title">Advanced MBSE&S Engineer</p>
                 <p className="Stext-card-content">Capgemini</p>
             </div>
         </div>

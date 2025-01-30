@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const GetDate = () => {
+const GetDate = ({ isMobile }) => {
     const [currentDate, setCurrentDate] = useState('');
 
     const formatDate = (date) => {
@@ -23,7 +23,7 @@ const GetDate = () => {
     }, []);
 
     return (
-        <div className="text-richBlack text-lg font-light">
+        <div className={`${isMobile ? 'text-Gray' : 'text-richBlack'} ${isMobile ? 'text-base' : 'text-lg'} font-light`}>
             <span>{currentDate}</span>
         </div>
     );

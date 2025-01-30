@@ -18,6 +18,9 @@
     --taskBarApp: 70px;
     --fswidth: 1650px;
 
+    --taskbar-size-lr2: 100px;
+    --taskbar-size-lr: 80px;
+
     --taskbar-height-md: 60px;
     --taskbar-height-sm: 50px;
     --taskbar-height-xs: 40px;

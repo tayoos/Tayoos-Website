@@ -31,8 +31,8 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
             Name: 'Education & Certification',
         },
         {
-            image: './src/assets/icons/profile.png',
-            imgdm: './src/assets/icons/profile.png',
+            image: './src/assets/icons/TechSkills.png',
+            imgdm: './src/assets/icons/TechSkills-dark.png',
             title: 'Tech-Skills',
             Name: 'Tech & Skills',
         },
@@ -187,9 +187,9 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
                                     handleSettingsClick(item.title);
                                 }}
                             >
-                                <div className="taskbar-content">
+                                <div className="taskbar-content-mobile">
                                     <img src={darkMode ? item.imgdm : item.image} alt={item.title} className="taskbar-icon-mobile" />
-                                    <span className="taskbar-name">{item.title === 'Settings' ? (darkMode ? 'Light Mode' : 'Dark Mode') : item.Name}</span>
+                                    <span className="taskbar-name-mobile">{item.title === 'Settings' ? (darkMode ? 'Light Mode' : 'Dark Mode') : item.Name}</span>
                                 </div>
                             </motion.div>
                         ))}
