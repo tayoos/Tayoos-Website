@@ -1,17 +1,4 @@
-[build]
-  command = "npm run build"
-  functions = "functions"
-  publish = "dist"
-
-[[plugins]]
-  package = "netlify-plugin-aws-parameter-store"
-    [plugins.inputs]
-    parameters = [
-      { name = "/WeatherWidget/API_KEY", env_key = "WEATHER_API_KEY" },
-      { name = "/Spotify/SPOTIFY_CLIENT_ID", env_key = "SPOTIFY_CLIENT_ID" },
-      { name = "/Spotify/SPOTIFY_CLIENT_SECRET", env_key = "SPOTIFY_CLIENT_SECRET" },
-      { name = "/Spotify/SPOTIFY_REFRESH_TOKEN", env_key = "SPOTIFY_REFRESH_TOKEN" },
-      { name = "/AppleMusic/APPLE_TEAM_ID", env_key = "APPLE_TEAM_ID" },
-      { name = "/AppleMusic/APPLE_KEY_ID", env_key = "APPLE_KEY_ID" },
-      { name = "/AppleMusic/APPLE_PRIVATE_KEY", env_key = "APPLE_PRIVATE_KEY" }
-    ]
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
