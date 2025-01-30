@@ -6,7 +6,7 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 
 import SWIcon from '../../assets/tech/SW2.png';
 import VBAIcon from '../../assets/tech/VBA.png';
-import CameoIcon from '../../assets/tech/Cameo_sm-m.png';
+import CameoIcon from '../../assets/tech/Cameo_smm.png';
 import SparxEAIcon from '../../assets/tech/SparxEA.png';
 import ReactJSIcon from '../../assets/tech/reactjs.png';
 import JavaScriptIcon from '../../assets/tech/Javascript.png';
