@@ -1,15 +1,17 @@
 [build]
-  command = """
-  echo "Using environment variables for build..."
-  export VITE_WEATHER_API_KEY=$VITE_WEATHER_API_KEY
-  export VITE_SPOTIFY_CLIENT_ID=$VITE_SPOTIFY_CLIENT_ID
-  export VITE_SPOTIFY_CLIENT_SECRET=$VITE_SPOTIFY_CLIENT_SECRET
-  export VITE_SPOTIFY_REFRESH_TOKEN=$VITE_SPOTIFY_REFRESH_TOKEN
-  export VITE_APPLE_TEAM_ID=$VITE_APPLE_TEAM_ID
-  export VITE_APPLE_KEY_ID=$VITE_APPLE_KEY_ID
-  export VITE_APPLE_PRIVATE_KEY=$VITE_APPLE_PRIVATE_KEY
-  
-  npm run build
-  """
+  command = "npm run build"
   functions = "functions"
   publish = "dist"
+
+[[plugins]]
+  package = "netlify-plugin-aws-parameter-store"
+    [plugins.inputs]
+    parameters = [
+      { name = "/WeatherWidget/API_KEY", env_key = "WEATHER_API_KEY" },
+      { name = "/Spotify/SPOTIFY_CLIENT_ID", env_key = "SPOTIFY_CLIENT_ID" },
+      { name = "/Spotify/SPOTIFY_CLIENT_SECRET", env_key = "SPOTIFY_CLIENT_SECRET" },
+      { name = "/Spotify/SPOTIFY_REFRESH_TOKEN", env_key = "SPOTIFY_REFRESH_TOKEN" },
+      { name = "/AppleMusic/APPLE_TEAM_ID", env_key = "APPLE_TEAM_ID" },
+      { name = "/AppleMusic/APPLE_KEY_ID", env_key = "APPLE_KEY_ID" },
+      { name = "/AppleMusic/APPLE_PRIVATE_KEY", env_key = "APPLE_PRIVATE_KEY" }
+    ]
