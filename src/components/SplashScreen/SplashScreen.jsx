@@ -17,7 +17,7 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
             setTimeout(() => {
                 // console.log('Fade in timer fired');
                 setIsFadedIn(true);
-            }, 100);
+            }, 150);
         }, 1000);
 
         return () => clearTimeout(readyTimer);
