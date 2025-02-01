@@ -8,15 +8,14 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
     const [showSplash, setShowSplash] = useState(true);
     const [isReady, setIsReady] = useState(false);
     const [isFadedIn, setIsFadedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true); // Track loading state
 
     useEffect(() => {
-        //console.log('Initial mount effect');
+        // Initial delay to simulate readiness (can be adjusted or removed)
         const readyTimer = setTimeout(() => {
-            //console.log('Ready timer fired');
             setIsReady(true);
             setTimeout(() => {
-                // console.log('Fade in timer fired');
-                setIsFadedIn(true);
+                setIsFadedIn(true); // Fade in after a short delay
             }, 150);
         }, 1000);
 
@@ -24,50 +23,36 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
     }, []);
 
     useEffect(() => {
-        if (!isReady) {
-            //console.log('Not ready yet');
-            return;
-        }
+        if (!isReady) return;
 
         const video = videoRef.current;
-        if (!video) {
-            //console.log('No video ref');
-            return;
-        }
-
-        //console.log('Setting up video');
+        if (!video) return;
 
         const handleVideoEnded = () => {
-            //console.log('Video ended');
             setIsTransitioning(true);
             setTimeout(() => {
                 setShowSplash(false);
-                // Call onEnd after transition completes
                 setTimeout(() => {
-                    onEnd();
+                    onEnd(); // Call onEnd after transition completes
                 }, 1000);
             }, 1000);
         };
 
         const startPlayback = async () => {
             try {
-                // console.log('Attempting to play video');
                 await video.play();
-                //console.log('Video playing successfully');
             } catch (error) {
-                //console.error('Play error:', error);
-                handleVideoEnded();
+                console.error('Play error:', error);
+                handleVideoEnded(); // Fallback if playback fails
             }
         };
 
         const handleLoadedMetadata = () => {
-            //console.log('Video metadata loaded');
-            startPlayback();
+            setIsLoading(false); // Mark video as loaded
+            startPlayback(); // Start playback once metadata is loaded
         };
 
-        video.removeAttribute('src');
-        video.load();
-
+        // Configure video attributes
         Object.assign(video, {
             muted: true,
             playsInline: true,
@@ -75,19 +60,19 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
             autoplay: true,
             preload: 'auto',
         });
-
         video.setAttribute('playsinline', '');
         video.setAttribute('webkit-playsinline', '');
 
+        // Attach event listeners
         video.addEventListener('loadedmetadata', handleLoadedMetadata);
         video.addEventListener('ended', handleVideoEnded);
 
-        //console.log('Setting video source:', videoSrc);
+        // Set video source
         video.src = videoSrc;
         video.load();
 
         return () => {
-            // console.log('Cleanup effect');
+            // Cleanup event listeners and pause video
             video.removeEventListener('loadedmetadata', handleLoadedMetadata);
             video.removeEventListener('ended', handleVideoEnded);
             video.pause();
@@ -100,6 +85,9 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
 
     return (
         <div className={`splash-screen ${isTransitioning ? 'transitioning' : ''} ${isMobile ? 'Mobile' : ''}`}>
+            {/* Show loading spinner until video is ready */}
+            {isLoading && <div className="loading-spinner">Loading...</div>}
+
             <div className="video-container">
                 {isReady && (
                     <video
