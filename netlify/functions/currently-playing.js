@@ -2,10 +2,11 @@ const axios = require('axios');
 
 exports.handler = async (event) => {
     try {
-        // Replace this with your actual AWS REST API endpoint
-        const apiEndpoint = 'https://<api-id>.execute-api.<region>.amazonaws.com/prod/currently-playing';
+        // Retrieve the API endpoint from environment variables
+        const aEP = import.meta.env.AEP;
 
-        const response = await axios.get(apiEndpoint);
+        // Forward the request to your AWS REST API
+        const response = await axios.get(aEP);
 
         return {
             statusCode: 200,
