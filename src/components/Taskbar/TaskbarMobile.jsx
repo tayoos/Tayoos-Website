@@ -12,6 +12,14 @@ import EducationCertificationModal from '../../content/EducationCertification/Ed
 import TechModal from '../../content/TechSkills/TechModal.jsx';
 import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
 
+import ExperienceImg from '../../assets/icons/profile.png';
+import ECImage from '../../assets/icons/certificates.png';
+import TSImage from '../../assets/icons/TechSkills.png';
+import MailImg from '../../assets/icons/mail-light.png';
+import LinkedinImage from '../../assets/icons/linkedin.png';
+import githubImage from '../../assets/icons/github-light.png';
+import dmImage from '../../assets/icons/settings-light.png';
+
 const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) => {
     const { openModal, isCurrentModal, modalContent, darkMode, toggleDarkMode, menuOpen, setMenuOpen } = useContext(ModalContext);
 
@@ -19,50 +27,50 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
 
     const taskbarItems = [
         {
-            image: './src/assets/icons/profile.png',
-            imgdm: './src/assets/icons/profile-dark.png',
+            image: '/icons/profile.png',
+            imgdm: '/icons/profile-dark.png',
             title: 'Experience',
             Name: 'Experience',
         },
         {
-            image: './src/assets/icons/certificates.png',
-            imgdm: './src/assets/icons/certificates.png',
+            image: '/icons/certificates.png',
+            imgdm: '/icons/certificates.png',
             title: 'EducationCertification',
             Name: 'Education & Certification',
         },
         {
-            image: './src/assets/icons/TechSkills.png',
-            imgdm: './src/assets/icons/TechSkills-dark.png',
+            image: '/icons/TechSkills.png',
+            imgdm: '/icons/TechSkills-dark.png',
             title: 'Tech-Skills',
             Name: 'Tech & Skills',
         },
         {
-            image: './src/assets/icons/Affiliates.png',
-            imgdm: './src/assets/icons/Affiliates-dark.png',
+            image: '/icons/Affiliates.png',
+            imgdm: '/icons/Affiliates-dark.png',
             title: 'Affiliates',
             Name: 'Affiliates',
         },
         {
-            image: './src/assets/icons/mail-light.png',
-            imgdm: './src/assets/icons/mail-dark.png',
+            image: '/icons/mail-light.png',
+            imgdm: '/icons/mail-dark.png',
             title: 'Contact',
             Name: 'Contact',
         },
         {
-            image: './src/assets/icons/linkedin.png',
-            imgdm: './src/assets/icons/linkedin.png',
+            image: '/icons/linkedin.png',
+            imgdm: '/icons/linkedin.png',
             title: 'LinkedIn',
             Name: 'LinkedIn',
         },
         {
-            image: './src/assets/icons/github-light.png',
-            imgdm: './src/assets/icons/github-dark.png',
+            image: '/icons/github-light.png',
+            imgdm: '/icons/github-dark.png',
             title: 'Github',
             Name: 'Github',
         },
         {
-            image: './src/assets/icons/settings-light.png',
-            imgdm: './src/assets/icons/settings-dark.png',
+            image: '/icons/settings-light.png',
+            imgdm: '/icons/settings-dark.png',
             title: 'Settings',
             Name: 'Dark Mode',
         },

@@ -5,8 +5,8 @@ const CVWidget = ({ darkMode }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     // Define paths directly in the component
-    const iconsrc = './src/assets/icons/wordicon.png'; // Update this path to your image
-    const cvFileUrl = './src/assets/Files/Curriculum Vitae-DavidOshidero.docx'; // Update this path to your CV
+    const iconsrc = '/icons/wordicon.png'; // Update this path to your image
+    const cvFileUrl = '/Curriculum Vitae-DavidOshidero.docx'; // Update this path to your CV
 
     const handleDownload = () => {
         const link = document.createElement('a');
