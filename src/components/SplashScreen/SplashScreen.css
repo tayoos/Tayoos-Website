@@ -40,7 +40,6 @@
     -webkit-video-playsinline: playsinline;
     playsinline: playsinline;
     pointer-events: none; /* Prevents interaction with the video */
-    background-color: red;
 }
 
 .loading-spinner {

@@ -24,7 +24,7 @@ const MusicWidget = ({ darkMode }) => {
     // Function to fetch data from your AWS REST API
     const fetchCurrentlyPlaying = async () => {
         try {
-            const response = await fetch('/.netlify/functions/currently-playing');
+            const response = await fetch(import.meta.env.VITE_AEP);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
