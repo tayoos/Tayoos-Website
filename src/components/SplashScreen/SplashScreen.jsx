@@ -73,7 +73,7 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
             playsInline: true,
             controls: false,
             autoplay: true,
-            preload: 'auto',
+            preload: 'true',
         });
 
         video.setAttribute('playsinline', '');

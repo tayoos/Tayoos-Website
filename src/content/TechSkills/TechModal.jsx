@@ -25,6 +25,7 @@ import TypeScriptIcon from '../../assets/tech/TypeScript3.png';
 import TailwindCSSIcon from '../../assets/tech/Tailwind.png';
 import CEAIcon from '../../assets/tech/CEA.png';
 import SAPIcon from '../../assets/tech/SAP.png';
+import TOGAFIcon from '../../assets/tech/TOGAF.png';
 
 const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
@@ -33,14 +34,14 @@ const TechModal = () => {
         { name: 'SolidWorks', icon: SWIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'Excel/VBA', icon: VBAIcon, certification: '', fill: 'true', bcolor: 'vbagreen' },
         { name: 'CAMEO SM', icon: CameoIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'Cameo EA', icon: CEAIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'Sparx EA', icon: SparxEAIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Cameo EA', icon: CEAIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'Sparx EA', icon: SparxEAIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '', bcolor: '' },
         { name: 'JavaScript', icon: JavaScriptIcon, certification: '', fill: 'true', bcolor: 'jsyellow', ccourse: 'true' },
         { name: 'Python', icon: PythonIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'SysML', icon: SysMLIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'UML', icon: UMLIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true', bcolor: 'ansysblack' },
+        { name: 'SysML', icon: SysMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'UML', icon: UMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true', bcolor: 'ansysblack', ccourse: 'true' },
         { name: 'MATLAB', icon: MATLABIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Simulink', icon: SimulinkIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Confluence', icon: ConfluenceIcon, certification: '', fill: '', bcolor: '' },
@@ -51,6 +52,7 @@ const TechModal = () => {
         { name: 'TypeScript', icon: TypeScriptIcon, certification: '', fill: 'true', bcolor: 'tsblue' },
         { name: 'TailwindCSS', icon: TailwindCSSIcon, certification: '', fill: '', bcolor: '' },
         { name: 'SAP', icon: SAPIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BXTG7GSFBM22' },
+        { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: '' },
     ];
 
     const variants = {

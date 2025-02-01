@@ -24,6 +24,14 @@ const EducationCertificationModal = () => {
             type: 'diploma',
         },
         {
+            id: 9,
+            title: 'TOGAF Enterprise Architecture',
+            graduation: 'Issued April 2023',
+            link: '',
+            type: 'certificate',
+        },
+
+        {
             id: 8,
             title: 'SAP Technology Consultant',
             graduation: 'Issued July 2024',
