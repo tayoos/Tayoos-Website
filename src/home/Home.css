@@ -10,6 +10,7 @@
     justify-content: center; /* Center vertically */
     align-items: center; /* Center horizontally */
     flex-direction: column; /* Stack items vertically if needed */
+    background-color: white;
 }
 
 /* Ensure the container starts at the very top */
