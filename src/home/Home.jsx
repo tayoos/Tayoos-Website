@@ -15,8 +15,6 @@ import NCReactGridLayoutMobile from '../components/Grid/NCReactGridLayoutMobile.
 
 import { ModalContext } from '../utitlites/ModalContext.jsx';
 
-import SpotifyService from '../utitlites/Services/SpotifyService.jsx';
-
 function Home() {
     const [splashComplete, setSplashComplete] = useState(false);
     const [isEntryPoint, setIsEntryPoint] = useState(true);

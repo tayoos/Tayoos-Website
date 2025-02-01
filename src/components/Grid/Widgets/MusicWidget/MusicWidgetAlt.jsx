@@ -5,6 +5,7 @@ import SpotifyIcon from '../../../../assets/icons/Spotify.png';
 import SpotifyDarkIcon from '../../../../assets/icons/Spotify-dark.png';
 
 // TEMP
+const TBC = import.meta.env.VITE_TBC;
 
 const MusicWidget = ({ darkMode }) => {
     const [currentTrack, setCurrentTrack] = useState(null);
@@ -25,7 +26,7 @@ const MusicWidget = ({ darkMode }) => {
     // Function to fetch data from your AWS REST API
     const fetchCurrentlyPlaying = async () => {
         try {
-            const response = await fetch('/.netlify/functions/currently-playing');
+            const response = await fetch(TBC);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -97,38 +98,10 @@ const MusicWidget = ({ darkMode }) => {
     }, []);
 
     // Render the widget
-    const renderLastPlayedInfo = () => {
-        return (
-            <div className={`LPContainer ${darkMode ? 'dark' : ''}`}>
-                <div className="LPHeader">Last Song Played</div>
-                <div className={`LPMusicWidgetContainer ${darkMode ? 'dark' : ''}`}>
-                    <div className={`LPAlbumArt`}>
-                        <img src={lastPlayedTrack.albumArtwork} alt="Album Artwork" className="LPAlbumImage" />
-                    </div>
-                    <div className={`LPMusicCoreContent`}>
-                        <div className="LPAlbumNameContainer">
-                            <h3 className="LPAlbumName">{lastPlayedTrack.title}</h3>
-                        </div>
-                        <div className="LPAlbumArtistContainer">
-                            <p className="LPAlbumArtist">{lastPlayedTrack.artist}</p>
-                        </div>
-                    </div>
-                    <div className={`LPServiceLogo`}>
-                        <img
-                            src={SpotifyIcon} // Choose icon based on darkMode
-                            alt="Spotify Logo" // Static alt text
-                            className="LPServiceImage"
-                        />
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
     const renderTrackInfo = () => {
-        /*if (error) {
+        if (error) {
             return <div className="error">{error}</div>;
-        }*/
+        }
 
         if (currentTrack) {
             return (
@@ -146,7 +119,7 @@ const MusicWidget = ({ darkMode }) => {
                     </div>
                     <div className={`ServiceLogo`}>
                         <img
-                            src={SpotifyIcon} // Choose icon based on darkMode
+                            src={darkMode ? SpotifyDarkIcon : SpotifyIcon} // Choose icon based on darkMode
                             alt="Spotify Logo" // Static alt text
                             className="ServiceImage"
                         />
@@ -157,7 +130,29 @@ const MusicWidget = ({ darkMode }) => {
 
         // Show "Last Song Played" layout if no song is playing
         if (lastPlayedTrack) {
-            return renderLastPlayedInfo();
+            return (
+                <div className={`MusicWidgetContainer ${darkMode ? 'dark' : ''}`}>
+                    <div className="LPHeader">Last Song Played</div>
+                    <div className={`LPAlbumArt`}>
+                        <img src={lastPlayedTrack.albumArtwork} alt="Album Artwork" className="AlbumImage" />
+                    </div>
+                    <div className={`MusicCoreContent`}>
+                        <div className="AlbumNameContainer">
+                            <h3 className="AlbumName">{lastPlayedTrack.title}</h3>
+                        </div>
+                        <div className="AlbumArtistContainer">
+                            <p className="AlbumArtist">{lastPlayedTrack.artist}</p>
+                        </div>
+                    </div>
+                    <div className={`ServiceLogo`}>
+                        <img
+                            src={darkMode ? SpotifyDarkIcon : SpotifyIcon} // Choose icon based on darkMode
+                            alt="Spotify Logo" // Static alt text
+                            className="ServiceImage"
+                        />
+                    </div>
+                </div>
+            );
         }
 
         // Fallback if no song has ever been played
