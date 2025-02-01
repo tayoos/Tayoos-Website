@@ -3,7 +3,7 @@ const axios = require('axios');
 exports.handler = async (event) => {
     try {
         // Retrieve the API endpoint from environment variables
-        const aEP = import.meta.env.AEP;
+        const aEP = import.meta.env.VITE_AEP;
 
         // Forward the request to your AWS REST API
         const response = await axios.get(aEP);

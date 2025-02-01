@@ -18,7 +18,7 @@ const WeatherWidget = ({ darkMode }) => {
                 throw new Error('Could not get location');
             }
 
-            const API_KEY = import.meta.env.WEATHER_API_KEY;
+            const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
             if (!API_KEY) {
                 throw new Error('Weather API key not found');
@@ -61,7 +61,7 @@ const WeatherWidget = ({ darkMode }) => {
     if (!weatherData) {
         return (
             <div className={`weather-widget-horizontal ${darkMode ? 'dark' : ''}`}>
-                <span>Weather unavailable</span>
+                <span className="weather-unavailable">Weather unavailable</span>
             </div>
         );
     }

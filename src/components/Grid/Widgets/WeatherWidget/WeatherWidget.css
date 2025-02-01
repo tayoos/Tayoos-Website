@@ -123,3 +123,9 @@
         width: 110px;
     }
 }
+
+.weather-unavailable {
+    display: flex;
+    align-self: center;
+    justify-self: center;
+}
