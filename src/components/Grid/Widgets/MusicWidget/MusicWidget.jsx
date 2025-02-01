@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './MusicWidget.css';
 
 import SpotifyIcon from '../../../../assets/icons/Spotify.png';
-import SpotifyDarkIcon from '../../../../assets/icons/Spotify-dark.png';
 
 // TEMP
 
