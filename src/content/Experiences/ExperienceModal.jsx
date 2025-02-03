@@ -20,7 +20,7 @@ const ExperienceModal = () => {
         {
             id: 1,
             title: 'Capgemini – Consultant Engineer (Senior MB Systems and Software Engineer)',
-            location: 'Birmingham, England United Kingdom',
+            location: 'Birmingham, England, United Kingdom',
             shortdesc: 'Successfully implemented MBSE into the ITER project, conducted requirement change analysis for defense projects, and contributed to AIRBUS NextWing and OneHeart development.',
             longdesc: `
             <p>Successfully implemented MBSE into the ITER project with Fusion4Energy, developing a pilot model and providing comprehensive training on its benefits and proper implementation.</p>
@@ -42,7 +42,7 @@ const ExperienceModal = () => {
         {
             id: 2,
             title: 'Jacobs – Consultant Engineer (Enterprise Architect/Systems Engineer)',
-            location: 'Derby, England United Kingdom',
+            location: 'Birmingham, England, United Kingdom',
             shortdesc: 'Developed Enterprise Architecture for Network Rail, using SWOT and PESTLE analysis for project design and risk management.',
             longdesc: `
             <p>Engineering consultant contracted as a Systems/Enterprise Architect to Network Rail for the Transpennine Route Upgrade project in the railway industry.</p>
@@ -63,7 +63,7 @@ const ExperienceModal = () => {
         {
             id: 3,
             title: 'Alten Engineering – Consultant Engineer (Systems and Software Engineer)',
-            location: 'Birmingham, England United Kingdom',
+            location: 'Derby, England, United Kingdom',
             shortdesc: 'Worked as a Systems and Software Verification Engineer for Rolls-Royce, utilizing Python and .ROBOT framework for engine maintenance projects.',
             longdesc: `
             <p>Engineering consultant contracted to Rolls-Royce as a Systems and Software Verification Engineer for the ECOSIStem project, aimed at streamlining code testing and development for engine maintenance and enhancement.</p>
@@ -78,7 +78,7 @@ const ExperienceModal = () => {
         {
             id: 5,
             title: 'Rolls-Royce – Performance Engineer',
-            location: 'Bristol, England United Kingdom',
+            location: 'Bristol, England, United Kingdom',
             shortdesc: 'Worked in the combat aftermarket division, improving data accuracy with MATLAB tools,managing multiple projects and carrying out data anyslsi and reporting on them.',
             longdesc: `
             <p>Performance Engineer in the combat aftermarket division, gaining hands-on experience in engineering and management tasks.</p>
@@ -96,7 +96,7 @@ const ExperienceModal = () => {
         {
             id: 6,
             title: 'Rolls-Royce – E-Fan X Development Engineer',
-            location: 'Bristol, England United Kingdom',
+            location: 'Bristol, England, United Kingdom',
             shortdesc: 'Developed verification strategies for the Electric Propulsion Unit system and led key sub-systems in the E-Fan X project.',
             longdesc: `
             <p>Defined verification strategies aligning with customer, business, and aviation authority (EASA) requirements for the Electric Propulsion Unit system.</p>
