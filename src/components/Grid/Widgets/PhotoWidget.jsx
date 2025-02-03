@@ -9,7 +9,7 @@ const PhotoWidget = ({ interval = 300000 }) => {
     useEffect(() => {
         // Dynamically import images using Vite's import.meta.glob
         const loadImages = async () => {
-            const images = import.meta.glob('/src/assets/images/PhotoWidget/*.{jpg,jpeg,png,gif,JPEG,JPG}', { eager: true });
+            const images = import.meta.glob('/src/assets/images/PhotoWidget/*.{jpg,jpeg,png,gif}', { eager: true });
             // Get the actual URLs from the imported modules
             const urls = Object.values(images).map((module) => module.default);
             setImageUrls(urls);
