@@ -12,12 +12,10 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
     useEffect(() => {
         //console.log('Initial mount effect');
         const readyTimer = setTimeout(() => {
-            //console.log('Ready timer fired');
             setIsReady(true);
             setTimeout(() => {
-                // console.log('Fade in timer fired');
                 setIsFadedIn(true);
-            }, 150);
+            }, 200);
         }, 1000);
 
         return () => clearTimeout(readyTimer);

@@ -7,7 +7,7 @@ import SplashScreen from '../components/SplashScreen/SplashScreen.jsx';
 import Device, { getDeviceType } from '../utitlites/Device';
 import Header from '../components/Header/Header.jsx';
 import videoPClndng from '../assets/animations/DesktopIntro.mp4';
-import videoMBLlndng from '../assets/animations/MobilePhoneIntro3.mp4';
+import videoMBLlndng from '../assets/animations/MobilePhoneIntro2.mp4';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import NCReactGridLayout from '../components/Grid/NCReactGridLayout.jsx';

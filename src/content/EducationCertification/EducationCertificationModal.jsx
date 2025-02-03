@@ -25,17 +25,16 @@ const EducationCertificationModal = () => {
         },
         {
             id: 9,
-            title: 'TOGAF Enterprise Architecture',
-            graduation: 'Issued April 2023',
-            link: '',
-            type: 'certificate',
-        },
-
-        {
-            id: 8,
             title: 'SAP Technology Consultant',
             graduation: 'Issued July 2024',
             link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BXTG7GSFBM22',
+            type: 'certificate',
+        },
+        {
+            id: 8,
+            title: 'TOGAF Enterprise Architecture',
+            graduation: 'Issued April 2024',
+            link: 'https://www.udemy.com/certificate/UC-252c6a20-95d5-453d-a488-b064f0e29438/',
             type: 'certificate',
         },
         {

@@ -41,18 +41,18 @@ const TechModal = () => {
         { name: 'Python', icon: PythonIcon, certification: '', fill: '', bcolor: '' },
         { name: 'SysML', icon: SysMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'UML', icon: UMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
-        { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true', bcolor: 'ansysblack', ccourse: 'true' },
+        { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true', bcolor: 'ansysblack', ccourse: '' },
         { name: 'MATLAB', icon: MATLABIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Simulink', icon: SimulinkIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Confluence', icon: ConfluenceIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'CSS', icon: CSSIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'CSS', icon: CSSIcon, certification: '', fill: '', bcolor: '', ccourse: '' },
         { name: 'Docker', icon: DockerIcon, certification: '', fill: '', bcolor: '' },
         { name: 'git', icon: GitIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Msc Patran', icon: MscPatranIcon, certification: '', fill: '', bcolor: '' },
         { name: 'TypeScript', icon: TypeScriptIcon, certification: '', fill: 'true', bcolor: 'tsblue' },
         { name: 'TailwindCSS', icon: TailwindCSSIcon, certification: '', fill: '', bcolor: '' },
         { name: 'SAP', icon: SAPIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BXTG7GSFBM22' },
-        { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: '' },
+        { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.udemy.com/certificate/UC-377dbad3-d945-497a-a2dc-d4f43ced948a/' },
     ];
 
     const variants = {
