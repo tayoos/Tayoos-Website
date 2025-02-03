@@ -31,7 +31,7 @@ Thumbs.db
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-src/assets/Files/CurriculumVitae-DavidOshidero.docx
+
 .idea
 *.suo
 *.ntvs*

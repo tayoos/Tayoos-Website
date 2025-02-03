@@ -31,7 +31,7 @@ const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
 
     const techItems = [
-        { name: 'SolidWorks', icon: SWIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'SolidWorks', icon: SWIcon, certification: '', fill: '', bcolor: '', ccourse: '' },
         { name: 'Excel/VBA', icon: VBAIcon, certification: '', fill: 'true', bcolor: 'vbagreen' },
         { name: 'CAMEO SM', icon: CameoIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Cameo EA', icon: CEAIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
