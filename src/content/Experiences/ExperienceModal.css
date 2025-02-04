@@ -28,10 +28,12 @@
     height: 100%; /* Fills the height of the parent container */
     overflow-y: auto; /* Enables vertical scrolling */
     overflow-x: hidden; /* Prevents horizontal scrolling */
+    color: black;
 }
 
 .experience-list-modal.dark {
     background-color: rgba(128, 128, 128, 0.98); /* Grey with 0.98 transparency */
+    color: #ffffff;
 }
 
 .ExperienceContainer,
@@ -172,6 +174,7 @@
     margin-top: 5px;
     justify-self: center;
     font-weight: 500;
+    color: #364858;
 }
 
 .ExperienceLongDesc {

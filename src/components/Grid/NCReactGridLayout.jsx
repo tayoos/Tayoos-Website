@@ -39,7 +39,7 @@ const NCReactGridLayout = ({ darkMode }) => {
     };
 
     const breakpoints = {
-        xxl: 1650,
+        xxl: 1650, // not currently used
         xl: 1200,
         md: 768,
         sm: 480,
@@ -54,7 +54,7 @@ const NCReactGridLayout = ({ darkMode }) => {
         xs: 6,
     };
 
-    // Specify xxl-specific positions
+    // Specify xxl-specific positions - not currently used
     const xxlLayout = layouts.map((item) => {
         switch (item.i) {
             case '0':
@@ -80,13 +80,13 @@ const NCReactGridLayout = ({ darkMode }) => {
     const xl_Layout = layouts.map((item) => {
         switch (item.i) {
             case '0':
-                return { ...item, x: 0, y: 0, w: 3 };
+                return { ...item, x: 0, y: 0, w: 4 };
             case '1':
-                return { ...item, x: 3, y: 1, w: 5 };
+                return { ...item, x: 4, y: 1, w: 5 };
             case '2':
-                return { ...item, x: 9, y: 1, w: 5 };
+                return { ...item, x: 11, y: 1, w: 5 };
             case '3':
-                return { ...item, x: 20, y: 8, w: 1 };
+                return { ...item, x: 4, y: 4, w: 1 };
             case '4':
                 return { ...item, x: 16, y: 4, w: 4 };
             case '5':
@@ -104,11 +104,11 @@ const NCReactGridLayout = ({ darkMode }) => {
             case '0':
                 return { ...item, x: 0, y: 0, w: 3 };
             case '1':
-                return { ...item, x: 3, y: 1, w: 6 };
+                return { ...item, x: 3, y: 1, w: 5 };
             case '2':
                 return { ...item, x: 3, y: 4, w: 5 };
             case '3':
-                return { ...item, x: 11, y: 8, w: 1 };
+                return { ...item, x: 11, y: 7, w: 1 };
             case '4':
                 return { ...item, x: 8, y: 4, w: 3 };
             case '5':
@@ -126,11 +126,11 @@ const NCReactGridLayout = ({ darkMode }) => {
             case '0':
                 return { ...item, x: 0, y: 0, w: 4 };
             case '1':
-                return { ...item, x: 0, y: 8, w: 5 };
+                return { ...item, x: 0, y: 6, w: 4, h: 4 };
             case '2':
                 return { ...item, x: 4, y: 6, w: 3 };
             case '3':
-                return { ...item, x: 6, y: 9, w: 1 };
+                return { ...item, x: 6, y: 8, w: 1 };
             case '4':
                 return { ...item, x: 4, y: 4, w: 3 };
             case '5':
