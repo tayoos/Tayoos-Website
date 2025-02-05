@@ -7,7 +7,7 @@ import './NCReactGridLayout.css';
 
 import PhotoWidget from './Widgets/PhotoWidget';
 import TextCardWidget from './Widgets/TextCardWidget/TextCardWidget';
-import MusicWidget from './Widgets/MusicWidget/MusicWidget';
+import MusicWidget from './Widgets/MusicWidget/MusicWidgetMobile';
 import CVWidget from './Widgets/CVWidget';
 import WeatherWidget from './Widgets/WeatherWidget/WeatherWidget';
 import TimezoneWidget from './Widgets/TimezoneWidget';

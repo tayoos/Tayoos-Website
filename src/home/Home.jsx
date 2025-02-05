@@ -26,8 +26,8 @@ function Home() {
     const closeTimeoutRef = useRef(null);
 
     // Get Device Type
-    const isMobile = getDeviceType() === 'Mobile';
-    //const isMobile = true;
+    // const isMobile = getDeviceType() === 'Mobile';
+    const isMobile = true;
 
     // First, create a function to set the --vh property
     function setVH() {

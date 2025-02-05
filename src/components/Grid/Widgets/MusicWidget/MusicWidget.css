@@ -379,8 +379,22 @@
     height: 25px;
 }
 
-@media (min-width: 768px) {
+.currentTimeContainerMobile {
+    display: none; /* Hidden by default */
+    align-items: center;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+
+    height: 25px;
+}
+
+@media (min-width: 480px) {
     .currentTimeContainer {
+        display: flex; /* Visible when width >= 600px */
+    }
+
+    .currentTimeContainerMobile {
         display: flex; /* Visible when width >= 600px */
     }
 }
