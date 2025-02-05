@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Widgets.css';
 
-const PhotoWidget = ({ interval = 300000 }) => {
+const PhotoWidget = ({ interval = 30000 }) => {
     const [imageUrls, setImageUrls] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [fade, setFade] = useState(false);
@@ -13,8 +13,12 @@ const PhotoWidget = ({ interval = 300000 }) => {
             // Get the actual URLs from the imported modules
             const urls = Object.values(images).map((module) => module.default);
             setImageUrls(urls);
-        };
 
+            // Set a random initial index after loading images
+            if (urls.length > 0) {
+                setCurrentIndex(Math.floor(Math.random() * urls.length));
+            }
+        };
         loadImages();
     }, []);
 
@@ -27,7 +31,6 @@ const PhotoWidget = ({ interval = 300000 }) => {
                     setFade(false);
                 }, 1000);
             }, interval);
-
             return () => clearInterval(timer);
         }
     }, [imageUrls, interval]);
