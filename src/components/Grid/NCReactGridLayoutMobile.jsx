@@ -128,7 +128,7 @@ const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
     const mobileGridConfig = {
         cols: 6,
         cellSize: 50,
-        gapSize: 20,
+        gapSize: 10,
         containerPadding: 5,
     };
 
@@ -317,7 +317,7 @@ const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
     return (
         <div
             ref={containerRef}
-            className={`w-full flex justify-center ${darkMode ? 'dark' : ''}`}
+            className={`NCReactGridContainer ${darkMode ? 'dark' : ''}`}
             style={{
                 //height: '100%',
                 height: '87%', // Takes 90% of viewport height
@@ -331,11 +331,13 @@ const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
                 style={{
                     position: 'relative',
                     height: '100%',
-                    width: `${calculateContainerWidth()}px`, // Set explicit width
+                    width: `98vw`, // Set explicit width
+                    boxSizing: 'border-box',
                 }}
             >
                 <ResponsiveGridLayout
-                    className="w-full"
+                    className="ResponsiveGridLayout"
+                    style={{ boxSizing: 'border-box' }} // Added inline style
                     layouts={{ xs: layouts }}
                     breakpoints={{ xs: 0 }}
                     cols={{ xs: mobileGridConfig.cols }}
@@ -355,9 +357,9 @@ const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
                 >
                     {renderWidget('0', <PhotoWidget />)}
                     {renderWidget('1', <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" isMobile={isMobile} />)}
-                    {renderWidget('2', <MusicWidget darkMode={darkMode} />)}
+                    {renderWidget('2', <MusicWidget darkMode={darkMode} isMobile={isMobile} />)}
                     {renderWidget('3', <CVWidget darkMode={darkMode} />)}
-                    {renderWidget('4', <WeatherWidget darkMode={darkMode} />)}
+                    {renderWidget('4', <WeatherWidget darkMode={darkMode} isMobile={isMobile} />)}
                     {renderWidget('5', <TimezoneWidget darkMode={darkMode} />)}
                     {renderWidget('6', <StatusCard darkMode={darkMode} />)}
                 </ResponsiveGridLayout>

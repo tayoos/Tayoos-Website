@@ -10,3 +10,9 @@
 .react-resizable-handle {
     display: none !important;
 }
+
+.NCReactGridContainer {
+    width: 98% !important;
+    display: flex;
+    justify-content: center;
+}

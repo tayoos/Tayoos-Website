@@ -75,6 +75,11 @@
     text-overflow: ellipsis;
 }
 
+.AlbumArtistContainer.mobile {
+    font-size: 12px;
+    height: 15% !important;
+}
+
 .AlbumArtist {
     margin-top: 0px;
     /* Auto-adjust text size */
@@ -140,7 +145,7 @@
 .currentTimeProgress {
     display: flex;
     flex-grow: 1;
-    height: 4px;
+    height: 5px;
     appearance: none;
     background-color: #e0e0e0;
     border-radius: 2px;
@@ -149,7 +154,7 @@
 }
 
 .currentTimeProgress::-webkit-progress-bar {
-    background-color: #e0e0e0;
+    background-color: #646464;
     border-radius: 2px;
 }
 
@@ -161,6 +166,20 @@
 .currentTimeProgress::-moz-progress-bar {
     background-color: #1db954;
     border-radius: 2px;
+}
+
+.progress-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px; /* Circle size */
+    height: 12px;
+    background-color: #1db954;
+    border: 2px solid white; /* Optional border */
+    border-radius: 50%;
+    z-index: 2; /* On top of the progress bar */
+    pointer-events: none; /* Prevents interaction blocking */
+    transition: left 0.1s ease-out; /* Smooth movement */
 }
 
 .currentTimeValues {
@@ -385,16 +404,51 @@
     flex-direction: column;
     gap: 0;
     padding: 0;
-
-    height: 25px;
+    height: 15%;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 768px) {
     .currentTimeContainer {
         display: flex; /* Visible when width >= 600px */
     }
+}
 
+@media (min-width: 400px) {
     .currentTimeContainerMobile {
         display: flex; /* Visible when width >= 600px */
     }
+}
+
+.currentTimeProgressMobile {
+    display: flex;
+    flex-grow: 1;
+    height: 3px;
+    appearance: none;
+    background-color: #e0e0e0;
+    border-radius: 1px;
+    margin: 0;
+    width: 100%; /* Ensure it spans the full width */
+}
+
+.currentTimeProgressMobile::-webkit-progress-bar {
+    background-color: #646464;
+    border-radius: 21pxvpx;
+}
+
+.currentTimeProgressMobile::-webkit-progress-value {
+    background-color: #1db954;
+    border-radius: 1px;
+}
+
+.currentTimeProgressMobile::-moz-progress-bar {
+    background-color: #1db954;
+    border-radius: 1px;
+}
+
+.AlbumNameContainerMobile {
+    height: 65% !important;
+    overflow: hidden;
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Horizontally center the content */
 }

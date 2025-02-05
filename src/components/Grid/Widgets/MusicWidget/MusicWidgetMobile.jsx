@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './MusicWidget.css';
 import SpotifyIcon from '../../../../assets/icons/Spotify.png';
 
-const MusicWidget = ({ darkMode }) => {
+const MusicWidget = ({ darkMode, isMobile }) => {
     const [currentTrack, setCurrentTrack] = useState(null);
     const [lastPlayedTrack, setLastPlayedTrack] = useState(null); // Store last played track
     const [error, setError] = useState(null);
@@ -172,14 +172,14 @@ const MusicWidget = ({ darkMode }) => {
                         <img src={albumArtwork} alt="Album Artwork" className="AlbumImage" />
                     </div>
                     <div className={`MusicCoreContent`}>
-                        <div className="AlbumNameContainer">
-                            <h3 className="AlbumName">{title}</h3>
+                        <div className="AlbumNameContainerMobile">
+                            <h3 className="AlbumNameMobile">{title}</h3>
                         </div>
-                        <div className="AlbumArtistContainer">
+                        <div className={`AlbumArtistContainer ${isMobile ? 'mobile' : ''}`}>
                             <p className="AlbumArtist">{artist}</p>
                         </div>
                         <div className="currentTimeContainerMobile">
-                            <progress className="currentTimeProgress" value={currentTime} max={songLength}></progress>
+                            <progress className="currentTimeProgressMobile" value={currentTime} max={songLength}></progress>
                             <div className="currentTimeValues">
                                 <span className="CurrentTime">{formatTime(currentTime)}</span>
                                 <span className="TotalTime">{formatTime(songLength)}</span>

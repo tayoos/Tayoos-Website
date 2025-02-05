@@ -7,7 +7,7 @@ const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-const WeatherWidget = ({ darkMode }) => {
+const WeatherWidget = ({ darkMode, isMobile }) => {
     const [weatherData, setWeatherData] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -70,10 +70,10 @@ const WeatherWidget = ({ darkMode }) => {
 
     return (
         <div className={`weather-widget-horizontal ${darkMode ? 'dark' : ''}`}>
-            <div className="weather-icon-section">
-                <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={condition} className="weather-icon-large" />
+            <div className={`weather-icon-section ${isMobile ? 'mobile' : ''}`}>
+                <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={condition} className={`weather-icon-large ${isMobile ? 'mobile' : ''}`} />
             </div>
-            <div className="weather-details-section">
+            <div className={`weather-details-section ${isMobile ? 'mobile' : ''}`}>
                 <div className="weather-location">
                     <span className="location-text">{location}</span>
                     <svg className="location-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">

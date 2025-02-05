@@ -50,6 +50,7 @@
 
 .page-container.Mobile {
     max-height: calc(var(--vh, 1vh) * 100);
+    width: 100vw;
 }
 
 .icongrid {
@@ -237,7 +238,7 @@
 }
 
 .GridContainer-mobile {
-    width: 98%;
+    width: 100% !important;
 
     padding-top: 10px;
     align-self: center;

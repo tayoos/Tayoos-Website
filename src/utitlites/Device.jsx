@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // Utility function to check if the device is mobile
 const checkDeviceType = () => {
-    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return /Android|iPhone|iPod/i.test(navigator.userAgent);
 };
 
 function Device({ onDeviceChange }) {

@@ -10,6 +10,7 @@
     width: 100%; /* Full width of the container */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden; /* Prevent overflow if content spills */
+    align-content: space-between !important;
 }
 
 .weather-widget-horizontal.dark {
@@ -26,9 +27,19 @@
     max-width: 150px;
 }
 
+.weather-icon-section.mobile {
+    max-width: 50px;
+    box-sizing: border-box;
+}
+
 .weather-icon-large {
     width: 100px;
     height: 100px;
+}
+
+.weather-icon-large.mobile {
+    width: 75px;
+    height: 75px;
 }
 
 .weather-details-section {
@@ -38,7 +49,10 @@
     padding-left: 10px;
     text-align: left;
     height: 100%;
-    padding-left: 30px;
+    max-width: 60%;
+}
+
+.weather-details-section.mobile {
 }
 
 .weather-temperature {
