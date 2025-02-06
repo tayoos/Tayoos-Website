@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-
 import './NCReactGridLayout.css';
 
 import PhotoWidget from './Widgets/PhotoWidget';
@@ -23,11 +21,9 @@ const NCReactGridLayout = ({ darkMode }) => {
     const [currentBreakpoint, setCurrentBreakpoint] = useState('xxl');
     const [layouts, setLayouts] = useState(generateInitialLayout);
     const [containerWidth, setContainerWidth] = useState('1650px');
-    const [maxRows, setMaxRows] = useState(22);
-
+    const [maxRows, setMaxRows] = useState(19);
     const [isDragging, setIsDragging] = useState(false);
 
-    // Get Device Type
     const isMobile = getDeviceType() === 'Mobile';
 
     const cellSizes = {
@@ -39,7 +35,7 @@ const NCReactGridLayout = ({ darkMode }) => {
     };
 
     const breakpoints = {
-        xxl: 1650, // not currently used
+        xxl: 1650,
         xl: 1200,
         md: 768,
         sm: 480,
@@ -54,30 +50,52 @@ const NCReactGridLayout = ({ darkMode }) => {
         xs: 6,
     };
 
-    // Specify xxl-specific positions - not currently used
-    const xxlLayout = layouts.map((item) => {
-        switch (item.i) {
-            case '0':
-                return { ...item, x: 0, y: 0, w: 3 };
-            case '1':
-                return { ...item, x: 3, y: 1, w: 6 };
-            case '2':
-                return { ...item, x: 9, y: 1, w: 5 };
-            case '3':
-                return { ...item, x: 20, y: 8, w: 1 };
-            case '4':
-                return { ...item, x: 16, y: 4, w: 4 };
-            case '5':
-                return { ...item, x: 16, y: 2, w: 4 };
-            case '6':
-                return { ...item, x: 16, y: 0, w: 4 };
-            default:
-                return item;
-        }
-    });
+    // Widgets with dynamic loading
+    const widgets = [
+        { key: '0', component: <PhotoWidget /> },
+        { key: '1', component: <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" /> },
+        { key: '2', component: <MusicWidget darkMode={darkMode} /> },
+        { key: '3', component: <CVWidget darkMode={darkMode} /> },
+        { key: '4', component: <WeatherWidget darkMode={darkMode} /> },
+        { key: '5', component: <TimezoneWidget darkMode={darkMode} /> },
+        { key: '6', component: <StatusCard darkMode={darkMode} /> },
+    ];
+
+    // Save and load layouts from localStorage
+    useEffect(() => {
+        const savedLayout = JSON.parse(localStorage.getItem('layout'));
+        if (savedLayout) setLayouts(savedLayout);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('layout', JSON.stringify(layouts));
+    }, [layouts]);
+
+    // Generate initial layout with error handling
+    function generateInitialLayout() {
+        const initialLayout = [
+            { i: '0', x: 0, y: 0, w: 3, h: 6, static: false, minW: 3, minH: 6, maxW: 3, maxH: 6 },
+            { i: '1', x: 3, y: 0, w: 5, h: 3, static: false, minW: 3, minH: 3, maxW: 6, maxH: 3 },
+            { i: '2', x: 3, y: 3, w: 4, h: 2, static: false, minW: 3, minH: 2, maxW: 5, maxH: 2 },
+            { i: '3', x: 7, y: 3, w: 1, h: 2, static: false, minW: 1, minH: 2, maxW: 1, maxH: 2 },
+            { i: '4', x: 26, y: 4, w: 3, h: 2, static: false, minW: 3, minH: 2, maxW: 4, maxH: 2 },
+            { i: '5', x: 26, y: 2, w: 3, h: 2, static: false, minW: 3, minH: 2, maxW: 4, maxH: 2 },
+            { i: '6', x: 26, y: 0, w: 3, h: 2, static: false, minW: 3, minH: 2, maxW: 4, maxH: 2 },
+        ];
+
+        // Validate layout
+        initialLayout.forEach((widget) => {
+            if (!widget.i || !widget.x || !widget.y) {
+                console.error('Invalid widget data:', widget);
+                return null;
+            }
+        });
+
+        return initialLayout;
+    }
 
     // Specify xl-specific positions
-    const xl_Layout = layouts.map((item) => {
+    const xlLayout = layouts.map((item) => {
         switch (item.i) {
             case '0':
                 return { ...item, x: 0, y: 0, w: 4 };
@@ -93,28 +111,6 @@ const NCReactGridLayout = ({ darkMode }) => {
                 return { ...item, x: 16, y: 2, w: 4 };
             case '6':
                 return { ...item, x: 16, y: 0, w: 4 };
-            default:
-                return item;
-        }
-    });
-
-    // Specify md-specific positions
-    const mdLayout = layouts.map((item) => {
-        switch (item.i) {
-            case '0':
-                return { ...item, x: 0, y: 0, w: 3 };
-            case '1':
-                return { ...item, x: 3, y: 1, w: 5 };
-            case '2':
-                return { ...item, x: 3, y: 4, w: 5 };
-            case '3':
-                return { ...item, x: 11, y: 7, w: 1 };
-            case '4':
-                return { ...item, x: 8, y: 4, w: 3 };
-            case '5':
-                return { ...item, x: 8, y: 2, w: 3 };
-            case '6':
-                return { ...item, x: 8, y: 0, w: 3 };
             default:
                 return item;
         }
@@ -164,257 +160,50 @@ const NCReactGridLayout = ({ darkMode }) => {
         }
     });
 
-    // Function to check if a position is within grid boundaries
-    const isWithinBounds = (x, y, w, h, maxCols, maxRows) => {
-        return x >= 0 && y >= 0 && x + w <= maxCols && y + h <= maxRows;
-    };
-
-    // Function to check if a position is occupied
-    const isPositionOccupied = (x, y, w, h, layout, excludeId = null) => {
-        return layout.some((item) => {
-            if (item.i === excludeId) return false;
-            const itemRight = item.x + item.w;
-            const itemBottom = item.y + item.h;
-            const newRight = x + w;
-            const newBottom = y + h;
-
-            return !(x >= itemRight || newRight <= item.x || y >= itemBottom || newBottom <= item.y);
-        });
-    };
-
-    // Function to find the nearest available position
-    const findNearestPosition = (width, height, layout, maxCols, maxRows, startX = 0, startY = 0) => {
-        // Ensure starting position is within bounds
-        startX = Math.min(Math.max(0, startX), maxCols - width);
-        startY = Math.min(Math.max(0, startY), maxRows - height);
-
-        // First try the original position if it's within bounds and not occupied
-        if (isWithinBounds(startX, startY, width, height, maxCols, maxRows) && !isPositionOccupied(startX, startY, width, height, layout)) {
-            return { x: startX, y: startY };
-        }
-
-        let layer = 1;
-        const maxLayer = Math.max(maxCols, maxRows);
-
-        while (layer < maxLayer) {
-            // Search in a spiral pattern from the start position
-            for (let dx = -layer; dx <= layer; dx++) {
-                for (let dy = -layer; dy <= layer; dy++) {
-                    const x = startX + dx;
-                    const y = startY + dy;
-
-                    if (isWithinBounds(x, y, width, height, maxCols, maxRows) && !isPositionOccupied(x, y, width, height, layout)) {
-                        return { x, y };
-                    }
-                }
+    // Calculate maxRows based on container height and cell size
+    useEffect(() => {
+        const calculateMaxRows = () => {
+            if (containerRef.current) {
+                const containerHeight = containerRef.current.clientHeight;
+                const rowHeight = cellSizes[currentBreakpoint];
+                const verticalMargin = 20; // Vertical margin between rows
+                const totalCellHeight = rowHeight + verticalMargin;
+                const calculatedMaxRows = Math.floor(containerHeight / totalCellHeight);
+                setMaxRows(calculatedMaxRows);
             }
-            layer++;
-        }
+        };
 
-        // If no position found, search systematically from top-left
-        for (let y = 0; y <= maxRows - height; y++) {
-            for (let x = 0; x <= maxCols - width; x++) {
-                if (!isPositionOccupied(x, y, width, height, layout)) {
-                    return { x, y };
-                }
-            }
-        }
+        calculateMaxRows();
 
-        // Absolute fallback to top-left
-        return { x: 0, y: 0 };
-    };
+        // Recalculate maxRows on window resize
+        window.addEventListener('resize', calculateMaxRows);
+        return () => window.removeEventListener('resize', calculateMaxRows);
+    }, [currentBreakpoint, cellSizes]);
 
     // Handle breakpoint change
     const onBreakpointChange = (newBreakpoint) => {
-        const previousCols = gridCols[currentBreakpoint];
-        const newCols = gridCols[newBreakpoint];
         setCurrentBreakpoint(newBreakpoint);
-
-        // Check and adjust positions regardless of whether the grid is growing or shrinking
-        const newLayout = [...layouts];
-
-        // Sort items by size (larger items first) to better handle placement
-        const sortedItems = [...layouts].map((item, index) => ({ ...item, originalIndex: index })).sort((a, b) => b.w * b.h - a.w * a.h);
-
-        let needsUpdate = false;
-
-        sortedItems.forEach((item) => {
-            // Check if item is out of bounds in the new grid
-            if (!isWithinBounds(item.x, item.y, item.w, item.h, newCols, maxRows)) {
-                needsUpdate = true;
-                const position = findNearestPosition(item.w, item.h, newLayout, newCols, maxRows, item.x, item.y);
-
-                // Update the item in our layout copy
-                newLayout[item.originalIndex] = {
-                    ...item,
-                    x: position.x,
-                    y: position.y,
-                };
-            }
-        });
-
-        // Only update the layout if changes were needed
-        if (needsUpdate) {
-            setLayouts(newLayout);
-        }
     };
 
-    useEffect(() => {
-        const updateMaxRows = () => {
-            if (containerRef.current) {
-                const containerHeight = containerRef.current.offsetHeight;
-                const gapSize = 20;
-                const cellHeight = cellSizes[currentBreakpoint];
-                const containerPadding = 10;
-
-                const availableHeight = containerHeight - containerPadding;
-                const maxPossibleRows = Math.floor((availableHeight + gapSize) / (cellHeight + gapSize));
-
-                setMaxRows(Math.max(1, maxPossibleRows));
-            }
-        };
-
-        updateMaxRows();
-
-        const resizeObserver = new ResizeObserver(updateMaxRows);
-        if (containerRef.current) {
-            resizeObserver.observe(containerRef.current);
-        }
-
-        return () => {
-            if (containerRef.current) {
-                resizeObserver.unobserve(containerRef.current);
-            }
-        };
-    }, [currentBreakpoint, cellSizes]);
-
-    function generateInitialLayout() {
-        return [
-            {
-                i: '0',
-                x: 0,
-                y: 0,
-                w: 3,
-                h: 6,
-                static: false,
-                minW: 3,
-                minH: 6,
-                maxW: 3,
-                maxH: 6,
-            },
-            {
-                i: '1',
-                x: 3,
-                y: 1,
-                w: 5,
-                h: 3,
-                static: false,
-                minW: 3,
-                minH: 3,
-                maxW: 6,
-                maxH: 3,
-            },
-            {
-                i: '2',
-                x: 4,
-                y: 5,
-                w: 4,
-                h: 2,
-                static: false,
-                minW: 3,
-                minH: 2,
-                maxW: 5,
-                maxH: 2,
-            },
-            {
-                i: '3',
-                x: 10,
-                y: 10,
-                w: 1,
-                h: 2,
-                static: false,
-                minW: 1,
-                minH: 2,
-                maxW: 1,
-                maxH: 2,
-            },
-
-            {
-                i: '4',
-                x: 10,
-                y: 5,
-                w: 3,
-                h: 2,
-                static: false,
-                minW: 3,
-                minH: 2,
-                maxW: 4,
-                maxH: 2,
-            },
-
-            {
-                i: '5',
-                x: 10,
-                y: 3,
-                w: 3,
-                h: 2,
-                static: false,
-                minW: 3,
-                minH: 2,
-                maxW: 4,
-                maxH: 2,
-            },
-
-            {
-                i: '6',
-                x: 10,
-                y: 1,
-                w: 3,
-                h: 2,
-                static: false,
-                minW: 3,
-                minH: 2,
-                maxW: 4,
-                maxH: 2,
-            },
-        ];
-    }
-
-    const onDrag = (layout, oldItem, newItem, placeholder, e, element) => {
+    // Handle drag and drop constraints
+    const onDrag = (layout, oldItem, newItem, placeholder, e) => {
         if (!dragBoundaryRef.current) return;
 
-        const containerBounds = dragBoundaryRef.current.getBoundingClientRect();
-
-        // Calculate grid metrics
-        const cellWidth = cellSizes[currentBreakpoint];
-        const cellHeight = cellSizes[currentBreakpoint];
-        const gapSize = 20;
-
-        // Calculate maximum positions in grid units
         const maxX = gridCols[currentBreakpoint] - newItem.w;
         const maxY = maxRows - newItem.h;
 
-        // Use the placeholder position if available, otherwise use newItem position
-        // The placeholder represents where the item would be dropped
-        const gridX = placeholder ? placeholder.x : newItem.x;
-        const gridY = placeholder ? placeholder.y : newItem.y;
+        const constrainedX = Math.max(0, Math.min(placeholder.x, maxX));
+        const constrainedY = Math.max(0, Math.min(placeholder.y, maxY));
 
-        // Strictly enforce boundaries
-        const constrainedX = Math.max(0, Math.min(gridX, maxX));
-        const constrainedY = Math.max(0, Math.min(gridY, maxY));
-
-        // Only update if position has changed after constraints
-        if (constrainedX !== gridX || constrainedY !== gridY) {
-            // Update layout with constrained position
+        if (constrainedX !== placeholder.x || constrainedY !== placeholder.y) {
             const updatedLayout = layout.map((item) => (item.i === newItem.i ? { ...item, x: constrainedX, y: constrainedY } : item));
-
             setLayouts(updatedLayout);
         }
 
-        // Prevent default to stop any potential dragging beyond bounds
         e.preventDefault();
     };
 
+    // Handle drag start and stop
     const handleDragStart = () => {
         setIsDragging(true);
         document.body.classList.add('dragging-active');
@@ -425,6 +214,7 @@ const NCReactGridLayout = ({ darkMode }) => {
         document.body.classList.remove('dragging-active');
     };
 
+    // Handle resize stop
     const handleResizeStop = (layout) => {
         const validatedLayout = layout.map((item) => {
             const maxX = gridCols[currentBreakpoint] - item.w;
@@ -440,6 +230,7 @@ const NCReactGridLayout = ({ darkMode }) => {
         setLayouts(validatedLayout);
     };
 
+    // Add animations
     useEffect(() => {
         const style = document.createElement('style');
         style.textContent = `
@@ -448,7 +239,7 @@ const NCReactGridLayout = ({ darkMode }) => {
                 z-index: 3;
             }
             .react-grid-item {
-                transition: transform 200ms ease;
+                transition: transform 200ms ease, opacity 200ms ease;
             }
             .react-grid-layout {
                 position: relative !important;
@@ -458,32 +249,35 @@ const NCReactGridLayout = ({ darkMode }) => {
         return () => document.head.removeChild(style);
     }, []);
 
+    //Endforce No scroll
+    useEffect(() => {
+        const preventScroll = (e) => {
+            e.preventDefault();
+        };
+
+        if (containerRef.current) {
+            containerRef.current.style.overflow = 'hidden';
+            containerRef.current.addEventListener('wheel', preventScroll, { passive: false });
+            containerRef.current.addEventListener('touchmove', preventScroll, { passive: false });
+        }
+
+        return () => {
+            if (containerRef.current) {
+                containerRef.current.removeEventListener('wheel', preventScroll);
+                containerRef.current.removeEventListener('touchmove', preventScroll);
+            }
+        };
+    }, []);
+
     return (
-        <div
-            ref={containerRef}
-            className={`w-full flex justify-center ${darkMode ? 'dark' : ''}`}
-            style={{
-                height: '100%',
-                position: 'relative',
-                padding: '5px',
-            }}
-        >
-            <div
-                style={{
-                    width: containerWidth,
-                    maxWidth: '100%',
-                    margin: '0 auto',
-                    height: '100%',
-                    position: 'relative',
-                }}
-            >
+        <div ref={containerRef} className={`w-full flex justify-center ${darkMode ? 'dark' : ''}`} style={{ height: '97%', position: 'relative', padding: '5px', overflow: 'hidden' }}>
+            <div style={{ width: containerWidth, maxWidth: '100%', margin: '0 auto', height: '100%', position: 'relative' }}>
                 <div ref={dragBoundaryRef} style={{ position: 'relative', height: '100%' }}>
                     <ResponsiveGridLayout
                         className="w-full"
                         layouts={{
-                            xxl: xxlLayout,
-                            xl: xl_Layout,
-                            md: mdLayout,
+                            xl: xlLayout,
+                            md: layouts,
                             sm: smLayout,
                             xs: xsLayout,
                         }}
@@ -508,27 +302,11 @@ const NCReactGridLayout = ({ darkMode }) => {
                         style={{ height: '100%' }}
                         transformScale={1}
                     >
-                        <div key="0" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <PhotoWidget />
-                        </div>
-                        <div key="1" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" />
-                        </div>
-                        <div key="2" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <MusicWidget darkMode={darkMode} />
-                        </div>
-                        <div key="3" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <CVWidget darkMode={darkMode} />
-                        </div>
-                        <div key="4" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <WeatherWidget darkMode={darkMode} />
-                        </div>
-                        <div key="5" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <TimezoneWidget darkMode={darkMode} />
-                        </div>
-                        <div key="6" className="grid-item rounded-lg shadow-lg overflow-hidden">
-                            <StatusCard darkMode={darkMode} />
-                        </div>
+                        {widgets.map((widget) => (
+                            <div key={widget.key} className="grid-item rounded-lg shadow-lg overflow-hidden" aria-label={`Widget ${widget.key}`}>
+                                {widget.component}
+                            </div>
+                        ))}
                     </ResponsiveGridLayout>
                 </div>
             </div>
@@ -536,4 +314,4 @@ const NCReactGridLayout = ({ darkMode }) => {
     );
 };
 
-export default NCReactGridLayout;
+export default React.memo(NCReactGridLayout);

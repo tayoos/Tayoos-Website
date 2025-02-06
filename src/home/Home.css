@@ -37,7 +37,7 @@
 }
 .page-container {
     height: 100vh;
-    max-height: 98%;
+    max-height: 100%;
     max-width: 1650px;
     display: flex;
     flex-direction: column;
@@ -46,6 +46,7 @@
     align-self: center;
     margin: 0 auto;
     position: relative; /* Keep this */
+    width: 100%;
 }
 
 .page-container.Mobile {
@@ -78,10 +79,7 @@
     border-radius: 15px;
     margin: 3px;
     background-color: rgba(80, 80, 80, 0.897);
-    position: absolute; /* Change from absolute to fixed */
-    bottom: 0;
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
+
     padding: 5px;
     z-index: 1000; /* Ensure it stays on top */
 }
@@ -98,15 +96,14 @@
     background-color: rgba(68, 68, 68, 0.1);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    display: flex; /* This ensures that the container behaves as a flexbox */
-    justify-content: space-between; /* This will place the logo on the left and the time on the right */
+    display: flex;
+    justify-content: space-between;
     justify-self: center;
 }
 
 .header-container.dark {
     background-color: rgba(184, 184, 184, 0.24);
 }
-
 .header-container.Mobile {
 }
 
@@ -192,49 +189,12 @@
 
 .GridContainer {
     width: 98%;
-    height: 90%;
+
     padding-top: 10px;
     align-self: center;
     align-content: flex-start;
-}
-
-/* Media query for height less than 800px */
-@media (max-height: 1150px) {
-    .GridContainer {
-        height: calc(87vh - (100vh - 1100px) * 0.01); /* Moderate rate of decrease */
-    }
-}
-
-@media (max-height: 1000px) {
-    .GridContainer {
-        height: calc(85vh - (1000px - 1100px) * 0.01); /* Moderate rate of decrease */
-    }
-}
-
-/* Progressively more aggressive scaling as the screen gets smaller */
-@media (max-height: 900px) {
-    .GridContainer {
-        height: calc(84vh - (900px - 100vh) * 0.1);
-    }
-}
-
-@media (max-height: 600px) {
-    .GridContainer {
-        height: calc(78vh - (600px - 100vh) * 0.2);
-    }
-}
-
-@media (max-height: 400px) {
-    .GridContainer {
-        height: calc(67vh - (400px - 100vh) * 0.3);
-    }
-}
-
-/* Minimum height safeguard */
-@media (max-height: 300px) {
-    .GridContainer {
-        height: 58vh;
-    }
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    flex-grow: 1; /* Takes up remaining space */
 }
 
 .GridContainer-mobile {
