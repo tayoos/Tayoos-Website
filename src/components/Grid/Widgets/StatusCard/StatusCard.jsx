@@ -3,7 +3,7 @@ import './StatusCard.css';
 import StatusCircle from './StatusCircle';
 import { ModalContext } from '../../../../utitlites/ModalContext';
 
-const TextCardWidget = ({ title = 'Title', body = 'Content goes here', isDarkMode, status = 'Online', statusLightColor = 'purple' }) => {
+const TextCardWidget = ({ title = 'Title', body = 'Content goes here', isDarkMode, status = 'Online', statusLightColor = 'purple', isMobile }) => {
     const [displayedTitle, setDisplayedTitle] = useState('');
     const [displayedBody, setDisplayedBody] = useState('');
     const [titleDone, setTitleDone] = useState(false);
@@ -16,8 +16,8 @@ const TextCardWidget = ({ title = 'Title', body = 'Content goes here', isDarkMod
                 <StatusCircle color={statusLightColor} />
             </div>
             <div className="Stext-card">
-                <p className="Stext-card-title">Advanced MBSE&S Engineer</p>
-                <p className="Stext-card-content">Capgemini</p>
+                <p className={`Stext-card-title ${isMobile ? 'mobile' : ''}`}>Advanced MBSE&S Engineer</p>
+                <p className={`Stext-card-content ${isMobile ? 'mobile' : ''}`}>Capgemini</p>
             </div>
         </div>
     );

@@ -26,6 +26,7 @@ import TailwindCSSIcon from '../../assets/tech/Tailwind.png';
 import CEAIcon from '../../assets/tech/CEA.png';
 import SAPIcon from '../../assets/tech/SAP.png';
 import TOGAFIcon from '../../assets/tech/TOGAF.png';
+import AzureIcon from '../../assets/tech/Azure.png';
 
 const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
@@ -53,6 +54,7 @@ const TechModal = () => {
         { name: 'TailwindCSS', icon: TailwindCSSIcon, certification: '', fill: '', bcolor: '' },
         { name: 'SAP', icon: SAPIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BXTG7GSFBM22' },
         { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.udemy.com/certificate/UC-377dbad3-d945-497a-a2dc-d4f43ced948a/' },
+        { name: 'Azure', icon: AzureIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/records/5ZMEXTAX8IEA' },
     ];
 
     const variants = {

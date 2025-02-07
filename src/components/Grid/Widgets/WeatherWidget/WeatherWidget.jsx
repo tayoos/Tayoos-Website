@@ -74,14 +74,16 @@ const WeatherWidget = ({ darkMode, isMobile }) => {
                 <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={condition} className={`weather-icon-large ${isMobile ? 'mobile' : ''}`} />
             </div>
             <div className={`weather-details-section ${isMobile ? 'mobile' : ''}`}>
-                <div className="weather-location">
-                    <span className="location-text">{location}</span>
-                    <svg className="location-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
-                        <path d="M12 2L4 20L12 17L20 20L12 2Z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-                    </svg>
+                <div className={`AlignBox`}>
+                    <div className={`weather-location ${isMobile ? 'mobile' : ''}`}>
+                        <span className={`location-text ${isMobile ? 'mobile' : ''}`}>{location}</span>
+                        <svg className={`location-symbol ${isMobile ? 'mobile' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                            <path d="M12 2L4 20L12 17L20 20L12 2Z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+                        </svg>
+                    </div>
+                    <div className={`weather-temperature ${isMobile ? 'mobile' : ''}`}>{temperature}°C</div>
+                    <div className={`weather-condition  ${isMobile ? 'mobile' : ''}`}>{description}</div>
                 </div>
-                <div className="weather-temperature">{temperature}°C</div>
-                <div className="weather-condition">{description}</div>
             </div>
         </div>
     );

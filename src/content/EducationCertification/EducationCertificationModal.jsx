@@ -24,6 +24,13 @@ const EducationCertificationModal = () => {
             type: 'diploma',
         },
         {
+            id: 10,
+            title: 'Modern Data Warehouse Analytics in Microsoft Azure',
+            graduation: 'Issued Feb 2025',
+            link: 'https://www.coursera.org/account/accomplishments/records/5ZMEXTAX8IEA',
+            type: 'certificate',
+        },
+        {
             id: 9,
             title: 'SAP Technology Consultant',
             graduation: 'Issued July 2024',

@@ -117,6 +117,42 @@ const mobileWidgetConfig = {
         },
     },
 };
+
+function getViewportHeight() {
+    return;
+}
+
+const simplifyResolution = (width, height) => {
+    const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b)); // Recursive GCD function
+    const divisor = gcd(width, height);
+    return [width / divisor, height / divisor];
+};
+
+const getCellSize = () => {
+    /* const viewportHeight = document.documentElement.clientHeight;
+
+    console.log('Window VP Height', viewportHeight);
+    console.log('Window VP TOtal Height', window.innerHeight);
+    console.log('Window VP Ratio', VPResolution);*/
+    let altFinalCellSize;
+
+    const VPResolution = simplifyResolution(window.innerWidth, window.innerHeight);
+    console.log('Window VP  height', VPResolution[1]);
+    //const altCellSize = VPResolution[1] * (50 / 844);
+    const altCellSize = window.innerHeight * (50 / 700);
+    console.log('Window VP reg', altCellSize);
+
+    if (altCellSize > 50) {
+        altFinalCellSize = 50;
+    } else {
+        altFinalCellSize = altCellSize;
+    }
+
+    console.log('altFinalCellSize', altFinalCellSize);
+
+    return altFinalCellSize;
+};
+
 const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
     const containerRef = useRef(null);
     const dragBoundaryRef = useRef(null);
@@ -124,10 +160,12 @@ const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
     const [isDragging, setIsDragging] = useState(false);
     const [layouts, setLayouts] = useState(generateInitialLayout());
 
+    const altCellSize = getCellSize();
+
     // Mobile Grid Configuration
     const mobileGridConfig = {
         cols: 6,
-        cellSize: 50,
+        cellSize: altCellSize,
         gapSize: 10,
         containerPadding: 5,
     };
@@ -361,7 +399,7 @@ const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
                     {renderWidget('3', <CVWidget darkMode={darkMode} />)}
                     {renderWidget('4', <WeatherWidget darkMode={darkMode} isMobile={isMobile} />)}
                     {renderWidget('5', <TimezoneWidget darkMode={darkMode} />)}
-                    {renderWidget('6', <StatusCard darkMode={darkMode} />)}
+                    {renderWidget('6', <StatusCard darkMode={darkMode} isMobile={isMobile} />)}
                 </ResponsiveGridLayout>
             </div>
         </div>
