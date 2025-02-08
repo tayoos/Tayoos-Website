@@ -19,7 +19,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0px 5px 0px 5px;
+    padding: 0px 10px 0px 5px;
     border-radius: 10px 10px 0 0;
     box-sizing: border-box;
 }
@@ -37,7 +37,6 @@
 /* Ensure alignment of StatusCircle */
 .status-circle {
     margin-left: auto;
-    z-index: 1000; /* Ensure it stays on top */
 }
 
 /* Status label */

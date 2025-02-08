@@ -28,14 +28,28 @@ const ExperienceModal = () => {
             <p>Contributed to AIRBUS NextWing and OneHeart development:</p>
             <ul>
                 <li>Programmed a robust interface between Cameo and Delmia using Java for end-to-end functionality.</li>
+                    <ul>
+                        <li>Java front end plugin development improving the ease of access.</li>
+                        <li>XML marshalling using a developed ontology.</li>
+
+                    </ul> 
                 <li>Developed a user-friendly Java plugin, enhancing accessibility and implemented efficient XML marshalling using a developed ontology, improving data handling, using kanban boards to task track completion.</li>
                 <li>Conducted architecture development using AIRBUS’ proprietary language, MOFLT, modelling functional, logical, and technical layers for levels 1-4, streamlining project design.</li>
-                <li>Developed an ontology and owned the adapter interface between Sparx EA and a Data Warehouse for XML data transfer using JavaScript, leading a team of 4 using an Agile Approach, managing workload and delivery, ensuring timely and high-quality outputs. Developed models for testing adapter using Sparx EA and NAF. Developed tool documentation.</li>
+                <li>Developed an ontology for use between the different tools as a template for both of them to understand each other. </li>
+                <li>Led and owned adapter interface between Sparx EA and a Data Warehouse for XML data transfer using JavaScript, leading a team of 4 using an Agile Approach, managing workload and delivery, ensuring a timely and high-quality outputs. 
+                    <ul>
+                        <li>Developed Architecture Models to give an understanding of what is being developed to the team and allow for quantifiable measures of success.</li>
+                        <li>Developed base code that could be used by the team to carry out key functions.</li>
+                        <li>Carried out code reviews to ensure quality.</li>
+                        <li>Developed models for testing adapter using Sparx EA and NAF.</li>
+                        <li>Wrote tool documentation.</li>
+                    </ul> 
+                </li>
             </ul>
             <p>Developed training packs for MBDA to train both external clients and internal employees.</p>
         `,
 
-            skills: 'Software Design · Software Development · JavaScript · Java · System Architecture · SysML · Requirements',
+            skills: 'Software Design · Software Architecture · Software Development · JavaScript · Java · System Architecture · SysML · Requirements',
             Tools: 'Cameo · Sparx EA · MOFLT · JavaScript',
             logo: logoCapgem,
         },

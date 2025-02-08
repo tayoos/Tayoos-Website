@@ -24,6 +24,20 @@ const EducationCertificationModal = () => {
             type: 'diploma',
         },
         {
+            id: 12,
+            title: 'AWS Cloud Technology Consultant',
+            graduation: 'On-going',
+            link: '',
+            type: 'certificate',
+        },
+        {
+            id: 11,
+            title: 'TOGAF 10 Foundation',
+            graduation: 'Issued Feb 2025',
+            link: 'https://www.coursera.org/account/accomplishments/verify/ZLN9DXLMJB1I',
+            type: 'certificate',
+        },
+        {
             id: 10,
             title: 'Modern Data Warehouse Analytics in Microsoft Azure',
             graduation: 'Issued Feb 2025',
