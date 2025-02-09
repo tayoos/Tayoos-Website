@@ -24,10 +24,24 @@ const EducationCertificationModal = () => {
             type: 'diploma',
         },
         {
-            id: 12,
+            id: 15,
             title: 'AWS Cloud Technology Consultant',
-            graduation: 'On-going',
-            link: '',
+            graduation: 'Issued Feb 2025',
+            link: 'https://www.coursera.org/account/accomplishments/specialization/LCX414UM7QNJ',
+            type: 'certificate',
+        },
+        {
+            id: 13,
+            title: 'AWS Cloud Technology Consultant',
+            graduation: 'Issued Feb 2025',
+            link: 'https://www.coursera.org/account/accomplishments/specialization/HGKM2R8D0U9M',
+            type: 'certificate',
+        },
+        {
+            id: 12,
+            title: 'AWS Fundamentals',
+            graduation: 'Issued Feb 2025',
+            link: 'https://www.coursera.org/account/accomplishments/specialization/BWKJJ0MYYV79',
             type: 'certificate',
         },
         {
