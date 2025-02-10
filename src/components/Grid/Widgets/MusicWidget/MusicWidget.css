@@ -142,9 +142,21 @@
     }
 }
 
-.currentTimeProgress {
+.currentTimeProgressContainer {
+    position: relative; /* Ensure that child elements are positioned relative to this container */
     display: flex;
     flex-grow: 1;
+    height: 5px;
+    appearance: none;
+    background-color: red;
+    margin: 0;
+    width: 100%; /* Ensure it spans the full width */
+}
+
+.currentTimeProgress {
+    position: absolute;
+    top: 0; /* Align to the top of the container */
+    left: 0; /* Align to the left of the container */
     height: 5px;
     appearance: none;
     background-color: #e0e0e0;
@@ -170,12 +182,12 @@
 
 .progress-thumb {
     position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: -3px; /* Align to the top of the container */
+    left: -1px; /* Align to the left of the container */
     width: 12px; /* Circle size */
     height: 12px;
     background-color: #1db954;
-    border: 2px solid white; /* Optional border */
+
     border-radius: 50%;
     z-index: 2; /* On top of the progress bar */
     pointer-events: none; /* Prevents interaction blocking */

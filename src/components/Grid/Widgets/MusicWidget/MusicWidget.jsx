@@ -179,8 +179,10 @@ const MusicWidget = ({ darkMode }) => {
                             <p className="AlbumArtist">{artist}</p>
                         </div>
                         <div className="currentTimeContainer">
-                            <progress className="currentTimeProgress" value={currentTime} max={songLength}></progress>
-                            <div className="progress-thumb" style={{ left: `${(currentTime / songLength) * 100}%` }}></div>
+                            <div className="currentTimeProgressContainer">
+                                <progress className="currentTimeProgress" value={currentTime} max={songLength}></progress>
+                                <div className="progress-thumb" style={{ left: `${(currentTime / songLength) * 100}%` }}></div>
+                            </div>
                             <div className="currentTimeValues">
                                 <span className="CurrentTime">{formatTime(currentTime)}</span>
                                 <span className="TotalTime">{formatTime(songLength)}</span>
