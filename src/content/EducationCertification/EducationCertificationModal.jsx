@@ -25,6 +25,13 @@ const EducationCertificationModal = () => {
         },
         {
             id: 15,
+            title: 'Neo4j Certified Professional',
+            graduation: 'Issued Feb 2025',
+            link: 'https://graphacademy.neo4j.com/c/582bcfe6-9690-4b63-a372-f6e9d0c94924/',
+            type: 'certificate',
+        },
+        {
+            id: 15,
             title: 'AWS Cloud Technology Consultant',
             graduation: 'Issued Feb 2025',
             link: 'https://www.coursera.org/account/accomplishments/specialization/LCX414UM7QNJ',
