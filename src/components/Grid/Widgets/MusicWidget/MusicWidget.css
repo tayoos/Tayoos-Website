@@ -148,7 +148,7 @@
     flex-grow: 1;
     height: 5px;
     appearance: none;
-    background-color: red;
+
     margin: 0;
     width: 100%; /* Ensure it spans the full width */
 }
