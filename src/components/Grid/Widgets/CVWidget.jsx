@@ -4,7 +4,7 @@ import './Widgets.css';
 const CVWidget = ({ darkMode }) => {
     const [isHovered, setIsHovered] = useState(false);
 
-    const iconsrc = '/icons/wordicon.png';
+    const iconsrc = '/icons/pdficon3.png';
     const cvFileUrl = '/CurriculumVitae-DavidOshidero.pdf';
 
     const handleDownload = () => {

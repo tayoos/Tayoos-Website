@@ -61,8 +61,8 @@
 
 .cv-image-container {
     position: relative;
-    width: 70%;
-    max-width: 70px;
+    width: 100%;
+    max-width: 75px;
     aspect-ratio: 1 / 1;
 }
 
