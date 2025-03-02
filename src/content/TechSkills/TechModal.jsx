@@ -29,6 +29,7 @@ import TOGAFIcon from '../../assets/tech/TOGAF.png';
 import AzureIcon from '../../assets/tech/Azure.png';
 import AWSIcon from '../../assets/tech/AWSIcon.png';
 import Neo4jIcon from '../../assets/tech/Neo4jIcon.png';
+import JavaIcon from '../../assets/tech/java.png';
 
 const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
@@ -42,6 +43,7 @@ const TechModal = () => {
         { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '', bcolor: '' },
         { name: 'JavaScript', icon: JavaScriptIcon, certification: '', fill: 'true', bcolor: 'jsyellow', ccourse: 'true' },
         { name: 'Python', icon: PythonIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Java', icon: JavaIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'SysML', icon: SysMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'UML', icon: UMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true', bcolor: 'ansysblack', ccourse: '' },
