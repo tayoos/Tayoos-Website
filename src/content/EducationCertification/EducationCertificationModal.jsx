@@ -39,7 +39,7 @@ const EducationCertificationModal = () => {
         },
         {
             id: 14,
-            title: 'AWS Cloud Technology Consultant',
+            title: 'AWS Cloud Support Associate',
             graduation: 'Issued Feb 2025',
             link: 'https://www.coursera.org/account/accomplishments/specialization/LCX414UM7QNJ',
             type: 'certificate',

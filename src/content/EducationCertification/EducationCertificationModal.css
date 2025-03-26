@@ -130,9 +130,6 @@
     color: var(--darkmode-text-color);
 }
 
-.education-location {
-}
-
 .education-location.dark {
     color: var(--darkmode-text-color);
 }
