@@ -30,37 +30,39 @@ import AzureIcon from '../../assets/tech/Azure.png';
 import AWSIcon from '../../assets/tech/AWSIcon.png';
 import Neo4jIcon from '../../assets/tech/Neo4jIcon.png';
 import JavaIcon from '../../assets/tech/java.png';
+import MySQL from '../../assets/tech/mySQL.png';
 
 const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
 
     const techItems = [
-        { name: 'SolidWorks', icon: SWIcon, certification: '', fill: '', bcolor: '', ccourse: '' },
-        { name: 'Excel/VBA', icon: VBAIcon, certification: '', fill: 'true', bcolor: 'vbagreen' },
+        { name: 'AWS', icon: AWSIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/HGKM2R8D0U9M' },
+        { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'JavaScript', icon: JavaScriptIcon, certification: '', fill: 'true', bcolor: 'jsyellow', ccourse: 'true' },
+        { name: 'TypeScript', icon: TypeScriptIcon, certification: '', fill: 'true', bcolor: 'tsblue' },
+        { name: 'Python', icon: PythonIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Java', icon: JavaIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'Neo4j', icon: Neo4jIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/HGKM2R8D0U9M' },
+        { name: 'MySQL', icon: MySQL, certification: '', fill: '', bcolor: '' },
+        { name: 'CSS', icon: CSSIcon, certification: '', fill: '', bcolor: '', ccourse: '' },
+        { name: 'Azure', icon: AzureIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/records/5ZMEXTAX8IEA' },
+        { name: 'SAP', icon: SAPIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BXTG7GSFBM22' },
         { name: 'CAMEO SM', icon: CameoIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Cameo EA', icon: CEAIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'Sparx EA', icon: SparxEAIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
-        { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'JavaScript', icon: JavaScriptIcon, certification: '', fill: 'true', bcolor: 'jsyellow', ccourse: 'true' },
-        { name: 'Python', icon: PythonIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'Java', icon: JavaIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'SysML', icon: SysMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'UML', icon: UMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.udemy.com/certificate/UC-377dbad3-d945-497a-a2dc-d4f43ced948a/' },
         { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true', bcolor: 'ansysblack', ccourse: '' },
         { name: 'MATLAB', icon: MATLABIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Simulink', icon: SimulinkIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Confluence', icon: ConfluenceIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'CSS', icon: CSSIcon, certification: '', fill: '', bcolor: '', ccourse: '' },
         { name: 'Docker', icon: DockerIcon, certification: '', fill: '', bcolor: '' },
         { name: 'git', icon: GitIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Msc Patran', icon: MscPatranIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'TypeScript', icon: TypeScriptIcon, certification: '', fill: 'true', bcolor: 'tsblue' },
         { name: 'TailwindCSS', icon: TailwindCSSIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'SAP', icon: SAPIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BXTG7GSFBM22' },
-        { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.udemy.com/certificate/UC-377dbad3-d945-497a-a2dc-d4f43ced948a/' },
-        { name: 'Azure', icon: AzureIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/records/5ZMEXTAX8IEA' },
-        { name: 'AWS', icon: AWSIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/HGKM2R8D0U9M' },
-        { name: 'Neo4j', icon: Neo4jIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/HGKM2R8D0U9M' },
+        { name: 'SolidWorks', icon: SWIcon, certification: '', fill: '', bcolor: '', ccourse: '' },
+        { name: 'Excel/VBA', icon: VBAIcon, certification: '', fill: 'true', bcolor: 'vbagreen' },
     ];
 
     const variants = {

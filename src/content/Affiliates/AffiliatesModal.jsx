@@ -7,6 +7,20 @@ import './AffiliatesModal.css';
 const AffiliatesModal = ({ isMobile }) => {
     const { darkMode } = useContext(ModalContext);
     const Affiliates = [
+        // Professional Memberships
+        {
+            id: 1,
+            title: 'Institute of Mechanical Engineers (iMechE)',
+            MembershipType: 'Associate Member (AMIMechE)',
+            type: 'Professional Memberships',
+        },
+        {
+            id: 2,
+            title: 'International Council on Systems Engineering (INCOSE)',
+            MembershipType: 'Associate Member (MINCOSE)',
+            type: 'Professional Memberships',
+        },
+
         // Volunteering & Community Engagement
         {
             id: 101,
@@ -36,19 +50,6 @@ const AffiliatesModal = ({ isMobile }) => {
             affiliationType: 'Strategic Partner',
             type: 'Operating Businesses & Partner Organisations',
         },*/
-        // Professional Memberships
-        {
-            id: 2,
-            title: 'International Council on Systems Engineering (INCOSE)',
-            MembershipType: 'Associate Member (AMIncose)',
-            type: 'Professional Memberships',
-        },
-        {
-            id: 1,
-            title: 'Institute of Mechanical Engineers (iMechE)',
-            MembershipType: 'Associate Member (AMIMechE)',
-            type: 'Professional Memberships',
-        },
     ];
 
     const affiliationTypes = [...new Set(Affiliates.map((affiliate) => affiliate.type))];

@@ -19,37 +19,47 @@ const ExperienceModal = () => {
     const experiences = [
         {
             id: 1,
-            title: 'Capgemini – Consultant Engineer (Senior MB Systems and Software Engineer)',
+            title: 'Capgemini – Consultant Engineer (Senior MB Software and Systems Engineer)',
             location: 'Birmingham, England, United Kingdom',
-            shortdesc: 'Successfully implemented MBSE into the ITER project, conducted requirement change analysis for defense projects, and contributed to AIRBUS NextWing and OneHeart development.',
+            shortdesc:
+                'Successfully implemented MBSE into the ITER Project with Fusion4Energy, developing a pilot model using MagicGrid in Cameo to create a digital twin of the Tokamak Building. Providing comprehensive training on its benefits and proper implementation, building MBSE understanding within Fusion4Energy and bring attention to its implementation within the company and executives.',
             longdesc: `
             <p>Successfully implemented MBSE into the ITER project with Fusion4Energy, developing a pilot model and providing comprehensive training on its benefits and proper implementation.</p>
-            <p>Conducted requirement change analysis for a defence project, including initial change impact assessment, enhancing project adaptability and risk management.</p>
-            <p>Contributed to AIRBUS NextWing and OneHeart development:</p>
+            <p>Conducted requirement change analysis for a defence project, including initial impact assessment to identify risks and improve risk management by understanding the effects of proposed changes.</p>
+            <p>Contributed to the development of AIRBUS NextWing, an Airbus-led initiative using digital tools to accelerate wing design through semantic integration, and OneHeart architecture models development:</p>
             <ul>
-                <li>Programmed a robust interface between Cameo and Delmia using Java for end-to-end functionality.</li>
+                <li>Designed and implemented an end-to-end Java interface between Cameo and Delmia, reducing manual effort in model updates, this allowed for faster transferring and updating of data between tools.</li>
+                <li>Developed a user-friendly Java plugin, enhancing accessibility by implemented efficient XML marshalling using a developed ontology, improving data handling, and improved processing times by 15% between initial version and completed version – carried out using kanban boards to track task completion.</li>
                     <ul>
                         <li>Java front end plugin development improving the ease of access.</li>
-                        <li>XML marshalling using a developed ontology.</li>
-
+                        <li>Use of JAXB package for XML marshalling using a developed ontology.</li>
                     </ul> 
-                <li>Developed a user-friendly Java plugin, enhancing accessibility and implemented efficient XML marshalling using a developed ontology, improving data handling, using kanban boards to task track completion.</li>
-                <li>Conducted architecture development using AIRBUS’ proprietary language, MOFLT, modelling functional, logical, and technical layers for levels 1-4, streamlining project design.</li>
+                <li>Conducted architecture development using AIRBUS’ proprietary language, MOFLT, modelling functional, logical, and technical layers for ontological levels 1-4, to assist in realising their system design.</li>
                 <li>Developed an ontology for use between the different tools as a template for both of them to understand each other. </li>
-                <li>Led and owned adapter interface between Sparx EA and a Data Warehouse for XML data transfer using JavaScript, leading a team of 4 using an Agile Approach, managing workload and delivery, ensuring a timely and high-quality outputs. 
+                <li>Led the development of an ontology-driven adapter interface between Sparx EA and a Neo4j Data Warehouse for XML data transfer using JavaScript, managing a team of 4 engineers using an Agile approach. Oversaw workload distribution, sprint planning, and delivery, ensuring high-quality outputs and improving data processing speed upon completion.</li>
                     <ul>
                         <li>Developed Architecture Models to give an understanding of what is being developed to the team and allow for quantifiable measures of success.</li>
                         <li>Developed base code that could be used by the team to carry out key functions.</li>
+                        <li>Extracting information from the model using MySQL.</li>
                         <li>Carried out code reviews to ensure quality.</li>
                         <li>Developed models for testing adapter using Sparx EA and NAF.</li>
-                        <li>Wrote tool documentation.</li>
+                        <li>Developed tool documentation.</li>
+                        <li>Developed a graph database in Neo4j for use as a data warehouse for transferring data between the various tools.</li>
                     </ul> 
                 </li>
             </ul>
-            <p>Developed training packs for MBDA to train both external clients and internal employees.</p>
-        `,
+            <p>Developed and delivered MBSE training packs for MBDA, training internal teams and external clients, improving MBSE competency across 5+ engineering departments.</p>
+            <p>Developed an ontology for nuclear waste services designed to facilitate digital safety case integration.</p>
+            <ul>
+                <li>Developed integration strategies for the digital safety case</li>
+                <li>Ensured interoperability with other parts of the organization</li>
+                <li>Provided a strategy for configuration management</li>
+            </ul>
 
-            skills: 'Software Design · Software Architecture · Software Development · JavaScript · Java · System Architecture · SysML · Requirements',
+
+            `,
+
+            skills: 'Software Design · Software Architecture · Software Development · System Architecture · JavaScript · Java · MySQL · SysML ·  UML · NAF · Requirements',
             Tools: 'Cameo · Sparx EA · MOFLT · JavaScript',
             logo: logoCapgem,
         },
@@ -60,15 +70,15 @@ const ExperienceModal = () => {
             shortdesc: 'Developed Enterprise Architecture for Network Rail, using SWOT and PESTLE analysis for project design and risk management.',
             longdesc: `
             <p>Engineering consultant contracted as a Systems/Enterprise Architect to Network Rail for the Transpennine Route Upgrade project in the railway industry.</p>
-            <p>Developed Enterprise Architecture for the whole project, individual systems, and at various key outputs in the design process as well as a WBS for the project based on business and systems requirements available:</p>
+            <p>Developed Enterprise Architecture for whole project, individual systems and at various key outputs in the design process as well as a WBS for the project based on business and systems requirements available, using TraK and TOGAF.</p>
             <ul>
-                <li>Developed Architecture Plan baselining with “As Is” architecture and “To-be” Architecture.</li>
-                <li>Used SWOT Analysis to find the strengths and weaknesses of the business and PESTLE to find areas that could affect the project moving forward.</li>
+                <li>Established an Architecture Plan, baselining the "As-Is" and "To-Be" architectures to guide system evolution.</li>
+                <li>Conducted SWOT and PESTLE analyses to assess business strengths, weaknesses, and external factors impacting project success, identifying key risks and opportunities that informed strategic time and integration decisions and mitigated project delays. Developed business architecture including architecture roadmaps that aligned with Network Rail’s business requirements, ensuring consistency across project objectives.</li>
                 <li>Developed business architecture and aligning with business requirements set by NR.</li>
                 <li>Carried out requirements analysis on the business requirements.</li>
+                <li>Addressed interfacing risks and applied mitigation strategies between components in architecture diagrams, reducing potential issues.</li>
             </ul>
-            <p>Addressed interfacing risks and applied mitigation strategies between components in architecture diagrams, reducing potential issues.</p>
-            <p>Ensured comprehensive system definition for architecture designs, facilitating accessibility of essential information.</p>
+            <p>Ensured comprehensive system definitions for architecture designs, enhancing the accessibility of essential information in turn improving team collaboration.</p>
         `,
             skills: 'Enterprise Architecture · Systems Architecture · Requirements Analysis · SWOT Analysis · PESTLE · Risk Management',
             Tools: 'Architecture Design · WBS · Systems Modeling',
@@ -81,11 +91,11 @@ const ExperienceModal = () => {
             shortdesc: 'Worked as a Systems and Software Verification Engineer for Rolls-Royce, utilizing Python and .ROBOT framework for engine maintenance projects.',
             longdesc: `
             <p>Engineering consultant contracted to Rolls-Royce as a Systems and Software Verification Engineer for the ECOSIStem project, aimed at streamlining code testing and development for engine maintenance and enhancement.</p>
-            <p>Utilized Python and .ROBOT framework to develop and analyse test cases, ensuring easy testing of new code implementations.</p>
+            <p>Utilized Python and .ROBOT framework to develop and analyse test cases as well as creating integration tests, ensuring easy testing of new code implementations.</p>
             <p>Reviewed, revised and verified test cases, improving quality and ensuring compliance, facilitating necessary reworks for approval.</p>
-            <p>Initiated and developed a knowledge-sharing database, aiding integration of new consultants and enhancing information exchange among colleagues.</p>
+            <p>Created a knowledge-sharing database, improving onboarding efficiency for new consultants and enhancing collaborative information exchange, reducing onboarding time and improving knowledge retention.</p>
         `,
-            skills: 'Systems Verification · Python · .ROBOT Framework · Test Case Development · Knowledge Management · Software Testing',
+            skills: 'Software Development · Software Design · Software Testing · Integration Tests · Systems Verification · Python · .ROBOT Framework · Test Case Development',
             Tools: 'Python · .ROBOT · Knowledge Sharing Systems',
             logo: logoAlten,
         },
