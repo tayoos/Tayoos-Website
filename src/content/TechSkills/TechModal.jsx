@@ -8,6 +8,8 @@ import SWIcon from '../../assets/tech/SW2.png';
 import VBAIcon from '../../assets/tech/VBA.png';
 import CameoIcon from '../../assets/tech/Cameo_smm.png';
 import SparxEAIcon from '../../assets/tech/SparxEA.png';
+import RhapsodyIcon from '../../assets/tech/Rhapsody.png';
+import CapellaIcon from '../../assets/tech/Capella.png';
 import ReactJSIcon from '../../assets/tech/ReactJS.png';
 import JavaScriptIcon from '../../assets/tech/Javascript.png';
 import PythonIcon from '../../assets/tech/Python.png';
@@ -50,9 +52,11 @@ const TechModal = () => {
         { name: 'CAMEO SM', icon: CameoIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Cameo EA', icon: CEAIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'Sparx EA', icon: SparxEAIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'IBM Rhapsody', icon: RhapsodyIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'Capella', icon: CapellaIcon, certification: '', fill: '', bcolor: '' },
         { name: 'SysML', icon: SysMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'UML', icon: UMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
-        { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.udemy.com/certificate/UC-377dbad3-d945-497a-a2dc-d4f43ced948a/' },
+        { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.udemy.com/certificate/UC-252c6a20-95d5-453d-a488-b064f0e29438/' },
         { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true', bcolor: 'ansysblack', ccourse: '' },
         { name: 'MATLAB', icon: MATLABIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Simulink', icon: SimulinkIcon, certification: '', fill: '', bcolor: '' },
