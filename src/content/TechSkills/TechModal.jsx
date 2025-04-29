@@ -36,7 +36,7 @@ import MySQL from '../../assets/tech/mySQL.png';
 
 const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
-
+    // Fix
     const techItems = [
         { name: 'AWS', icon: AWSIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/HGKM2R8D0U9M' },
         { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '', bcolor: '' },
