@@ -32,7 +32,7 @@ import AzureIcon from '../../assets/tech/Azure.png';
 import AWSIcon from '../../assets/tech/AWSIcon.png';
 import Neo4jIcon from '../../assets/tech/Neo4jIcon.png';
 import JavaIcon from '../../assets/tech/java.png';
-import MySQL from '../../assets/tech/mySQL.png';
+import MySQL from '../../assets/tech/mysql.png';
 
 const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
