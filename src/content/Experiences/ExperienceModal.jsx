@@ -174,6 +174,7 @@ const ExperienceModal = () => {
 
     const [isMobileView, setIsMobileView] = useState(false);
 
+
     const [selectedExperience, setSelectedExperience] = useState(experiences[0]);
     const [detailExpanded, setDetailExpanded] = useState(false);
     const [displayDetail, setDisplayDetail] = useState(false);

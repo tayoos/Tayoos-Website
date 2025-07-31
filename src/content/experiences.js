@@ -43,10 +43,9 @@ export const experiences = [
             id: 7,
             company: 'AtkinsRéalis',
             logoKey: 'atkinsRealis',
-            tabRole: 'Senior Model-Based Systems and Software Engineer',
-            secondaryRole: 'Enterprise Architect',
+            tabRole: 'Senior Systems Engineer',
             contractTitle: 'Consultant Engineer',
-            title: 'AtkinsRéalis – Senior Model-Based Systems and Software Engineer',
+            title: 'AtkinsRéalis – Senior Systems Engineer',
             location: 'Birmingham, England, United Kingdom',
             shortdesc:
                 'Mission Engineering and Enterprise Architecture for MOD capability planning and system development. NAFv4, ArchiMate and SysML models linking operational need to systems design, layered EA across business, application and technology, architecture governance and stakeholder traceability from strategic intent to solution design, and training on Sparx EA, SysML and ArchiMate.',
