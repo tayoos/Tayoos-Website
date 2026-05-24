@@ -54,18 +54,65 @@
 
 /* Card below the header */
 .Stext-card {
-    padding: 3px;
+    padding: 3px 5px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    justify-content: space-between;
-    height: 60% !important;
+    gap: 2px;
+    justify-content: center;
+    flex: 1;
+    min-height: 0;
     box-sizing: border-box;
 }
 
 /* Add styles for the children of .Stext-card */
 .Stext-card > * {
     flex-shrink: 1; /* Allow items to shrink */
+}
+
+.Stext-card-role {
+    cursor: default;
+    outline: none;
+}
+
+.Stext-card-title-full {
+    display: none;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+@media (hover: hover) {
+    .Stext-card-role:hover .Stext-card-title-short {
+        display: none;
+    }
+
+    .Stext-card-role:hover .Stext-card-title-full {
+        display: block;
+    }
+}
+
+.Stext-card-role:focus-visible .Stext-card-title-short {
+    display: none;
+}
+
+.Stext-card-role:focus-visible .Stext-card-title-full {
+    display: block;
+}
+
+.Stext-card-at,
+.Stext-card-company {
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.Stext-card-at {
+    color: inherit;
+    opacity: 0.75;
+}
+
+.Stext-card-at.mobile,
+.Stext-card-company.mobile {
+    font-size: 12px;
 }
 
 /* Title inside the card */
@@ -76,14 +123,6 @@
     line-height: 1.4;
 }
 
-/* Body inside the card */
-.Stext-card-content {
-    font-size: 14px;
-    margin: 0;
-
-    line-height: 1.4;
-}
-
-.Stext-card-content.mobile {
+.Stext-card-title.mobile {
     font-size: 12px;
 }

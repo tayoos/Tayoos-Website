@@ -12,6 +12,7 @@ import WeatherWidget from './Widgets/WeatherWidget/WeatherWidget';
 import TimezoneWidget from './Widgets/TimezoneWidget';
 import StatusCard from './Widgets/StatusCard/StatusCard';
 import Device, { getDeviceType } from '../../utitlites/Device';
+import siteConfig from '../../siteConfig.js';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -53,7 +54,7 @@ const NCReactGridLayout = ({ darkMode }) => {
     // Widgets with dynamic loading
     const widgets = [
         { key: '0', component: <PhotoWidget /> },
-        { key: '1', component: <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" /> },
+        { key: '1', component: <TextCardWidget darkMode={darkMode} title={siteConfig.welcome.title} body={siteConfig.welcome.body} /> },
         { key: '2', component: <MusicWidget darkMode={darkMode} /> },
         { key: '3', component: <CVWidget darkMode={darkMode} /> },
         { key: '4', component: <WeatherWidget darkMode={darkMode} /> },

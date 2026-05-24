@@ -7,6 +7,7 @@ import ExperienceModal from '../../content/Experiences/ExperienceModal.jsx';
 import EducationCertificationModal from '../../content/EducationCertification/EducationCertificationModal.jsx';
 import TechModal from '../../content/TechSkills/TechModal.jsx';
 import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
+import ProjectsModal from '../../content/Projects/ProjectsModal.jsx';
 
 const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
     const { openModal, isCurrentModal, modalContent, darkMode, toggleDarkMode } = useContext(ModalContext);
@@ -37,6 +38,12 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
             Name: 'Affiliates',
         },
         {
+            image: './icons/projects-light.png',
+            imgdm: './icons/projects-dark.png',
+            title: 'Projects',
+            Name: 'Projects',
+        },
+        {
             image: './icons/mail-light.png',
             imgdm: './icons/mail-dark.png',
             title: 'Contact',
@@ -49,12 +56,6 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
             Name: 'LinkedIn',
         },
         {
-            image: './icons/github-light.png',
-            imgdm: './icons/github-dark.png',
-            title: 'Github',
-            Name: 'Github',
-        },
-        {
             image: './icons/settings-light.png',
             imgdm: './icons/settings-dark.png',
             title: 'Settings',
@@ -62,26 +63,21 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
         },
     ];
 
-    const handleSettingsClick = (title) => {
-        const itemName = taskbarItems.find((item) => item.title === title)?.Name; // Get the Name based on the title
-        if (!itemName) return; // Exit if no matching item is found
+    const handleSettingsClick = (title, anchorEl) => {
+        const itemName = taskbarItems.find((item) => item.title === title)?.Name;
+        if (!itemName) return;
         switch (title) {
             case 'Experience':
-                console.log('itemName', itemName);
-                openModal(<ExperienceModal />, itemName);
-
+                openModal(<ExperienceModal />, itemName, 'Normal', false, anchorEl);
                 break;
             case 'EducationCertification':
-                openModal(<EducationCertificationModal />, itemName, 'Small');
-
+                openModal(<EducationCertificationModal />, itemName, 'Small', false, anchorEl);
                 break;
             case 'Tech-Skills':
-                openModal(<TechModal />, itemName, 'Medium');
-
+                openModal(<TechModal />, itemName, 'Medium', false, anchorEl);
                 break;
             case 'Affiliates':
-                openModal(<AffiliatesModal />, itemName, 'Small');
-
+                openModal(<AffiliatesModal />, itemName, 'Small', false, anchorEl);
                 break;
             case 'Contact':
                 window.location.href = 'mailto:dtoshidero@gmail.com';
@@ -89,8 +85,8 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
             case 'LinkedIn':
                 window.open('//www.linkedin.com/in/david-oshidero-10933613a/', '_blank');
                 break;
-            case 'Github':
-                window.open('https://github.com/tayoos/Tayoos-Website', '_blank');
+            case 'Projects':
+                openModal(<ProjectsModal />, itemName, 'Small', false, anchorEl);
                 break;
             case 'Settings':
                 const newDarkMode = !darkMode;
@@ -105,7 +101,11 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
     return (
         <div className="taskbar-container">
             {taskbarItems.map((item, index) => (
-                <div key={index} className={`taskbar-item ${activeModal === item.title ? 'active' : ''}`} onClick={() => handleSettingsClick(item.title)}>
+                <div
+                    key={index}
+                    className={`taskbar-item ${activeModal === item.title ? 'active' : ''}`}
+                    onClick={(e) => handleSettingsClick(item.title, e.currentTarget)}
+                >
                     <div className="taskbar-content">
                         <img src={darkMode ? item.imgdm : item.image} alt={item.title} className="taskbar-icon" />
                         <span className="taskbar-name">{item.title === 'Settings' ? (darkMode ? 'Light Mode' : 'Dark Mode') : item.Name}</span>

@@ -12,6 +12,7 @@ import CVWidget from './Widgets/CVWidget';
 import WeatherWidget from './Widgets/WeatherWidget/WeatherWidget';
 import TimezoneWidget from './Widgets/TimezoneWidget';
 import StatusCard from './Widgets/StatusCard/StatusCard';
+import siteConfig from '../../siteConfig.js';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 // Mobile Widget Configuration
@@ -394,7 +395,7 @@ const NCReactGridLayoutMobile = ({ darkMode, isMobile }) => {
                     maxRows={maxRows}
                 >
                     {renderWidget('0', <PhotoWidget />)}
-                    {renderWidget('1', <TextCardWidget darkMode={darkMode} title="Welcome" body="This is my workspace. I'm a MBS&S Engineering Consultant with a wide range of experience. I did this mostly for fun but also to get some traction for future job and business opportunities!" isMobile={isMobile} />)}
+                    {renderWidget('1', <TextCardWidget darkMode={darkMode} title={siteConfig.welcome.title} body={siteConfig.welcome.body} isMobile={isMobile} />)}
                     {renderWidget('2', <MusicWidget darkMode={darkMode} isMobile={isMobile} />)}
                     {renderWidget('3', <CVWidget darkMode={darkMode} />)}
                     {renderWidget('4', <WeatherWidget darkMode={darkMode} isMobile={isMobile} />)}

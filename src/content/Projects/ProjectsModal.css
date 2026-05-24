@@ -1,0 +1,208 @@
+.projects-modal-container {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px 20px;
+    margin: 0;
+}
+
+.projects-modal-container.dark {
+    background-color: rgba(42, 53, 53, 0.212);
+    color: #f4f4f4;
+}
+
+.projects-github-header {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.projects-github-header.dark {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.projects-github-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 7px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(0, 0, 0, 0.04);
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    width: fit-content;
+    max-width: 100%;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.projects-github-button:hover {
+    background: rgba(120, 9, 148, 0.1);
+    border-color: rgba(120, 9, 148, 0.45);
+    color: #780994;
+}
+
+.projects-github-button.dark {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    color: #f4f4f4;
+}
+
+.projects-github-button.dark:hover {
+    background: rgba(201, 160, 212, 0.18);
+    border-color: rgba(201, 160, 212, 0.5);
+    color: #e8d4ec;
+}
+
+.projects-github-button:hover .projects-github-button-external {
+    opacity: 1;
+}
+
+.projects-github-button-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.projects-github-button-label {
+    flex: 0 1 auto;
+}
+
+.projects-github-button-external {
+    width: 16px !important;
+    height: 16px !important;
+    opacity: 0.65;
+    flex-shrink: 0;
+}
+
+.projects-github-hint {
+    margin: 6px 0 0;
+    padding: 0;
+    border: none;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #888;
+    line-height: 1.35;
+}
+
+.projects-github-hint.dark {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.projects-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.projects-row {
+    display: block;
+    padding: 14px 16px;
+    margin: 0 0 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.02);
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.projects-row.is-link {
+    cursor: pointer;
+}
+
+.projects-row:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+.projects-row.dark {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.projects-row.dark:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+}
+
+.projects-row-title {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--secondary-text-color);
+}
+
+.projects-row-title.dark {
+    color: #f4f4f4;
+}
+
+.projects-row-description {
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #555;
+    text-align: left;
+}
+
+.projects-row-description.dark {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.projects-stack {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+    margin-top: 2px;
+}
+
+.projects-stack-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #777;
+    flex-shrink: 0;
+}
+
+.projects-stack-label.dark {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.projects-stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.projects-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(120, 9, 148, 0.1);
+    color: #5a2d6b;
+}
+
+.projects-tag.dark {
+    background: rgba(201, 160, 212, 0.18);
+    color: #e8d4ec;
+}
+
+.projects-empty {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+}
+
+.projects-empty.dark {
+    color: rgba(255, 255, 255, 0.5);
+}

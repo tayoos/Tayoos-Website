@@ -10,7 +10,7 @@
     justify-content: center; /* Center vertically */
     align-items: center; /* Center horizontally */
     flex-direction: column; /* Stack items vertically if needed */
-    background-color: white;
+    background-color: transparent;
 }
 
 /* Ensure the container starts at the very top */
@@ -79,9 +79,22 @@
     border-radius: 15px;
     margin: 3px;
     background-color: rgba(80, 80, 80, 0.897);
-
     padding: 5px;
-    z-index: 1000; /* Ensure it stays on top */
+    position: relative;
+    z-index: 60;
+    pointer-events: none;
+}
+
+/* Parent pointer-events:none does not apply to children — reset all, re-enable icons only */
+.taskbar,
+.taskbar * {
+    pointer-events: none;
+}
+
+.taskbar .taskbar-item,
+.taskbar .taskbar-item-mobile,
+.taskbar .tblaunchpad {
+    pointer-events: auto;
 }
 
 .taskbar.taskbarmb {
@@ -99,6 +112,19 @@
     display: flex;
     justify-content: space-between;
     justify-self: center;
+    position: relative;
+    z-index: 60;
+    pointer-events: none;
+}
+
+.header-container,
+.header-container * {
+    pointer-events: none;
+}
+
+.header-container .logo-container,
+.header-container .timedate-container {
+    pointer-events: auto;
 }
 
 .header-container.dark {
@@ -112,39 +138,54 @@
     align-items: start;
 }
 
-.bg-main,
-.bg-dm {
-    transition: all 0.5s ease-in-out;
-}
-
-.bg-main {
-    background-image: url('../assets/backgrounds/white_layers.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+.theme-viewport {
+    position: relative;
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align the content at the top */
-    align-items: center; /* Center content horizontally */
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100%;
 }
 
-.bg-dm {
-    background-image: url('../assets/backgrounds/white_layers_darkmode.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+.theme-viewport.Mobile {
     width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align the content at the top */
-    align-items: center; /* Center content horizontally */
-}
-
-.bg-main.Mobile,
-.bg-dm.Mobile {
-    width: 100vw; /* Full viewport width on mobile */
     height: 100%;
+}
+
+.theme-bg {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: -1;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.theme-bg-light {
+    opacity: 1;
+}
+
+.theme-bg-dark {
+    opacity: 0;
+}
+
+.theme-viewport.is-dark .theme-bg-light {
+    opacity: 0;
+}
+
+.theme-viewport.is-dark .theme-bg-dark {
+    opacity: 1;
+}
+
+.theme-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .osProfileImage {

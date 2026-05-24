@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import './TechModal.css';
 import { ModalContext } from '../../utitlites/ModalContext';
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -34,9 +34,39 @@ import Neo4jIcon from '../../assets/tech/Neo4jIcon.png';
 import JavaIcon from '../../assets/tech/java.png';
 import MySQL from '../../assets/tech/mysql.png';
 
+const EASE_SMOOTH = [0.22, 1, 0.36, 1];
+
+const gridVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.016,
+            delayChildren: 0.06,
+        },
+    },
+};
+
+const itemVariantsReduced = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.2 } },
+};
+
+const itemVariantsFull = {
+    hidden: { opacity: 0, y: 10, scale: 0.96 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: { duration: 0.28, ease: EASE_SMOOTH },
+    },
+};
+
 const TechModal = () => {
     const { darkMode } = useContext(ModalContext);
-    // Fix
+    const reduceMotion = useReducedMotion();
+    const itemVariants = reduceMotion ? itemVariantsReduced : itemVariantsFull;
+    const [filters, setFilters] = useState({ certified: false, course: false });
+
     const techItems = [
         { name: 'AWS', icon: AWSIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/HGKM2R8D0U9M' },
         { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '', bcolor: '' },
@@ -69,40 +99,81 @@ const TechModal = () => {
         { name: 'Excel/VBA', icon: VBAIcon, certification: '', fill: 'true', bcolor: 'vbagreen' },
     ];
 
-    const variants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                type: 'spring',
-                stiffness: 300,
-                damping: 20,
-            },
-        },
-        exit: {
-            opacity: 0,
-            y: 50,
-            transition: {
-                duration: 0.2,
-            },
-        },
+    const toggleFilter = (key) => {
+        setFilters((prev) => ({ ...prev, [key]: !prev[key] }));
     };
+
+    const isCertified = (item) => item.certification === 'true';
+    const isCourse = (item) => item.ccourse === 'true';
+
+    const filteredItems = techItems.filter((item) => {
+        if (!filters.certified && !filters.course) return true;
+        if (filters.certified && isCertified(item)) return true;
+        if (filters.course && isCourse(item)) return true;
+        return false;
+    });
+
+    const filterActive = filters.certified || filters.course;
 
     return (
         <div className={`TechModal-container ${darkMode ? 'dark' : ''}`}>
-            <motion.div className="TechModal-grid" initial="hidden" animate="visible" variants={variants} exit="exit">
-                {techItems.map((item, index) => (
-                    <TechItem key={index} name={item.name} icon={item.icon} certification={item.certification || ''} fill={item.fill || ''} bcolor={item.bcolor} link={item.link || ''} ccourse={item.ccourse || ''} darkMode={darkMode} variants={variants} />
-                ))}
-            </motion.div>
+            <div className={`TechModal-filter-bar ${darkMode ? 'dark' : ''}`}>
+                <div className="TechModal-filters" role="group" aria-label="Filter skills by credential type">
+                    <span className="TechModal-filter-label">Filter</span>
+                    <button
+                        type="button"
+                        className={`TechModal-filter-toggle certified ${filters.certified ? 'active' : ''}`}
+                        onClick={() => toggleFilter('certified')}
+                        aria-pressed={filters.certified}
+                        aria-label="Certified"
+                        title="Certified"
+                    >
+                        <VerifiedIcon className="TechModal-filter-icon" aria-hidden="true" />
+                    </button>
+                    <button
+                        type="button"
+                        className={`TechModal-filter-toggle course ${filters.course ? 'active' : ''}`}
+                        onClick={() => toggleFilter('course')}
+                        aria-pressed={filters.course}
+                        aria-label="Course"
+                        title="Course"
+                    >
+                        <VerifiedIcon className="TechModal-filter-icon" aria-hidden="true" />
+                    </button>
+                </div>
+            </div>
+            {filterActive && filteredItems.length === 0 ? (
+                <p className={`TechModal-filter-empty ${darkMode ? 'dark' : ''}`}>No skills match the selected filters.</p>
+            ) : (
+                <motion.div
+                    className="TechModal-grid"
+                    initial="hidden"
+                    animate="visible"
+                    variants={gridVariants}
+                    key={`${filters.certified}-${filters.course}`}
+                >
+                    {filteredItems.map((item) => (
+                    <TechItem
+                        key={item.name}
+                        name={item.name}
+                        icon={item.icon}
+                        certification={item.certification || ''}
+                        fill={item.fill || ''}
+                        bcolor={item.bcolor}
+                        link={item.link || ''}
+                        ccourse={item.ccourse || ''}
+                        darkMode={darkMode}
+                        itemVariants={itemVariants}
+                    />
+                    ))}
+                </motion.div>
+            )}
         </div>
     );
 };
 
-const TechItem = ({ name, icon, certification, fill, bcolor, darkMode, variants, link, ccourse }) => {
+const TechItem = ({ name, icon, certification, fill, bcolor, darkMode, itemVariants, link, ccourse }) => {
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
-    const itemRef = useRef(null);
     const circleRef = useRef(null);
 
     const handleMouseMove = (e) => {
@@ -126,7 +197,12 @@ const TechItem = ({ name, icon, certification, fill, bcolor, darkMode, variants,
     };
 
     return (
-        <motion.div ref={itemRef} className={`TechModal-item ${darkMode ? 'dark' : ''}`} variants={variants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <motion.div
+            className={`TechModal-item ${darkMode ? 'dark' : ''}`}
+            variants={itemVariants}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.98 }}
+        >
             <motion.div
                 ref={circleRef}
                 className={`TechModal-squircle ${darkMode ? 'dark' : ''} ${bcolor ? bcolor : ''}`}
@@ -138,12 +214,12 @@ const TechItem = ({ name, icon, certification, fill, bcolor, darkMode, variants,
                 }}
                 transition={{
                     type: 'spring',
-                    stiffness: 300,
-                    damping: 20,
+                    stiffness: 320,
+                    damping: 24,
                 }}
             >
                 <div className={`TechModal-icon-wrapper ${fill === 'true' ? 'fill' : ''}`}>
-                    <img src={icon} alt={name} className="TechModal-image" />
+                    <img src={icon} alt={name} className="TechModal-image" loading="lazy" decoding="async" />
                 </div>
             </motion.div>
             <p className={`TechModal-name ${darkMode ? 'dark' : ''}`}>{name}</p>

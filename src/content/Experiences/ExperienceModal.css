@@ -1,12 +1,20 @@
 .ExperienceContainer {
     display: flex;
+    flex: 1;
+    min-height: 0;
     border: 1px solid #e0e0e0;
-    box-sizing: border-box; /* Includes padding in size calculations */
-    width: 100%; /* Occupies full width of the parent container */
-    height: 100%; /* Occupies full height of the parent container */
-    overflow: hidden; /* Prevents scrolling for the entire modal */
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 0;
+}
+
+.modals-content-body.dark .ExperienceContainer {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
 }
 
 @media (max-width: 1650px) {
@@ -17,129 +25,382 @@
 
 .ExperienceContainer.dark {
     border: 1px solid #2c2c2c;
+    background-color: rgba(42, 53, 53, 0.212);
 }
 
 .experience-list-modal {
-    max-width: 20%; /* Sidebar width as a percentage of the modal */
+    flex: 0 0 32%;
+    max-width: 320px;
+    min-width: 220px;
     border-right: 1px solid #e0e0e0;
     background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
-    height: 100%; /* Fills the height of the parent container */
-    overflow-y: auto; /* Enables vertical scrolling */
-    overflow-x: hidden; /* Prevents horizontal scrolling */
+    gap: 4px;
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
     color: black;
+    padding: 12px 10px;
+    box-sizing: border-box;
 }
 
 .experience-list-modal.dark {
-    background-color: rgba(128, 128, 128, 0.98); /* Grey with 0.98 transparency */
+    background-color: transparent;
+    border-right-color: rgba(255, 255, 255, 0.08);
     color: #ffffff;
 }
 
-.ExperienceContainer,
-.ExperienceContainer.dark {
-    transition: all 0.5s ease-in-out;
+/* Override global button styles (index.css adds blue border on hover) */
+.experience-list-modal .experience-item-modal {
+    cursor: pointer;
+    border: none;
+    border-left: 3px solid transparent;
+    background-color: transparent;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: 13px;
+    line-height: 1.3;
+    min-height: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    text-align: left;
+    width: 100%;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    color: inherit;
+    transition: background-color 0.2s ease;
 }
 
-.experience-item-modal {
-    cursor: pointer;
-    border-bottom: 1px solid #e0e0e0;
-    transition: background-color 0.3s ease;
+.experience-tab-company {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #5a5a5a;
+    margin-bottom: 2px;
+}
+
+.experience-tab-role {
+    display: block;
     font-size: 13px;
-    height: 50px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.experience-tab-roles-stacked {
     display: flex;
-    align-items: center;
-    text-align: left;
-    width: 100%; /* Matches the width of the parent container */
-    padding: 10px;
-    box-sizing: border-box; /* Includes padding in size calculations */
+    flex-direction: column;
+    gap: 1px;
+}
+
+.experience-tab-role-line {
+    display: block;
+    line-height: 1.2;
+}
+
+.experience-tab-role-line--lead {
+    font-size: 12px;
+    font-weight: 600;
+    color: inherit;
+}
+
+.experience-tab-role-line--trail {
+    font-size: 11px;
+    font-weight: 500;
+    color: #555;
+}
+
+.experience-item-modal.dark .experience-tab-role-line--trail,
+.experience-item-modal-mobile.dark .experience-tab-role-line--trail {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.experience-item-modal.active .experience-tab-role-line--trail {
+    color: #4a4a4a;
+}
+
+.experience-item-modal.dark.active .experience-tab-role-line--trail {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.experience-item-modal.has-dual-role,
+.experience-item-modal-mobile.has-dual-role {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.experience-item-modal.has-dual-role .experience-tab-dates,
+.experience-item-modal-mobile.has-dual-role .experience-tab-dates {
+    margin-top: 2px;
+}
+
+.experience-tab-dates {
+    display: block;
+    margin-top: 3px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #888;
+}
+
+.experience-item-modal.dark .experience-tab-dates,
+.experience-item-modal-mobile.dark .experience-tab-dates {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.experience-item-modal.active .experience-tab-dates {
+    color: #666;
+}
+
+.experience-item-modal.dark.active .experience-tab-dates {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* Same-company nav group (e.g. two Rolls-Royce placements) — neutral grey, not selection purple */
+.experience-nav-group {
+    margin: 2px 0 6px;
+    padding: 4px 4px 4px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    background-color: rgba(0, 0, 0, 0.035);
+    box-sizing: border-box;
+}
+
+.experience-nav-group.dark {
+    border-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.experience-nav-group-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 8px 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 2px;
+}
+
+.experience-nav-group.dark .experience-nav-group-header {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.experience-nav-group-header .experience-tab-company {
+    margin-bottom: 0;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.experience-nav-group-count {
+    flex-shrink: 0;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.experience-nav-group.dark .experience-nav-group-count {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+/* Full-width role rows inside a group — same hover/active as standalone nav items */
+.experience-list-modal .experience-item-modal--grouped {
+    width: 100%;
+    margin: 2px 0 0;
+    padding: 8px 10px;
+    border-left: 3px solid transparent;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.experience-list-modal .experience-item-modal--grouped:first-of-type {
+    margin-top: 0;
+}
+
+.experience-list-modal-mobile .experience-nav-group {
+    margin: 0 0 10px;
+    padding: 6px 4px 4px;
+    width: 100%;
+}
+
+.experience-item-modal-mobile--grouped {
+    border-bottom: none !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.experience-item-modal-mobile--grouped + .experience-item-modal-mobile--grouped {
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.experience-list-modal-mobile.dark .experience-item-modal-mobile--grouped + .experience-item-modal-mobile--grouped {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.experience-list-modal-mobile .experience-nav-group-header {
+    padding: 0 10px 6px;
+    margin-bottom: 4px;
+}
+
+.experience-item-modal.dark .experience-tab-company {
+    color: rgba(255, 255, 255, 0.72);
 }
 
 .experience-item-modal.dark {
-    border-bottom: 1px solid #3f3f3f;
     color: #ffffff;
 }
 
 .experience-detail-modal {
-    padding: 10px;
-    max-width: 80%; /* Main content width as a percentage of the modal */
-    height: 100%; /* Fills the height of the parent container */
-    overflow-y: auto; /* Enables vertical scrolling */
-    box-sizing: border-box; /* Includes padding in size calculations */
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: inherit;
 }
 
-.experience-item-modal:hover {
-    background-color: #f0f0f0;
+.experience-detail-scroll {
+    --chrome-pad-left: 16px;
+    --chrome-pad-right: 16px;
+    --detail-pad-left: 16px;
+    --detail-pad-right: 16px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 16px 0 20px;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
 }
 
-.experience-item-modal.dark:hover {
-    background-color: rgba(88, 88, 88, 0.98); /* Grey with 0.98 transparency */
+.experience-detail-modal-mobile {
+    --chrome-pad-left: 10px;
+    --chrome-pad-right: 10px;
+    --detail-pad-left: 10px;
+    --detail-pad-right: 10px;
+    padding: 10px 0;
+    overflow-y: auto;
 }
 
-.experience-item-modal.active {
-    background-color: #e6f2ff;
-    border-left: solid #78099452;
-    font-weight: bold;
+.experience-detail-content {
+    width: 100%;
 }
 
-.experience-item-modal.dark.active {
-    background-color: #555555;
+.experience-list-modal .experience-item-modal:hover:not(.active) {
+    border: none;
+    border-left-color: transparent;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.experience-list-modal .experience-item-modal.dark:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.experience-list-modal .experience-item-modal:focus,
+.experience-list-modal .experience-item-modal:focus-visible {
+    outline: none;
+}
+
+.experience-list-modal .experience-item-modal.active {
+    background-color: #e8f2fc;
+    border: none;
+    border-left: 3px solid rgba(120, 9, 148, 0.45);
+}
+
+.experience-list-modal .experience-item-modal.active:hover {
+    border: none;
+    border-left: 3px solid rgba(120, 9, 148, 0.45);
+    background-color: #e8f2fc;
+}
+
+.experience-item-modal.active .experience-tab-role {
+    font-weight: 600;
+    color: #2c2c2c;
+}
+
+.experience-item-modal.active .experience-tab-company {
+    color: #4a4a4a;
+}
+
+.experience-list-modal .experience-item-modal.dark.active {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: none;
+    border-left: 3px solid rgba(201, 160, 212, 0.55);
+}
+
+.experience-list-modal .experience-item-modal.dark.active:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-left-color: rgba(201, 160, 212, 0.55);
+}
+
+.experience-item-modal.dark.active .experience-tab-role {
+    color: #ffffff;
+}
+
+.experience-item-modal.dark.active .experience-tab-company {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 @media (max-width: 1650px) {
     .experience-item-modal {
-        height: 70px;
         font-size: 12px;
+        padding: 10px 12px;
     }
 }
+
 @media (max-width: 1200px) {
+    .experience-list-modal {
+        flex-basis: 34%;
+        min-width: 200px;
+    }
+
     .experience-item-modal {
-        height: 85px;
         font-size: 12px;
     }
 }
 
 @media (max-width: 900px) {
     .experience-item-modal {
-        height: 100px;
-        font-size: 11px;
-    }
-}
-
-@media (max-width: 768px) {
-    .experience-item-modal {
-        height: 100px;
         font-size: 11px;
     }
 }
 
 @media (max-width: 450px) {
     .modals-content {
-        max-width: 92%; /* Adjust container size for smaller screens */
-        padding: 0 20px; /* Add some padding */
+        max-width: 92%;
+        padding: 0 20px;
         transition: max-width 0.3s ease, padding 0.3s ease;
     }
 }
 
 .experience-modal-header {
     display: flex;
-    align-items: flex-start; /* Align items at the top */
-    margin-bottom: 5px;
-
-    padding: 5px; /* Add spacing inside the container */
-
-    box-sizing: border-box; /* Includes padding in dimensions */
-    gap: 10px; /* Space between logo and text */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    gap: 12px;
     color: black;
-    padding-bottom: 15px;
-    border-bottom: #2c2c2c2a solid 1px;
+    border-bottom: none;
 }
 
 .company-logo {
+    flex: 0 0 60px;
     width: 60px;
     height: 60px;
     object-fit: contain;
-    margin-right: 20px;
     align-self: center;
 }
 
@@ -147,69 +408,372 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    height: auto; /* Allow content to determine height */
+    height: auto;
     color: #333;
+    padding-right: 0;
+    flex: 1;
+    min-width: 0;
 }
 
-.experience-modal-text h2 {
+.experience-company-name {
+    margin: 0 0 4px;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #5a5a5a;
+    line-height: 1.25;
+}
+
+.experience-modal-text.dark .experience-company-name {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.experience-role-line {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.35em;
+    font-weight: 600;
     color: #333;
+    line-height: 1.3;
+    padding-right: 2rem;
+    box-sizing: border-box;
 }
 
-.experience-modal-text h3 {
+.experience-modal-text.dark .experience-role-line {
+    color: #ffffff;
+}
+
+.experience-role-separator {
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+.experience-secondary-role {
+    font-weight: 600;
+}
+
+.experience-key-project {
+    margin: 6px 0 0;
+    padding: 0;
+    line-height: 1.3;
+}
+
+.experience-modal-text h3,
+.experience-location {
     margin: 5px 0 0;
     font-size: 1em;
     color: #525252;
     font-weight: normal;
 }
 
+.experience-contract-title {
+    font-weight: 500;
+    color: #5a5a5a;
+}
+
+.experience-modal-text.dark .experience-contract-title {
+    color: #ffffffb0;
+}
+
+.experience-programme-label {
+    font-size: 0.92em;
+    font-weight: 600;
+    color: #780994;
+}
+
+.experience-modal-text.dark .experience-programme-label {
+    color: #e8c4f0;
+}
+
+.experience-dates {
+    margin: 4px 0 0;
+    font-size: 0.9em;
+    color: #5a5a5a;
+    font-weight: 500;
+}
+
+.experience-modal-text.dark .experience-dates {
+    color: #ffffffb0;
+}
+
+.experience-view-switch {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-top: 8px;
+    padding: 3px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.06);
+    gap: 2px;
+}
+
+.experience-view-switch.dark {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.experience-view-tab {
+    margin: 0;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    color: #5a5a5a;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.experience-view-tab:hover:not(.active) {
+    color: #333;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.experience-view-switch.dark .experience-view-tab {
+    color: #ffffffb0;
+}
+
+.experience-view-switch.dark .experience-view-tab:hover:not(.active) {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.experience-view-tab.active {
+    background: #fff;
+    color: #780994;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.experience-view-switch.dark .experience-view-tab.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #f5ebf8;
+    box-shadow: none;
+}
+
+.experience-view-tab:focus-visible {
+    outline: 2px solid #78099452;
+    outline-offset: 1px;
+}
+
+.experience-body-swap {
+    position: relative;
+    width: 100%;
+    min-height: 0;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    will-change: opacity;
+    box-sizing: border-box;
+}
+
+.modals-content-body.dark .experience-body-swap {
+    background-color: transparent;
+}
+
+.experience-body-swap.is-content-fading {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .experience-body-swap {
+        transition: none;
+    }
+}
+
+/* Opaque top chrome: symmetric pads so divider lines align with list sidebar */
+.experience-modal-chrome {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    padding-left: var(--chrome-pad-left, 16px);
+    padding-right: var(--chrome-pad-right, 16px);
+    padding-bottom: 0;
+    background-color: #ffffff;
+}
+
+.experience-modal-chrome.dark {
+    background-color: transparent;
+}
+
+.experience-body-swap .ExperienceLongDesc {
+    padding: 10px var(--detail-pad-right) 0 var(--detail-pad-left);
+    box-sizing: border-box;
+}
+
+.experience-body-swap .ExperienceLongDesc > :first-child {
+    margin-top: 0;
+}
+
+.experience-body-swap .experience-detail-extra > :first-child {
+    margin-top: 0;
+}
+
+.experience-detail-extra {
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    color: #333;
+}
+
+.experience-detail-extra.dark {
+    color: #ffffffd3;
+}
+
+.experience-detail-scroll.is-detail-view .experience-detail-lead,
+.experience-detail-modal-mobile.is-detail-view .experience-detail-lead {
+    margin: 0 0 0.75rem;
+    padding: 0 var(--detail-pad-right) 0 var(--detail-pad-left);
+    line-height: 1.55;
+}
+
+.experience-detail-lead p {
+    margin: 0;
+}
+
+/* Full-width bands: richer in the centre, lighter at top/bottom/sides (no overlap) */
+.experience-detail-section {
+    --section-tint: rgba(100, 116, 139, 0.055);
+    --section-tint-light: rgba(100, 116, 139, 0.015);
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background-image: linear-gradient(
+            180deg,
+            var(--section-tint-light) 0%,
+            var(--section-tint) 38%,
+            var(--section-tint) 62%,
+            var(--section-tint-light) 100%
+        ),
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            var(--section-tint-light) 8%,
+            var(--section-tint) 22%,
+            var(--section-tint) 78%,
+            var(--section-tint-light) 92%,
+            transparent 100%
+        );
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.experience-detail-section + .experience-detail-section {
+    margin-top: 0;
+}
+
+.experience-detail-section-inner {
+    padding: 1.35rem var(--detail-pad-right, 16px) 1.35rem var(--detail-pad-left, 16px);
+}
+
+.experience-detail-scroll.is-detail-view .experience-detail-section-inner,
+.experience-detail-modal-mobile.is-detail-view .experience-detail-section-inner {
+    padding-left: var(--detail-pad-left);
+    padding-right: var(--detail-pad-right);
+}
+
+.experience-detail-section h3 {
+    margin: 0 0 0.5em;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: inherit;
+}
+
+.experience-detail-section p {
+    margin: 0 0 0.85em;
+    line-height: 1.55;
+}
+
+.experience-detail-section p:last-child {
+    margin-bottom: 0;
+}
+
+.experience-detail-section--iter {
+    --section-tint: rgba(59, 130, 246, 0.05);
+    --section-tint-light: rgba(59, 130, 246, 0.012);
+}
+
+.experience-detail-section--defence {
+    --section-tint: rgba(100, 116, 139, 0.05);
+    --section-tint-light: rgba(100, 116, 139, 0.012);
+}
+
+.experience-detail-section--aerospace {
+    --section-tint: rgba(14, 165, 233, 0.05);
+    --section-tint-light: rgba(14, 165, 233, 0.012);
+}
+
+.experience-detail-section--training {
+    --section-tint: rgba(217, 119, 6, 0.048);
+    --section-tint-light: rgba(217, 119, 6, 0.011);
+}
+
+.experience-detail-section--default {
+    --section-tint: rgba(120, 9, 148, 0.045);
+    --section-tint-light: rgba(120, 9, 148, 0.01);
+}
+
+.experience-detail-extra.dark .experience-detail-section--iter {
+    --section-tint: rgba(96, 165, 250, 0.072);
+    --section-tint-light: rgba(96, 165, 250, 0.02);
+}
+
+.experience-detail-extra.dark .experience-detail-section--defence {
+    --section-tint: rgba(148, 163, 184, 0.068);
+    --section-tint-light: rgba(148, 163, 184, 0.02);
+}
+
+.experience-detail-extra.dark .experience-detail-section--aerospace {
+    --section-tint: rgba(56, 189, 248, 0.068);
+    --section-tint-light: rgba(56, 189, 248, 0.02);
+}
+
+.experience-detail-extra.dark .experience-detail-section--training {
+    --section-tint: rgba(251, 191, 36, 0.065);
+    --section-tint-light: rgba(251, 191, 36, 0.018);
+}
+
+.experience-detail-extra.dark .experience-detail-section--default {
+    --section-tint: rgba(201, 160, 212, 0.065);
+    --section-tint-light: rgba(201, 160, 212, 0.018);
+}
+
 .skills {
-    margin-bottom: 10px;
-    padding: 10px;
-    /*background-color: #f4f4f4;*/
-
-    width: fit-content;
-
-    margin-top: 5px;
-    justify-self: center;
+    margin: 10px 0 0;
+    padding: 8px 0;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
     font-weight: 500;
     color: #364858;
+    border-top: #2c2c2c2a solid 1px;
+    border-bottom: #2c2c2c2a solid 1px;
 }
 
 .ExperienceLongDesc {
-    text-align: left; /* Aligns text */
-    align-self: flex-start; /* Aligns this element within a flex container if applicable */
-    width: 100%; /* Ensure the element spans its container for proper text alignment */
+    text-align: left;
+    align-self: flex-start;
+    width: 100%;
     color: #333;
 }
 
 .experience-modal-text.dark,
 .experience-modal-text.dark h2,
-.experience-modal-text.dark h3,
+.experience-modal-text.dark .experience-location,
 .ExperienceLongDesc.dark {
     color: #ffffffd3;
 }
 .skills.dark {
     color: #dddadae7;
+    border-top-color: rgba(255, 255, 255, 0.16);
+    border-bottom-color: rgba(255, 255, 255, 0.16);
 }
 
-.skills,
-.skills.dark {
-    transition: all 0.5s ease-in-out;
-}
-
-.back-button,
-.close-button {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.experience-detail-modal-mobile {
-    padding: 10px;
-    overflow-y: auto;
+/* Full details: lead sits below skills with same horizontal inset as summary */
+.experience-body-swap .experience-detail-extra .experience-detail-lead {
+    padding: 10px var(--detail-pad-right) 0 var(--detail-pad-left);
+    box-sizing: border-box;
 }
 
 .experience-list-modal.mobile {
@@ -234,16 +798,28 @@
     padding: 15px;
     border-bottom: 1px solid #e0e0e0;
     cursor: pointer;
-    box-sizing: border-box; /* Includes padding in size calculations */
+    box-sizing: border-box;
 }
 
-.experience-modal-mobile-title {
-    margin: 0 0 10px 0;
+.experience-item-modal-mobile .experience-tab-company {
+    margin: 0 0 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+}
+
+.experience-item-modal-mobile.dark .experience-tab-company {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.experience-item-modal-mobile .experience-tab-role {
+    margin: 0 0 10px;
     font-size: 16px;
+    font-weight: 600;
     color: var(--secondary-text-color);
 }
 
-.experience-modal-mobile-title.dark {
+.experience-item-modal-mobile.dark .experience-tab-role {
     color: #cfcfcf;
 }
 
@@ -252,7 +828,7 @@
 }
 
 .experience-list-modal-mobile.dark :hover {
-    background-color: rgba(88, 88, 88, 0.98); /* Grey with 0.98 transparency */
+    background-color: rgba(255, 255, 255, 0.06);
 }
 
 .experience-item-modal-mobile .short-description {
@@ -273,5 +849,3 @@
 .location.dark {
     color: #fafafa85;
 }
-
-/*Animations */

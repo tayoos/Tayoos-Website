@@ -13,16 +13,18 @@
     grid-auto-rows: 1fr;
     padding: 10px;
     border-radius: 17px;
-
     background-color: rgba(80, 80, 80, 0.897);
-    column-gap: 10px; /* Gap only between columns *
-
-    /* Position at bottom of parent */
+    column-gap: 10px;
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1000;
+    z-index: 60;
+    pointer-events: none;
+}
+
+.taskbar-container-mobile .taskbar-item-mobile {
+    pointer-events: auto;
 }
 
 .taskbar-container-mobile.menu {

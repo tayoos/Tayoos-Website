@@ -1,17 +1,41 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react';
+import React, { useContext, useEffect, useState, useCallback, useRef } from 'react';
 import { ModalContext } from '../../utitlites/ModalContext.jsx';
 import { X, ArrowLeft } from 'lucide-react';
 import Device, { getDeviceType } from '../../utitlites/Device.jsx';
+import { applyMinimizeVars, clearMinimizeVars, captureAnchor, getActiveTaskbarAnchor } from '../../utitlites/modalMinimize.js';
 
 import './Modal.css';
 
+/** Must match Modal.css `--modal-exit-duration` */
+const MODAL_CLOSE_MS = 700;
+
 const Modal = () => {
-    const { openModal, closeModal, modalContent, isModalOpen, isCurrentModal, modalTransition, modalActiveClose, modalTitle, darkMode, ListView, resetListView, triggerListView, currentModalSize } = useContext(ModalContext);
+    const {
+        closeModal,
+        modalContent,
+        isModalOpen,
+        modalTransition,
+        modalTitle,
+        darkMode,
+        ListView,
+        triggerListView,
+        currentModalSize,
+        modalAnchor,
+        closeAnchor,
+        closeSignal,
+        requestClose,
+        registerCancelClose,
+        setIsModalClosing,
+    } = useContext(ModalContext);
+
     const [modalOpen, setModalOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const [isMobileView, setIsMobileView] = useState(false);
+    const panelRef = useRef(null);
+    const closeButtonRef = useRef(null);
+    const closeTimerRef = useRef(null);
+    const isClosingRef = useRef(false);
 
-    // Check for mobile view
     useEffect(() => {
         const checkMobileView = () => {
             const isMobile = getDeviceType() === 'Mobile' || window.innerWidth < 700;
@@ -23,65 +47,151 @@ const Modal = () => {
         return () => window.removeEventListener('resize', checkMobileView);
     }, []);
 
-    const handleClose = useCallback(() => {
-        setIsClosing(true);
-        setTimeout(() => {
-            closeModal();
-            setIsClosing(false);
-        }, 200);
-    }, [closeModal]);
+    const cancelCloseAnimation = useCallback(() => {
+        if (closeTimerRef.current) {
+            clearTimeout(closeTimerRef.current);
+            closeTimerRef.current = null;
+        }
+        clearMinimizeVars(panelRef.current);
+        isClosingRef.current = false;
+        setIsClosing(false);
+        setIsModalClosing(false);
+    }, [setIsModalClosing]);
 
-    const handleBackdropClick = useCallback(
-        (e) => {
-            if (e.target.classList.contains('modal-backlay')) {
-                handleClose();
-            }
+    useEffect(() => {
+        registerCancelClose(cancelCloseAnimation);
+        return () => registerCancelClose(() => {});
+    }, [registerCancelClose, cancelCloseAnimation]);
+
+    const beginClose = useCallback(
+        (anchor) => {
+            if (isClosingRef.current) return;
+
+            const target =
+                anchor ??
+                closeAnchor ??
+                modalAnchor ??
+                getActiveTaskbarAnchor() ?? {
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight - 48,
+                };
+
+            const panel = panelRef.current;
+            applyMinimizeVars(panel, target);
+            if (panel) void panel.offsetWidth;
+
+            isClosingRef.current = true;
+            setIsClosing(true);
+            setIsModalClosing(true);
+
+            closeTimerRef.current = window.setTimeout(() => {
+                closeTimerRef.current = null;
+                clearMinimizeVars(panelRef.current);
+                isClosingRef.current = false;
+                setIsClosing(false);
+                setIsModalClosing(false);
+                closeModal();
+            }, MODAL_CLOSE_MS);
         },
-        [handleClose]
+        [closeAnchor, modalAnchor, closeModal, setIsModalClosing]
     );
 
     useEffect(() => {
+        if (closeSignal > 0 && modalOpen && !isClosingRef.current) {
+            beginClose(closeAnchor ?? modalAnchor);
+        }
+    }, [closeSignal, modalOpen, beginClose, closeAnchor, modalAnchor]);
+
+    const handleClose = useCallback(() => {
+        requestClose();
+    }, [requestClose]);
+
+    useEffect(() => {
         if (isModalOpen) {
-            document.addEventListener('click', handleBackdropClick);
             setModalOpen(true);
         } else {
-            document.removeEventListener('click', handleBackdropClick);
             setModalOpen(false);
         }
 
         return () => {
-            document.removeEventListener('click', handleBackdropClick);
+            if (closeTimerRef.current) {
+                clearTimeout(closeTimerRef.current);
+            }
         };
-    }, [isModalOpen, handleBackdropClick]);
+    }, [isModalOpen]);
+
+    const handleDismissClick = useCallback(() => {
+        requestClose();
+    }, [requestClose]);
 
     const handeBackClick = useCallback(() => {
-        console.log('back click', ListView);
         triggerListView();
-        console.log('handle back click done', ListView);
-    }, [closeModal]);
+    }, [triggerListView]);
 
     if (!modalOpen) return null;
 
-    return (
-        <div className={`modal-backlay ${modalOpen ? 'open' : ''} ${isClosing ? 'close' : ''} `}>
-            <div className={`modals-content ${modalOpen ? 'open' : ''} ${isClosing ? 'close' : ''} ${modalActiveClose ? 'close' : ''}  ${modalTransition ? 'transition' : ''} ${darkMode ? 'dark' : ''} ${currentModalSize === 'Small' ? 'small' : ''} ${currentModalSize === 'Medium' ? 'medium' : ''}`}>
-                <div className={`modal-header ${darkMode ? 'dark' : ''}`}>
-                    <h2 className={`modal-title ${darkMode ? 'dark' : ''}`}>{modalTitle}</h2>
-                    <div className="modal-nav-buttons">
-                        {isMobileView && !ListView && (
-                            <button onClick={handeBackClick} className="modal-back-button" aria-label="Go back">
-                                <ArrowLeft className={`modal-back-icon ${darkMode ? 'dark' : ''}`} />
-                            </button>
-                        )}
+    const isExperienceModal = modalTitle === 'Experience';
+    const overlayOpen = modalOpen && !isClosing;
+    const overlayClose = isClosing;
 
-                        <button onClick={handleClose} className="modal-close-button" aria-label="Close modal">
-                            <X className={`modal-close-icon ${darkMode ? 'dark' : ''}`} />
-                        </button>
+    return (
+        <>
+            <button
+                type="button"
+                className={`modal-dismiss-layer modal-header-dismiss ${overlayOpen ? 'open' : ''} ${overlayClose ? 'close' : ''}`}
+                onClick={handleDismissClick}
+                aria-label="Close modal"
+                tabIndex={-1}
+            />
+            <button
+                type="button"
+                className={`modal-dismiss-layer modal-footer-dismiss ${overlayOpen ? 'open' : ''} ${overlayClose ? 'close' : ''}`}
+                onClick={handleDismissClick}
+                aria-label="Close modal"
+                tabIndex={-1}
+            />
+            <button
+                type="button"
+                className={`modal-dismiss-layer modal-backdrop-dismiss ${overlayOpen ? 'open' : ''} ${overlayClose ? 'close' : ''}`}
+                onClick={handleDismissClick}
+                aria-label="Close modal"
+                tabIndex={-1}
+            />
+            <div className={`modal-backlay ${overlayOpen ? 'open' : ''}`} role="presentation">
+                <div
+                    ref={panelRef}
+                    className={`modals-content ${overlayOpen ? 'open' : ''} ${overlayClose ? 'close minimize' : ''} ${modalTransition ? 'transition' : ''} ${darkMode ? 'dark' : ''} ${currentModalSize === 'Small' ? 'small' : ''} ${currentModalSize === 'Medium' ? 'medium' : ''} ${isExperienceModal ? 'experience-modal' : ''}`}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <div className={`modal-header ${darkMode ? 'dark' : ''}`}>
+                        <h2 className={`modal-title ${darkMode ? 'dark' : ''}`}>{modalTitle}</h2>
+                        <div className="modal-nav-buttons">
+                            {isMobileView && !ListView && (
+                                <button
+                                    type="button"
+                                    onClick={handeBackClick}
+                                    className={`modal-back-button ${darkMode ? 'dark' : ''}`}
+                                    aria-label="Go back to experience list"
+                                >
+                                    <ArrowLeft className="modal-back-icon" aria-hidden="true" />
+                                </button>
+                            )}
+
+                            <button
+                                ref={closeButtonRef}
+                                type="button"
+                                onClick={handleClose}
+                                className={`modal-close-button ${darkMode ? 'dark' : ''}`}
+                                aria-label="Close modal"
+                            >
+                                <X className="modal-close-icon" aria-hidden="true" />
+                            </button>
+                        </div>
                     </div>
+                    <div className={`modals-content-body ${darkMode ? 'dark' : ''} ${isExperienceModal ? 'experience-modal-body' : ''}`}>{modalContent}</div>
                 </div>
-                <div className={`modals-content-body ${darkMode ? 'dark' : ''}`}>{modalContent}</div>
             </div>
-        </div>
+        </>
     );
 };
 

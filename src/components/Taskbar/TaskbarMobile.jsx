@@ -11,13 +11,13 @@ import ExperienceModal from '../../content/Experiences/ExperienceModal.jsx';
 import EducationCertificationModal from '../../content/EducationCertification/EducationCertificationModal.jsx';
 import TechModal from '../../content/TechSkills/TechModal.jsx';
 import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
+import ProjectsModal from '../../content/Projects/ProjectsModal.jsx';
 
 import ExperienceImg from '../../assets/icons/profile.png';
 import ECImage from '../../assets/icons/certificates.png';
 import TSImage from '../../assets/icons/TechSkills.png';
 import MailImg from '../../assets/icons/mail-light.png';
 import LinkedinImage from '../../assets/icons/linkedin.png';
-import githubImage from '../../assets/icons/github-light.png';
 import dmImage from '../../assets/icons/settings-light.png';
 
 const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) => {
@@ -51,6 +51,12 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
             Name: 'Affiliates',
         },
         {
+            image: '/icons/projects-light.png',
+            imgdm: '/icons/projects-dark.png',
+            title: 'Projects',
+            Name: 'Projects',
+        },
+        {
             image: '/icons/mail-light.png',
             imgdm: '/icons/mail-dark.png',
             title: 'Contact',
@@ -61,12 +67,6 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
             imgdm: '/icons/linkedin.png',
             title: 'LinkedIn',
             Name: 'LinkedIn',
-        },
-        {
-            image: '/icons/github-light.png',
-            imgdm: '/icons/github-dark.png',
-            title: 'Github',
-            Name: 'Github',
         },
         {
             image: '/icons/settings-light.png',
@@ -94,22 +94,22 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
         };
     }, []);
 
-    const handleSettingsClick = (title) => {
-        const itemName = taskbarItems.find((item) => item.title === title)?.Name; // Get the Name based on the title
-        if (!itemName) return; // Exit if no matching item is found
+    const handleSettingsClick = (title, anchorEl) => {
+        const itemName = taskbarItems.find((item) => item.title === title)?.Name;
+        if (!itemName) return;
 
         switch (title) {
             case 'Experience':
-                openModal(<ExperienceModal />, itemName);
+                openModal(<ExperienceModal />, itemName, 'Normal', false, anchorEl);
                 break;
             case 'EducationCertification':
-                openModal(<EducationCertificationModal />, itemName, 'Small');
+                openModal(<EducationCertificationModal />, itemName, 'Small', false, anchorEl);
                 break;
             case 'Tech-Skills':
-                openModal(<TechModal />, itemName, 'Medium');
+                openModal(<TechModal />, itemName, 'Medium', false, anchorEl);
                 break;
             case 'Affiliates':
-                openModal(<AffiliatesModal isMobile={isMobile} />, itemName, 'Small');
+                openModal(<AffiliatesModal isMobile={isMobile} />, itemName, 'Small', false, anchorEl);
                 break;
             case 'Contact':
                 window.location.href = 'mailto:dtoshidero@gmail.com';
@@ -117,8 +117,8 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
             case 'LinkedIn':
                 window.open('//www.linkedin.com/in/david-oshidero-10933613a/', '_blank');
                 break;
-            case 'Github':
-                window.open('https://github.com/tayoos/Tayoos-Website', '_blank');
+            case 'Projects':
+                openModal(<ProjectsModal isMobile={isMobile} />, itemName, 'Small', false, anchorEl);
                 break;
             case 'Settings':
                 const newDarkMode = !darkMode;
@@ -192,7 +192,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
                                 }}
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    handleSettingsClick(item.title);
+                                    handleSettingsClick(item.title, e.currentTarget);
                                 }}
                             >
                                 <div className="taskbar-content-mobile">
