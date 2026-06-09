@@ -4,7 +4,7 @@ import StatusCircle from './StatusCircle';
 import { ModalContext } from '../../../../utitlites/ModalContext';
 import siteConfig from '../../../../siteConfig.js';
 
-const { roleShort, roleFull, company } = siteConfig.status;
+const { roleShort, roleSecondaryShort, roleFull, roleSecondaryFull, company } = siteConfig.status;
 
 const TextCardWidget = ({ title = 'Title', body = 'Content goes here', isDarkMode, status = 'Online', statusLightColor = 'purple', isMobile }) => {
     const { darkMode } = useContext(ModalContext);
@@ -16,13 +16,23 @@ const TextCardWidget = ({ title = 'Title', body = 'Content goes here', isDarkMod
                 <StatusCircle color={statusLightColor} />
             </div>
             <div className="Stext-card">
-                <div className="Stext-card-role" tabIndex={0} title={roleFull}>
-                    <p className={`Stext-card-title ${isMobile ? 'mobile' : ''}`}>
-                        <span className="Stext-card-title-short">{roleShort}</span>
-                        <span className="Stext-card-title-full" aria-hidden="true">
-                            {roleFull}
-                        </span>
-                    </p>
+                <div
+                    className={`Stext-card-role${roleSecondaryShort ? ' has-dual-role' : ''}`}
+                    tabIndex={0}
+                    aria-label={roleSecondaryFull ? `${roleFull}, ${roleSecondaryFull}` : roleFull}
+                >
+                    <div className={`Stext-card-title Stext-card-title-short ${isMobile ? 'mobile' : ''}`}>
+                        <span className="Stext-card-role-primary">{roleShort}</span>
+                        {roleSecondaryShort && (
+                            <span className={`Stext-card-role-secondary ${darkMode ? 'dark' : ''}`}>{roleSecondaryShort}</span>
+                        )}
+                    </div>
+                    <div className={`Stext-card-title Stext-card-title-full ${isMobile ? 'mobile' : ''}`} aria-hidden="true">
+                        <span className="Stext-card-role-primary">{roleFull}</span>
+                        {roleSecondaryFull && (
+                            <span className={`Stext-card-role-secondary ${darkMode ? 'dark' : ''}`}>{roleSecondaryFull}</span>
+                        )}
+                    </div>
                 </div>
                 <p className={`Stext-card-at ${isMobile ? 'mobile' : ''}`}>at</p>
                 <p className={`Stext-card-company ${isMobile ? 'mobile' : ''}`}>{company}</p>
