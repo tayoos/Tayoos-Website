@@ -2,6 +2,15 @@ import React, { useRef, useState, useContext } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import './TechModal.css';
 import { ModalContext } from '../../utitlites/ModalContext';
+import {
+    ORACLE_JAVA_FOUNDATIONS,
+    COURSERA_AWS_CLOUD_TECHNOLOGY_CONSULTANT,
+    NEO4J_CERTIFIED_PROFESSIONAL,
+    COURSERA_AZURE_MODERN_DATA_WAREHOUSE,
+    COURSERA_SAP_TECHNOLOGY_CONSULTANT,
+    CREDENTIAL_SYSML_MAGICGRID_CATIA,
+    UDEMY_TOGAF_ENTERPRISE_ARCHITECTURE,
+} from '../certLinks.js';
 import VerifiedIcon from '@mui/icons-material/Verified';
 
 import SWIcon from '../../assets/tech/SW2.png';
@@ -68,25 +77,25 @@ const TechModal = () => {
     const [filters, setFilters] = useState({ certified: false, course: false });
 
     const techItems = [
-        { name: 'AWS', icon: AWSIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/HGKM2R8D0U9M' },
+        { name: 'AWS', icon: AWSIcon, certification: 'true', fill: '', bcolor: '', link: COURSERA_AWS_CLOUD_TECHNOLOGY_CONSULTANT },
         { name: 'ReactJS', icon: ReactJSIcon, certification: '', fill: '', bcolor: '' },
         { name: 'JavaScript', icon: JavaScriptIcon, certification: '', fill: 'true', bcolor: 'jsyellow', ccourse: 'true' },
         { name: 'TypeScript', icon: TypeScriptIcon, certification: '', fill: 'true', bcolor: 'tsblue' },
         { name: 'Python', icon: PythonIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'Java', icon: JavaIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
-        { name: 'Neo4j', icon: Neo4jIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/HGKM2R8D0U9M' },
+        { name: 'Java', icon: JavaIcon, certification: '', fill: '', bcolor: '', ccourse: 'true', link: ORACLE_JAVA_FOUNDATIONS },
+        { name: 'Neo4j', icon: Neo4jIcon, certification: 'true', fill: '', bcolor: '', link: NEO4J_CERTIFIED_PROFESSIONAL },
         { name: 'MySQL', icon: MySQL, certification: '', fill: '', bcolor: '' },
         { name: 'CSS', icon: CSSIcon, certification: '', fill: '', bcolor: '', ccourse: '' },
-        { name: 'Azure', icon: AzureIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/records/5ZMEXTAX8IEA' },
-        { name: 'SAP', icon: SAPIcon, certification: 'true', fill: '', bcolor: '', link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/BXTG7GSFBM22' },
-        { name: 'CAMEO SM', icon: CameoIcon, certification: '', fill: '', bcolor: '' },
+        { name: 'Azure', icon: AzureIcon, ccourse: 'true', fill: '', bcolor: '', link: COURSERA_AZURE_MODERN_DATA_WAREHOUSE },
+        { name: 'SAP', icon: SAPIcon, certification: 'true', fill: '', bcolor: '', link: COURSERA_SAP_TECHNOLOGY_CONSULTANT },
+        { name: 'CAMEO SM', icon: CameoIcon, certification: 'true', fill: '', bcolor: '', link: CREDENTIAL_SYSML_MAGICGRID_CATIA },
         { name: 'Cameo EA', icon: CEAIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'Sparx EA', icon: SparxEAIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'IBM Rhapsody', icon: RhapsodyIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
         { name: 'Capella', icon: CapellaIcon, certification: '', fill: '', bcolor: '' },
-        { name: 'SysML', icon: SysMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
+        { name: 'SysML', icon: SysMLIcon, certification: 'true', fill: '', bcolor: '', link: CREDENTIAL_SYSML_MAGICGRID_CATIA },
         { name: 'UML', icon: UMLIcon, certification: '', fill: '', bcolor: '', ccourse: 'true' },
-        { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: 'https://www.udemy.com/certificate/UC-252c6a20-95d5-453d-a488-b064f0e29438/' },
+        { name: 'TOGAF', icon: TOGAFIcon, ccourse: 'true', fill: '', bcolor: '', link: UDEMY_TOGAF_ENTERPRISE_ARCHITECTURE },
         { name: 'ANSYS', icon: AnsysIcon, certification: '', fill: 'true', bcolor: 'ansysblack', ccourse: '' },
         { name: 'MATLAB', icon: MATLABIcon, certification: '', fill: '', bcolor: '' },
         { name: 'Simulink', icon: SimulinkIcon, certification: '', fill: '', bcolor: '' },

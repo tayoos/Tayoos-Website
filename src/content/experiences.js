@@ -49,34 +49,35 @@ export const experiences = [
             title: 'AtkinsRéalis – Senior Model-Based Systems and Software Engineer',
             location: 'Birmingham, England, United Kingdom',
             shortdesc:
-                'Mission Engineering and Enterprise Architecture for MOD capability planning — NAFv4, ArchiMate, and SysML models, layered EA across business, application, and technology, plus internal training on Sparx EA, SysML, and ArchiMate.',
+                'Mission Engineering and Enterprise Architecture for MOD capability planning and system development. NAFv4, ArchiMate and SysML models linking operational need to systems design, layered EA across business, application and technology, architecture governance and stakeholder traceability from strategic intent to solution design, and training on Sparx EA, SysML and ArchiMate.',
             longdesc: `
-            <p>At AtkinsRéalis I work at the intersection of Mission Engineering and Enterprise Architecture, supporting MOD capability planning and system development across some of the UK's most complex defence programmes.</p>
-            <p>Lead Mission Engineering models using NAFv4 and ArchiMate (Navy and MOD frameworks), with recent extension into SysML to bridge enterprise operational architectures and downstream systems engineering design.</p>
-            <p>Develop layered Enterprise Architectures for MOD programmes — capability models, application landscapes, and technology roadmaps — with stakeholder engagement across engineering and programme teams.</p>
-            <p>Lead internal training on Sparx EA, SysML, and ArchiMate to build team competency and consistency across architecture models.</p>
+            <p>At AtkinsRéalis I worked at the intersection of Mission Engineering and Enterprise Architecture, supporting MOD capability planning and system development across some of the UK's most complex defence programmes.</p>
+            <p>Led Mission Engineering models using NAFv4 and ArchiMate (Navy and MOD frameworks), aligning operational capability needs with system development from strategic intent through to physical system realisation, and extended this into SysML to bridge enterprise operational architectures and downstream systems engineering design and improve cross-discipline traceability.</p>
+            <p>Developed layered Enterprise Architectures for MOD programmes, including capability models, application landscapes and technology roadmaps to support investment decisions and capability planning, with stakeholder engagement across engineering and programme teams to translate operational needs into structured architecture views.</p>
+            <p>Introduced Mission Engineering as a structured methodology across programmes to improve consistency and traceability from strategy through to design, and supported architecture governance including architecture review boards and decision authority frameworks in line with programme and MOD standards.</p>
+            <p>Led internal training on Sparx EA, SysML, and ArchiMate to build team competency and consistency across architecture models.</p>
             `,
             skills:
-                'Mission Engineering · Enterprise Architecture · NAFv4 · ArchiMate · SysML · Sparx EA · Capability Planning · Stakeholder Engagement',
+                'Mission Engineering · Enterprise Architecture · NAFv4 · ArchiMate · SysML · Sparx EA · Capability Planning · Architecture Governance · Stakeholder Engagement',
             Tools: 'Sparx EA · ArchiMate · SysML · NAF',
             dates: 'June 2025 – Present',
             detail: {
-                lead: '<p>At AtkinsRéalis I work at the intersection of Mission Engineering and Enterprise Architecture, supporting MOD capability planning and system development across some of the UK\'s most complex defence programmes.</p>',
+                lead: '<p>At AtkinsRéalis I worked at the intersection of Mission Engineering and Enterprise Architecture, supporting MOD capability planning and system development across some of the UK\'s most complex defence programmes.</p>',
                 sections: [
                     {
                         tone: 'defence',
                         heading: 'Mission Engineering',
-                        body: '<p>My primary focus has been leading the development of Mission Engineering models using NAFv4 and ArchiMate, applying both the Navy and MOD Mission Engineering frameworks to trace operational need through capability to physical system realisation. More recently I have extended this into SysML, bridging the gap between enterprise-level operational architectures and the systems engineering design models used downstream — improving traceability across disciplines that have historically worked in silos.</p>',
+                        body: '<p>I led the development of Mission Engineering models using NAFv4 and ArchiMate, applying both the Navy and MOD Mission Engineering frameworks to align operational capability needs with system development across the spectrum from strategic intent to physical system realisation. I extended this work into SysML, bridging enterprise-level operational architectures and the systems engineering design models used downstream to improve cross-discipline traceability where those disciplines had historically worked in silos.</p><p>I also drove adoption of Mission Engineering as a structured methodology across programmes, improving consistency and traceability from strategy through to design.</p>',
                     },
                     {
                         tone: 'default',
                         heading: 'Enterprise Architecture',
-                        body: '<p>Alongside the mission engineering work, I develop layered Enterprise Architectures across business, application, and technology layers for MOD programmes, producing capability models, application landscape views, and technology roadmaps to inform investment decisions and capability planning. A significant part of this role involves stakeholder engagement across engineering and programme teams, translating operational needs into structured architecture views that provide coherent traceability from strategic intent through to solution design.</p>',
+                        body: '<p>I developed layered Enterprise Architectures across business, application and technology layers for MOD programmes, producing capability models, application landscape views and technology roadmaps to inform investment decisions and capability planning.</p><p>Stakeholder engagement across engineering and programme teams was a core part of the role: translating operational needs into structured architecture views with coherent traceability from strategic intent through to solution design. I supported architecture governance processes, including architecture review boards and decision authority frameworks, ensuring compliance with programme and MOD standards.</p>',
                     },
                     {
                         tone: 'training',
                         heading: 'Training & Capability Building',
-                        body: '<p>I lead internal training and guidance on Sparx EA, SysML, and ArchiMate, building team competency and driving consistency and quality across architecture models produced within the practice.</p>',
+                        body: '<p>I delivered training and internal guidance on Sparx EA, SysML and ArchiMate, building team competency and driving consistency and quality across architecture models produced within the practice.</p>',
                     },
                 ],
             },
