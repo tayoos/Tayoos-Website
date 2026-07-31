@@ -12,7 +12,7 @@ export const CREDENTIAL_ASEP =
     'https://www.credential.net/9d75f5fe-1bec-4961-be49-1bd372d9d389#acc.WCPlk9dO';
 
 export const CREDENTIAL_SYSML_MAGICGRID_CATIA =
-    'https://www.credential.net/d43b3c79-9f80-4466-b87d-64c7cc504426?username=davidoshidero669172';
+    'https://www.credential.net/3d881a1c-ae3b-40ca-9dba-2e619ce88dff?username=davidoshidero93255';
 
 // —— Oracle ——
 export const ORACLE_JAVA_FOUNDATIONS =
