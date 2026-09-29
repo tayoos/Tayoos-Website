@@ -116,7 +116,7 @@
         font-size: 0.8rem;
     }
     .weather-temperature.mobile {
-        font-size: 1.5;
+        font-size: 1.5rem;
     }
 
     .weather-icon-large.mobile {
@@ -141,7 +141,7 @@
 
     .weather-icon-large.mobile {
         width: 80px;
-        height: 80pxpx;
+        height: 80px;
     }
 }
 

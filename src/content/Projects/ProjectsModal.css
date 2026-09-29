@@ -32,7 +32,7 @@
     background: rgba(0, 0, 0, 0.04);
     color: #1a1a1a;
     text-decoration: none;
-    font-size: 0.88rem;
+    font-size: var(--text-small);
     font-weight: 600;
     width: fit-content;
     max-width: 100%;
@@ -83,7 +83,7 @@
     margin: 6px 0 0;
     padding: 0;
     border: none;
-    font-size: 0.78rem;
+    font-size: var(--text-caption);
     font-style: italic;
     color: #888;
     line-height: 1.35;
@@ -133,7 +133,7 @@
 
 .projects-row-title {
     margin: 0 0 8px;
-    font-size: 1.05rem;
+    font-size: var(--text-body);
     font-weight: 600;
     color: var(--secondary-text-color);
 }
@@ -144,7 +144,7 @@
 
 .projects-row-description {
     margin: 0 0 10px;
-    font-size: 0.9rem;
+    font-size: var(--text-small);
     line-height: 1.5;
     color: #555;
     text-align: left;
@@ -181,7 +181,7 @@
 }
 
 .projects-tag {
-    font-size: 0.7rem;
+    font-size: var(--text-caption);
     font-weight: 600;
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -198,7 +198,7 @@
 
 .projects-empty {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: var(--text-small);
     color: #666;
     font-style: italic;
 }

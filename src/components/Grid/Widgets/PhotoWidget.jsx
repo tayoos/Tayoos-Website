@@ -7,14 +7,12 @@ const PhotoWidget = ({ interval = 30000 }) => {
     const [fade, setFade] = useState(false);
 
     useEffect(() => {
-        // Dynamically import images using Vite's import.meta.glob
         const loadImages = async () => {
-            const images = import.meta.glob('/src/assets/images/PhotoWidget/*.{jpg,jpeg,png,gif}', { eager: true });
-            // Get the actual URLs from the imported modules
-            const urls = Object.values(images).map((module) => module.default);
+            const images = import.meta.glob('/src/assets/images/PhotoWidget/*.{jpg,jpeg,png,gif}');
+            const urls = await Promise.all(
+                Object.values(images).map((load) => load().then((m) => m.default))
+            );
             setImageUrls(urls);
-
-            // Set a random initial index after loading images
             if (urls.length > 0) {
                 setCurrentIndex(Math.floor(Math.random() * urls.length));
             }

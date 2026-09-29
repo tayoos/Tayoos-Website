@@ -29,7 +29,7 @@
 /* Status label */
 .SCwidget-status-label {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .SCwidget-status-label.dark {
@@ -44,7 +44,7 @@
 /* Status label */
 .SCwidget-status-label {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /* Status light */
@@ -218,4 +218,14 @@
 
 .Stext-card-title.mobile {
     font-size: 12px;
+}
+
+/* Company accent stays scoped to AtkinsRealis when the status copy changes. */
+.Stext-card-company[data-company="AtkinsRéalis"] {
+    color: #007a53;
+    font-weight: 600;
+}
+
+.SCwidget-container.dark .Stext-card-company[data-company="AtkinsRéalis"] {
+    color: #05e560;
 }

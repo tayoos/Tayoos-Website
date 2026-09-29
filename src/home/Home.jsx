@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useContext } from 'react';
+import React, { useRef, useEffect, useState, useContext, useCallback } from 'react';
 import './Home.css';
 
 import Taskbar from '../components/Taskbar/Taskbar.jsx';
@@ -20,6 +20,7 @@ import { ModalContext } from '../utitlites/ModalContext.jsx';
 function Home() {
     const [splashComplete, setSplashComplete] = useState(false);
     const [isEntryPoint, setIsEntryPoint] = useState(true);
+    const [contentRevealing, setContentRevealing] = useState(false);
     const { darkMode, toggleDarkMode, menuOpen } = useContext(ModalContext);
     const [activeModal, setActiveModal] = useState(null);
     const [currentModalContent, setCurrentModalContent] = useState(null);
@@ -31,19 +32,15 @@ function Home() {
     const isMobile = getDeviceType() === 'Mobile';
     //const isMobile = true;
 
-    // First, create a function to set the --vh property
-    function setVH() {
-        // Get the actual viewport height
-        const vh = window.innerHeight * 0.01;
-        // Set the value in the --vh custom property
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-
-    // Set the height initially
-    setVH();
-
-    // Update the height whenever the window is resized
-    window.addEventListener('resize', setVH);
+    useEffect(() => {
+        const setVH = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+        setVH();
+        window.addEventListener('resize', setVH);
+        return () => window.removeEventListener('resize', setVH);
+    }, []);
 
     // Preload wallpapers so theme toggle doesn't wait on network/decode
     useEffect(() => {
@@ -53,10 +50,14 @@ function Home() {
         });
     }, []);
 
-    const handleSplashEnd = () => {
+    const handleSplashEnd = useCallback(() => {
         setIsEntryPoint(false);
         setSplashComplete(true);
-    };
+    }, []);
+
+    const handleTransitionStart = useCallback(() => {
+        setContentRevealing(true);
+    }, []);
 
     const handleDarkModeChange = (darkMode) => {
         toggleDarkMode(darkMode);
@@ -64,9 +65,9 @@ function Home() {
 
     return (
         <div className={`screen-container ${isMobile ? 'Mobile' : ''}`}>
-            {!splashComplete && isEntryPoint && <SplashScreen videoSrc={isMobile ? videoMBLlndng : videoPClndng} isMobile={isMobile} onEnd={handleSplashEnd} />}
+            {!splashComplete && isEntryPoint && <SplashScreen videoSrc={isMobile ? videoMBLlndng : videoPClndng} isMobile={isMobile} onEnd={handleSplashEnd} onTransitionStart={handleTransitionStart} />}
 
-            <div className={`theme-viewport ${darkMode ? 'is-dark' : ''} ${isMobile ? 'Mobile' : ''}`}>
+            <div className={`theme-viewport ${darkMode ? 'is-dark' : ''} ${isMobile ? 'Mobile' : ''} ${isEntryPoint && !contentRevealing ? 'splash-hidden' : ''} ${isEntryPoint && contentRevealing ? 'splash-revealing' : ''}`}>
                 <div
                     className="theme-bg theme-bg-light"
                     style={{ backgroundImage: `url(${wallpaperLight})` }}

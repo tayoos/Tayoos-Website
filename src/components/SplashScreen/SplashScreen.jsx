@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './SplashScreen.css';
 
-const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
+const SplashScreen = ({ videoSrc, isMobile, onEnd, onTransitionStart }) => {
     const videoRef = useRef(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [showSplash, setShowSplash] = useState(true);
@@ -10,16 +10,21 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
     const [isFadedIn, setIsFadedIn] = useState(false);
 
     useEffect(() => {
-        //console.log('Initial mount effect');
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            onEnd();
+            return;
+        }
+        let innerTimer;
         const readyTimer = setTimeout(() => {
             setIsReady(true);
-            setTimeout(() => {
-                setIsFadedIn(true);
-            }, 200);
+            innerTimer = setTimeout(() => setIsFadedIn(true), 200);
         }, 1000);
 
-        return () => clearTimeout(readyTimer);
-    }, []);
+        return () => {
+            clearTimeout(readyTimer);
+            clearTimeout(innerTimer);
+        };
+    }, [onEnd]);
 
     useEffect(() => {
         if (!isReady) {
@@ -35,16 +40,20 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
 
         //console.log('Setting up video');
 
+        let endTimer;
+        let finished = false;
+        let disposed = false;
         const handleVideoEnded = () => {
-            //console.log('Video ended');
+            if (finished || disposed) return;
+            finished = true;
             setIsTransitioning(true);
-            setTimeout(() => {
+            if (onTransitionStart) onTransitionStart();
+            // Match the shared reveal duration, including reduced-motion overrides.
+            const fadeMs = parseFloat(getComputedStyle(video.closest('.splash-screen')).transitionDuration) * 1000;
+            endTimer = setTimeout(() => {
                 setShowSplash(false);
-                // Call onEnd after transition completes
-                setTimeout(() => {
-                    onEnd();
-                }, 1000);
-            }, 1000);
+                onEnd();
+            }, fadeMs);
         };
 
         const startPlayback = async () => {
@@ -71,7 +80,7 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
             playsInline: true,
             controls: false,
             autoplay: true,
-            preload: 'true',
+            preload: 'auto',
         });
 
         video.setAttribute('playsinline', '');
@@ -79,6 +88,7 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
 
         video.addEventListener('loadedmetadata', handleLoadedMetadata);
         video.addEventListener('ended', handleVideoEnded);
+        video.addEventListener('error', handleVideoEnded);
 
         //console.log('Setting video source:', videoSrc);
         video.src = videoSrc;
@@ -86,13 +96,16 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd }) => {
 
         return () => {
             // console.log('Cleanup effect');
+            disposed = true;
+            clearTimeout(endTimer);
+            video.removeEventListener('error', handleVideoEnded);
             video.removeEventListener('loadedmetadata', handleLoadedMetadata);
             video.removeEventListener('ended', handleVideoEnded);
             video.pause();
             video.removeAttribute('src');
             video.load();
         };
-    }, [videoSrc, isReady, onEnd]);
+    }, [videoSrc, isReady, onEnd, onTransitionStart]);
 
     if (!showSplash) return null;
 
@@ -124,6 +137,7 @@ SplashScreen.propTypes = {
     videoSrc: PropTypes.string.isRequired,
     isMobile: PropTypes.bool.isRequired,
     onEnd: PropTypes.func.isRequired,
+    onTransitionStart: PropTypes.func,
 };
 
 export default SplashScreen;

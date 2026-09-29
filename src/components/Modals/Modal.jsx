@@ -7,7 +7,7 @@ import { applyMinimizeVars, clearMinimizeVars, captureAnchor, getActiveTaskbarAn
 import './Modal.css';
 
 /** Must match Modal.css `--modal-exit-duration` */
-const MODAL_CLOSE_MS = 700;
+const MODAL_CLOSE_MS = 280;
 
 const Modal = () => {
     const {

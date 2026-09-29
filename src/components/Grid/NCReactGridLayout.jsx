@@ -16,6 +16,14 @@ import siteConfig from '../../siteConfig.js';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
+const cellSizes = {
+    xxl: 50,
+    xl: 50,
+    md: 50,
+    sm: 50,
+    xs: 50,
+};
+
 const NCReactGridLayout = ({ darkMode }) => {
     const containerRef = useRef(null);
     const dragBoundaryRef = useRef(null);
@@ -26,14 +34,6 @@ const NCReactGridLayout = ({ darkMode }) => {
     const [isDragging, setIsDragging] = useState(false);
 
     const isMobile = getDeviceType() === 'Mobile';
-
-    const cellSizes = {
-        xxl: 50,
-        xl: 50,
-        md: 50,
-        sm: 50,
-        xs: 50,
-    };
 
     const breakpoints = {
         xxl: 1650,
@@ -84,9 +84,9 @@ const NCReactGridLayout = ({ darkMode }) => {
             { i: '6', x: 26, y: 0, w: 3, h: 2, static: false, minW: 3, minH: 2, maxW: 4, maxH: 2 },
         ];
 
-        // Validate layout
+        // Validate layout (x/y of 0 are valid — check for null/undefined)
         initialLayout.forEach((widget) => {
-            if (!widget.i || !widget.x || !widget.y) {
+            if (widget.i == null || widget.x == null || widget.y == null) {
                 console.error('Invalid widget data:', widget);
                 return null;
             }
@@ -179,7 +179,7 @@ const NCReactGridLayout = ({ darkMode }) => {
         // Recalculate maxRows on window resize
         window.addEventListener('resize', calculateMaxRows);
         return () => window.removeEventListener('resize', calculateMaxRows);
-    }, [currentBreakpoint, cellSizes]);
+    }, [currentBreakpoint]);
 
     // Handle breakpoint change
     const onBreakpointChange = (newBreakpoint) => {
@@ -277,6 +277,7 @@ const NCReactGridLayout = ({ darkMode }) => {
                     <ResponsiveGridLayout
                         className="w-full"
                         layouts={{
+                            xxl: layouts,
                             xl: xlLayout,
                             md: layouts,
                             sm: smLayout,

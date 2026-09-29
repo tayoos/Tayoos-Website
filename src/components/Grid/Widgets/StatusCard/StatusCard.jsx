@@ -35,7 +35,7 @@ const TextCardWidget = ({ title = 'Title', body = 'Content goes here', isDarkMod
                     </div>
                 </div>
                 <p className={`Stext-card-at ${isMobile ? 'mobile' : ''}`}>at</p>
-                <p className={`Stext-card-company ${isMobile ? 'mobile' : ''}`}>{company}</p>
+                <p data-company={company} className={`Stext-card-company ${isMobile ? 'mobile' : ''}`}>{company}</p>
             </div>
         </div>
     );

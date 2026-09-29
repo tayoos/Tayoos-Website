@@ -1,6 +1,6 @@
 :root {
     --base-height: 90%;
-    --modal-base-height: 87.3%$;
+    --modal-base-height: 87.3%;
     --modal-base-width: 1650px;
 }
 
@@ -148,6 +148,15 @@
     min-height: 100%;
 }
 
+.theme-viewport.splash-hidden {
+    opacity: 0;
+}
+
+.theme-viewport.splash-revealing {
+    opacity: 1;
+    transition: opacity var(--motion-reveal) var(--ease-out);
+}
+
 .theme-viewport.Mobile {
     width: 100vw;
     height: 100%;
@@ -163,6 +172,7 @@
     z-index: -1;
     transform: translateZ(0);
     backface-visibility: hidden;
+    transition: opacity var(--theme-fade-duration) var(--theme-fade-ease);
 }
 
 .theme-bg-light {

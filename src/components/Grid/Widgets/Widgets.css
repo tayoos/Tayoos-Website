@@ -21,7 +21,7 @@
     max-width: 100%; /* Prevent it from exceeding the parent's width */
     max-height: 100%; /* Prevent it from exceeding the parent's height */
     object-fit: cover; /* Maintain aspect ratio and cover the container */
-    transition: opacity 1s ease-in-out; /* Smooth transition for opacity */
+    transition: opacity var(--motion-reveal) ease-in-out; /* Smooth transition for opacity */
     border-radius: 15px;
 }
 
@@ -45,7 +45,7 @@
     border-radius: 0.5rem;
     border: 1px solid rgba(0, 0, 0, 0);
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: border-color var(--motion-fast) ease, color var(--motion-standard) ease;
     position: relative;
     color: rgb(99, 99, 99);
 }
@@ -89,7 +89,7 @@
 }
 
 .cv-title {
-    font-size: 1.25rem;
+    font-size: var(--text-heading);
     font-weight: 600;
     margin-top: 0;
 }
@@ -121,7 +121,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
-    font-family: 'San Francisco', Arial, sans-serif;
+    font-family: inherit;
 
     /* Add transition for smooth color change */
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -143,12 +143,12 @@
 
 .timezone-time {
     font-size: 2.5rem; /* Prominent time display */
-    font-weight: bold;
+    font-weight: 600;
     letter-spacing: -0.02em;
 }
 
 .timezone-label {
-    font-size: 1.2rem;
+    font-size: var(--text-small);
     color: #555;
     text-transform: uppercase;
     font-weight: 600;

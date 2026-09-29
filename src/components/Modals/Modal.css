@@ -92,10 +92,10 @@
     position: relative;
     z-index: 2;
     pointer-events: auto;
-    --modal-exit-duration: 0.7s;
+    --modal-exit-duration: 0.28s;
     --modal-exit-ease: cubic-bezier(0.33, 0.86, 0.2, 1);
     background-color: rgba(255, 255, 255, 0.979);
-    border-radius: 0.5rem;
+    border-radius: 16px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     width: min(1485px, 98vw);
     height: 70vh;
@@ -112,7 +112,7 @@
 }
 
 .modals-content.open {
-    animation: modalEnter 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: modalEnter var(--motion-standard) var(--ease-out) forwards;
 }
 
 .modals-content.dark {
@@ -223,7 +223,8 @@
 }
 
 .modal-title {
-    font-size: 1.5rem;
+    margin: 0;
+    font-size: var(--text-heading);
     font-weight: 600;
     height: fit-content;
     color: #2c2c2c;
@@ -352,4 +353,20 @@
 .modals-content-body.experience-modal-body {
     overflow: hidden;
     align-items: stretch;
+}
+
+/* Fade surfaces independently; theme changes must not interrupt window motion. */
+.modals-content,
+.modal-header,
+.modals-content-body {
+    transition: background-color var(--theme-fade-duration) ease, color var(--theme-fade-duration) ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modals-content.close,
+    .modals-content.close.minimize,
+    .modals-content.transition {
+        opacity: 0;
+        pointer-events: none;
+    }
 }

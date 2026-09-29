@@ -97,22 +97,8 @@ export const ModalProvider = ({ children }) => {
         setListView(false);
     };
 
-    const themeFadeTimeoutRef = useRef(null);
-
     const toggleDarkMode = (mode) => {
-        const next = mode !== undefined ? mode : !darkMode;
-        const root = document.documentElement;
-
-        if (themeFadeTimeoutRef.current) {
-            window.clearTimeout(themeFadeTimeoutRef.current);
-        }
-
-        root.classList.add('theme-crossfading');
-        setDarkMode(next);
-        themeFadeTimeoutRef.current = window.setTimeout(() => {
-            root.classList.remove('theme-crossfading');
-            themeFadeTimeoutRef.current = null;
-        }, 500);
+        setDarkMode((current) => mode !== undefined ? mode : !current);
     };
 
     return (

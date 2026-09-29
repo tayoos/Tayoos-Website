@@ -10,12 +10,19 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks(id) {
-                    if (id.includes('node_modules')) {
-                        return 'vendor'; // Moves dependencies to a separate file
-                    }
+                    if (!id.includes('node_modules')) return;
+
+                    if (id.includes('three') || id.includes('@react-three')) return 'three';
+                    if (id.includes('@mui') || id.includes('@emotion')) return 'mui';
+                    if (id.includes('framer-motion')) return 'framer';
+                    if (id.includes('react-grid-layout') || id.includes('react-resizable')) return 'grid';
+                    if (id.includes('react-router')) return 'router';
+                    if (id.includes('/react-dom/') || id.includes('\\react-dom\\') || /[/\\]react[/\\]/.test(id)) return 'react';
+
+                    return 'vendor';
                 },
             },
         },
-        chunkSizeWarningLimit: 1000, // Increases the warning limit to 1000 kB
+        chunkSizeWarningLimit: 2000,
     },
 });

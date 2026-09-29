@@ -12,10 +12,10 @@ export const siteConfig = {
 
     /** Status widget on the desktop grid */
     status: {
-        roleShort: 'Senior MBS&SE',
-        roleSecondaryShort: 'EA',
-        roleFull: 'Senior Model-Based Systems & Software Engineer',
-        roleSecondaryFull: 'Enterprise Architect',
+        roleShort: 'Senior Systems Eng.',
+        roleSecondaryShort: '',
+        roleFull: 'Senior Systems Engineer',
+        roleSecondaryFull: '',
         company: 'AtkinsRéalis',
     },
 
