@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './Widgets.css';
 
-const PhotoWidget = ({ interval = 30000 }) => {
-    const [imageUrls, setImageUrls] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [fade, setFade] = useState(false);
+// Eager URL-only glob: emits each image as an asset and inlines its URL string
+// into the bundle. Cheap (just strings), and the browser lazy-loads the image
+// bytes only when <img src> is set — no per-image JS module fetch.
+const imageModules = import.meta.glob('/src/assets/images/PhotoWidget/*.{jpg,jpeg,png,gif}', {
+    eager: true,
+    query: '?url',
+    import: 'default',
+});
+const PHOTO_URLS = Object.values(imageModules);
 
-    useEffect(() => {
-        const loadImages = async () => {
-            const images = import.meta.glob('/src/assets/images/PhotoWidget/*.{jpg,jpeg,png,gif}');
-            const urls = await Promise.all(
-                Object.values(images).map((load) => load().then((m) => m.default))
-            );
-            setImageUrls(urls);
-            if (urls.length > 0) {
-                setCurrentIndex(Math.floor(Math.random() * urls.length));
-            }
-        };
-        loadImages();
-    }, []);
+const PhotoWidget = ({ interval = 30000 }) => {
+    const [imageUrls] = useState(PHOTO_URLS);
+    const [currentIndex, setCurrentIndex] = useState(() =>
+        PHOTO_URLS.length > 0 ? Math.floor(Math.random() * PHOTO_URLS.length) : 0
+    );
+    const [fade, setFade] = useState(false);
 
     useEffect(() => {
         if (imageUrls.length > 0) {

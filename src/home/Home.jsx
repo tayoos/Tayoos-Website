@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useContext, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useContext, useCallback, lazy, Suspense } from 'react';
 import './Home.css';
 
 import Taskbar from '../components/Taskbar/Taskbar.jsx';
@@ -6,16 +6,18 @@ import TaskbarMobile from '../components/Taskbar/TaskbarMobile.jsx';
 import SplashScreen from '../components/SplashScreen/SplashScreen.jsx';
 import Device, { getDeviceType } from '../utitlites/Device';
 import Header from '../components/Header/Header.jsx';
-import videoPClndng from '../assets/animations/DesktopIntro.mp4';
-import videoMBLlndng from '../assets/animations/MobilePhoneIntro2.mp4';
 import wallpaperLight from '../assets/backgrounds/white_layers.jpg';
 import wallpaperDark from '../assets/backgrounds/white_layers_darkmode.jpg';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import NCReactGridLayout from '../components/Grid/NCReactGridLayout.jsx';
-import NCReactGridLayoutMobile from '../components/Grid/NCReactGridLayoutMobile.jsx';
 
 import { ModalContext } from '../utitlites/ModalContext.jsx';
+
+const videoPClndng = '/animations/DesktopIntro.mp4';
+const videoMBLlndng = '/animations/MobilePhoneIntro2.mp4';
+
+const NCReactGridLayout = lazy(() => import('../components/Grid/NCReactGridLayout.jsx'));
+const NCReactGridLayoutMobile = lazy(() => import('../components/Grid/NCReactGridLayoutMobile.jsx'));
 
 function Home() {
     const [splashComplete, setSplashComplete] = useState(false);
@@ -84,11 +86,13 @@ function Home() {
                             <Header isMobile={isMobile} darkMode={darkMode} />
                         </div>
                         <div className={`GridContainer ${isMobile ? 'GridContainer-mobile' : ''}`}>
-                            {isMobile ? (
-                                <NCReactGridLayoutMobile darkMode={darkMode} isMobile={isMobile} />
-                            ) : (
-                                <NCReactGridLayout darkMode={darkMode} />
-                            )}
+                            <Suspense fallback={<div className="grid-loading" aria-hidden="true" />}>
+                                {isMobile ? (
+                                    <NCReactGridLayoutMobile darkMode={darkMode} isMobile={isMobile} />
+                                ) : (
+                                    <NCReactGridLayout darkMode={darkMode} />
+                                )}
+                            </Suspense>
                         </div>
 
                         <div className={`taskbar ${isMobile ? 'taskbarmb' : ''}`}>

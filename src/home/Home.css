@@ -257,6 +257,21 @@
     overflow-y: hidden; /* Prevents scrolling and hides overflow content */
 }
 
+/* Fallback placeholder for lazy-loaded grid — invisible, holds space during Suspense */
+.grid-loading {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Gentle fade-in when the lazy grid mounts, in case it lands after the splash crossfade completes */
+.GridContainer > .react-grid-layout,
+.GridContainer > div > .react-grid-layout,
+.GridContainer > div > div > .react-grid-layout {
+    animation: fadeIn 600ms ease-out both;
+}
+
 @keyframes modalExpand {
     from {
         opacity: 0;
