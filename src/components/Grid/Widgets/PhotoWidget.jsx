@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Widgets.css';
 
-// Eager URL-only glob: emits each image as an asset and inlines its URL string
-// into the bundle. Cheap (just strings), and the browser lazy-loads the image
-// bytes only when <img src> is set — no per-image JS module fetch.
-const imageModules = import.meta.glob('/src/assets/images/PhotoWidget/*.{jpg,jpeg,png,gif}', {
-    eager: true,
-    query: '?url',
-    import: 'default',
-});
-const PHOTO_URLS = Object.values(imageModules);
+// Eager glob: inlines each image's URL string into the bundle at build time.
+// Cheap (strings only); the browser lazy-loads image bytes when <img src> is set.
+const imageModules = import.meta.glob('/src/assets/images/PhotoWidget/*.{jpg,jpeg,png,gif}', { eager: true });
+const PHOTO_URLS = Object.values(imageModules).map((m) => m.default);
 
 const PhotoWidget = ({ interval = 30000 }) => {
     const [imageUrls] = useState(PHOTO_URLS);

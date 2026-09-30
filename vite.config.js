@@ -9,17 +9,17 @@ export default defineConfig({
     build: {
         rollupOptions: {
             output: {
+                // Single vendor chunk for all node_modules. Splitting React
+                // consumers (react-grid-layout, framer-motion, mui, router)
+                // into their own chunks broke cross-chunk React interop —
+                // Rollup's CJS→ESM wrapper leaves `exports` undefined at the
+                // wrong moment, producing errors like:
+                //   "Cannot set properties of undefined (setting 'Children')"
+                //   "Cannot read properties of undefined (reading 'forwardRef')"
                 manualChunks(id) {
-                    if (!id.includes('node_modules')) return;
-
-                    if (id.includes('three') || id.includes('@react-three')) return 'three';
-                    if (id.includes('@mui') || id.includes('@emotion')) return 'mui';
-                    if (id.includes('framer-motion')) return 'framer';
-                    if (id.includes('react-grid-layout') || id.includes('react-resizable')) return 'grid';
-                    if (id.includes('react-router')) return 'router';
-                    if (id.includes('/react-dom/') || id.includes('\\react-dom\\') || /[/\\]react[/\\]/.test(id)) return 'react';
-
-                    return 'vendor';
+                    if (id.includes('node_modules')) {
+                        return 'vendor';
+                    }
                 },
             },
         },
