@@ -39,3 +39,49 @@ Manual `manualChunks` splitting of React consumers is fragile. Any React-consumi
 - `vite.config.js` — reverted to single vendor chunk
 
 ---
+
+## 2026-09-30 — MusicWidget "Failed to connect to the music service"
+
+### Symptom
+Widget shows the error banner instead of a track or the last-played fallback. Console: `Error fetching currently playing track:`. Probe of `VITE_AEP` (the AWS API Gateway URL) returns HTTP 200 with an **empty body** — the Lambda is invoked but returns nothing usable.
+
+### Root cause (most likely)
+Spotify refresh token invalidated. Spotify tokens don't officially "expire" on a clock, but in practice they get revoked after:
+- ~180 days of inactivity
+- Password change
+- Manual revoke in Spotify account settings
+- App credential rotation in the Spotify Developer dashboard
+
+When the Lambda tries to refresh, Spotify returns `400 invalid_grant`; if the Lambda doesn't handle that path it silently exits and API Gateway returns an empty 200.
+
+### Fix
+Re-authorize the account and store the new refresh token in **both** places:
+
+1. Run the auth helper from repo root:
+   ```
+   npm run spotify:refresh
+   ```
+   Opens a local server on `http://127.0.0.1:8888/callback`, prints an authorization URL, catches the callback, prints the new refresh token.
+
+2. Update the token in:
+   - `Tayoos-Website/.env` → `VITE_SPOTIFY_REFRESH_TOKEN=<new>` (local dev only; not what the deployed widget actually uses)
+   - **AWS SSM Parameter Store**, region `eu-west-2`, parameter name `/Spotify/SPOTIFY_REFRESH_TOKEN` (SecureString). This is what the currently-playing Lambda reads. Console: https://eu-west-2.console.aws.amazon.com/systems-manager/parameters — or CLI:
+     ```
+     aws ssm put-parameter --name "/Spotify/SPOTIFY_REFRESH_TOKEN" \
+       --value "<new>" --type SecureString --overwrite --region eu-west-2
+     ```
+   - Related SSM params (usually don't need touching): `/Spotify/SPOTIFY_CLIENT_ID`, `/Spotify/SPOTIFY_CLIENT_SECRET`
+
+3. Redeploy the Lambda if it caches the token at cold start only.
+
+### Prereq (one-time)
+Add `http://127.0.0.1:3000/callback` to Redirect URIs in the Spotify app on https://developer.spotify.com/dashboard. Spotify's newer auth rules **reject `http://localhost`** at authorization time even when grandfathered in the dashboard list — only the `127.0.0.1` IP literal or `https://` schemes are accepted. Once registered, the script default matches. Override with:
+```
+$env:SPOTIFY_REDIRECT_URI="http://127.0.0.1:5179/callback"; npm run spotify:refresh
+```
+
+### Files touched
+- `scripts/spotify-refresh-token.js` — the auth helper (zero deps, Node built-ins only)
+- `package.json` — added `spotify:refresh` script
+
+---

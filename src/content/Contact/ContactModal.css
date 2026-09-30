@@ -1,0 +1,159 @@
+.ContactModal {
+    padding: 20px 24px;
+    color: #1a1a1a;
+    font-family: inherit;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.ContactModal.dark {
+    color: #f0f0f0;
+}
+
+.ContactModal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.ContactModal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ContactModal-field input,
+.ContactModal-field textarea {
+    font: inherit;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.6);
+    color: inherit;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    resize: vertical;
+    min-height: 40px;
+}
+
+.ContactModal.dark .ContactModal-field input,
+.ContactModal.dark .ContactModal-field textarea {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.ContactModal-field input:focus,
+.ContactModal-field textarea:focus {
+    outline: none;
+    border-color: #4a86e8;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.ContactModal.dark .ContactModal-field input:focus,
+.ContactModal.dark .ContactModal-field textarea:focus {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/* Honeypot — visually hidden but still in the DOM for bots. */
+.ContactModal-hp {
+    position: absolute !important;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.ContactModal-error {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(220, 60, 60, 0.12);
+    color: #a1181d;
+    font-size: 13px;
+}
+
+.ContactModal.dark .ContactModal-error {
+    background: rgba(220, 60, 60, 0.22);
+    color: #ff9a9a;
+}
+
+.ContactModal-error a {
+    color: inherit;
+}
+
+.ContactModal-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.ContactModal-submit {
+    font: inherit;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    background: #1a1a1a;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.05s ease;
+}
+
+.ContactModal-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.ContactModal-submit:not(:disabled):active {
+    transform: translateY(1px);
+}
+
+.ContactModal.dark .ContactModal-submit {
+    background: #f0f0f0;
+    color: #1a1a1a;
+}
+
+.ContactModal-secondary {
+    font: inherit;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.ContactModal.dark .ContactModal-secondary {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.ContactModal-secondary:hover {
+    text-decoration: underline;
+}
+
+.ContactModal-sent {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.ContactModal-sent h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.ContactModal-sent p {
+    margin: 0 0 16px;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 14px;
+}
+
+.ContactModal.dark .ContactModal-sent p {
+    color: rgba(255, 255, 255, 0.7);
+}

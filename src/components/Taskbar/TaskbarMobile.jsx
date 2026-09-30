@@ -12,6 +12,7 @@ import EducationCertificationModal from '../../content/EducationCertification/Ed
 import TechModal from '../../content/TechSkills/TechModal.jsx';
 import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
 import ProjectsModal from '../../content/Projects/ProjectsModal.jsx';
+import ContactModal from '../../content/Contact/ContactModal.jsx';
 
 import ExperienceImg from '../../assets/icons/profile.png';
 import ECImage from '../../assets/icons/certificates.png';
@@ -112,7 +113,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal, isMobile }) =>
                 openModal(<AffiliatesModal isMobile={isMobile} />, itemName, 'Small', false, anchorEl);
                 break;
             case 'Contact':
-                window.location.href = 'mailto:dtoshidero@gmail.com';
+                openModal(<ContactModal isMobile={isMobile} />, itemName, 'Small', false, anchorEl);
                 break;
             case 'LinkedIn':
                 window.open('//www.linkedin.com/in/david-oshidero-10933613a/', '_blank');

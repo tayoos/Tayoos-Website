@@ -7,7 +7,8 @@
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint .",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "spotify:refresh": "node --env-file=.env scripts/spotify-refresh-token.js"
     },
     "dependencies": {
         "@aws-sdk/client-ssm": "^3.738.0",

@@ -8,6 +8,7 @@ import EducationCertificationModal from '../../content/EducationCertification/Ed
 import TechModal from '../../content/TechSkills/TechModal.jsx';
 import AffiliatesModal from '../../content/Affiliates/AffiliatesModal.jsx';
 import ProjectsModal from '../../content/Projects/ProjectsModal.jsx';
+import ContactModal from '../../content/Contact/ContactModal.jsx';
 
 const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
     const { openModal, isCurrentModal, modalContent, darkMode, toggleDarkMode } = useContext(ModalContext);
@@ -80,7 +81,7 @@ const Taskbar = ({ onDarkModeChange, setActiveModal, activeModal }) => {
                 openModal(<AffiliatesModal />, itemName, 'Small', false, anchorEl);
                 break;
             case 'Contact':
-                window.location.href = 'mailto:dtoshidero@gmail.com';
+                openModal(<ContactModal />, itemName, 'Small', false, anchorEl);
                 break;
             case 'LinkedIn':
                 window.open('//www.linkedin.com/in/david-oshidero-10933613a/', '_blank');
