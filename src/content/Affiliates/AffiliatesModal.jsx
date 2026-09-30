@@ -7,49 +7,36 @@ import './AffiliatesModal.css';
 const AffiliatesModal = ({ isMobile }) => {
     const { darkMode } = useContext(ModalContext);
     const Affiliates = [
-        // Professional Memberships
         {
             id: 1,
-            title: 'Institute of Mechanical Engineers (iMechE)',
-            MembershipType: 'Associate Member (AMIMechE)',
-            type: 'Professional Memberships',
+            title: "Institute of Engineering and TTechnology",
+            MembershipType: "Associate Member (MIET)",
+            type: "Professional Memberships",
         },
         {
             id: 2,
-            title: 'International Council on Systems Engineering (INCOSE)',
-            MembershipType: 'Associate Member (MINCOSE)',
-            type: 'Professional Memberships',
+            title: "International Council on Systems Engineering (INCOSE)",
+            MembershipType: "Associate Member (MINCOSE)",
+            type: "Professional Memberships",
         },
-
-        // Volunteering & Community Engagement
         {
             id: 101,
-            title: 'Flying Start Challenge',
-            affiliationType: 'STEM Project Mentor',
-            type: 'Volunteering & Community Engagement',
+            title: "Flying Start Challenge",
+            affiliationType: "STEM Project Mentor",
+            type: "Volunteering & Community Engagement",
         },
         {
             id: 100,
-            title: 'Bristol MS Therapy Centre',
-            affiliationType: 'Community Volunteer',
-            type: 'Volunteering & Community Engagement',
+            title: "Bristol MS Therapy Centre",
+            affiliationType: "Community Volunteer",
+            type: "Volunteering & Community Engagement",
         },
-        // Education & Research Affiliations
         {
             id: 50,
-            title: 'Swansea University',
-            affiliationType: 'Alumni - Aerospace Engineering',
-            type: 'Education & Research Affiliations',
+            title: "Swansea University",
+            affiliationType: "Alumni - Aerospace Engineering",
+            type: "Education & Research Affiliations",
         },
-        // Operating Businesses & Partner Organisations
-        /*
-        {
-            id: 10,
-            title: 'EF - Example',
-            companyPurpose: 'A forward-thinking technology consultancy dedicated to driving innovation and contributing to the development of the next generation of transformative solutions, empowering businesses and shaping the future through cutting-edge expertise and collaboration.',
-            affiliationType: 'Strategic Partner',
-            type: 'Operating Businesses & Partner Organisations',
-        },*/
     ];
 
     const affiliationTypes = [...new Set(Affiliates.map((affiliate) => affiliate.type))];
