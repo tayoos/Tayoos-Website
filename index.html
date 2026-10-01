@@ -47,6 +47,20 @@
         <script defer src="https://stats.tayoos.com/script.js" data-website-id="046a9ffe-5e03-4c4e-8b28-ae06a6dfe7c3"></script>
     </head>
     <body>
+        <!--
+          Netlify Forms detection stub. This hidden form is parsed by Netlify at
+          build time so it knows the "contact" form exists on this site. The
+          real form in the React app POSTs to "/" with form-name=contact and
+          Netlify intercepts automatically.
+        -->
+        <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+            <input type="text" name="bot-field" />
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <input type="text" name="subject" />
+            <textarea name="message"></textarea>
+        </form>
+
         <div id="root"></div>
         <script type="module" src="/src/main.jsx"></script>
     </body>
