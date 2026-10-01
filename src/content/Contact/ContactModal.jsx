@@ -3,10 +3,15 @@ import { ArrowUpRight, Check, LoaderCircle, Mail, Send } from 'lucide-react';
 import { ModalContext } from '../../utitlites/ModalContext.jsx';
 import './ContactModal.css';
 
-const WEBHOOK_URL = 'https://admin.tayoos.com/api/contact/webhook';
-const WEBHOOK_SECRET = import.meta.env.VITE_CONTACT_WEBHOOK_SECRET ?? '';
 const FALLBACK_EMAIL = 'dtoshidero@gmail.com';
 const EMPTY_FORM = { name: '', email: '', message: '' };
+const FORM_NAME = 'contact';
+
+// Encode form fields as application/x-www-form-urlencoded for Netlify Forms.
+const encode = (data) =>
+    Object.entries(data)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value ?? '')}`)
+        .join('&');
 
 const ContactModal = () => {
     const { darkMode } = useContext(ModalContext);
@@ -61,12 +66,19 @@ const ContactModal = () => {
         requestRef.current = controller;
         const timeout = setTimeout(() => controller.abort(), 15000);
         try {
-            const response = await fetch(WEBHOOK_URL, {
-                method: 'POST', signal: controller.signal,
-                headers: { 'Content-Type': 'application/json', 'X-Webhook-Secret': WEBHOOK_SECRET },
-                body: JSON.stringify({
-                    name: form.name.trim(), email: form.email.trim(), message: form.message.trim(),
-                    source: 'tayoos.com', userAgent: navigator.userAgent,
+            // Netlify Forms expects a urlencoded POST to any path on the site
+            // with form-name matching one of its detected forms.
+            const response = await fetch('/', {
+                method: 'POST',
+                signal: controller.signal,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: encode({
+                    'form-name': FORM_NAME,
+                    'bot-field': hp,
+                    name: form.name.trim(),
+                    email: form.email.trim(),
+                    message: form.message.trim(),
+                    source: 'tayoos.com',
                 }),
             });
             if (!response.ok) throw new Error(`Contact request returned ${response.status}`);
@@ -107,7 +119,18 @@ const ContactModal = () => {
                             <p>Have a project in mind, a question or want to connect?</p>
                         </div>
                     </header>
-                    <form ref={formRef} className="ContactModal-form" onSubmit={submit} noValidate aria-busy={sending}>
+                    <form
+                        ref={formRef}
+                        className="ContactModal-form"
+                        name={FORM_NAME}
+                        method="POST"
+                        data-netlify="true"
+                        data-netlify-honeypot="bot-field"
+                        onSubmit={submit}
+                        noValidate
+                        aria-busy={sending}
+                    >
+                        <input type="hidden" name="form-name" value={FORM_NAME} />
                         <p className="ContactModal-required">All fields are required.</p>
                         <div className="ContactModal-row">
                             <div className="ContactModal-field">
@@ -131,7 +154,7 @@ const ContactModal = () => {
                         </div>
                         <label className="ContactModal-hp" aria-hidden="true">
                             Leave this field blank
-                            <input type="text" name="website" tabIndex={-1} autoComplete="off" value={hp} onChange={(event) => setHp(event.target.value)} />
+                            <input type="text" name="bot-field" tabIndex={-1} autoComplete="off" value={hp} onChange={(event) => setHp(event.target.value)} />
                         </label>
                         <div className="ContactModal-feedback" role="alert" aria-atomic="true">
                             <div className={`ContactModal-error ${status !== 'error' ? 'ContactModal-error-placeholder' : ''}`} aria-hidden={status !== 'error'}>
