@@ -1,12 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './SplashScreen.css';
+
+const PLAYBACK_WAIT_MS = 4000;
 
 const SplashScreen = ({ videoSrc, isMobile, onEnd, onTransitionStart }) => {
     const videoRef = useRef(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [showSplash, setShowSplash] = useState(true);
-    const [isReady, setIsReady] = useState(false);
     const [isFadedIn, setIsFadedIn] = useState(false);
 
     useEffect(() => {
@@ -14,38 +15,18 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd, onTransitionStart }) => {
             onEnd();
             return;
         }
-        let innerTimer;
-        const readyTimer = setTimeout(() => {
-            setIsReady(true);
-            innerTimer = setTimeout(() => setIsFadedIn(true), 200);
-        }, 1000);
-
-        return () => {
-            clearTimeout(readyTimer);
-            clearTimeout(innerTimer);
-        };
-    }, [onEnd]);
-
-    useEffect(() => {
-        if (!isReady) {
-            //console.log('Not ready yet');
-            return;
-        }
-
         const video = videoRef.current;
-        if (!video) {
-            //console.log('No video ref');
-            return;
-        }
-
-        //console.log('Setting up video');
+        if (!video) return;
 
         let endTimer;
+        let waitTimer;
         let finished = false;
         let disposed = false;
         const handleVideoEnded = () => {
             if (finished || disposed) return;
             finished = true;
+            clearTimeout(waitTimer);
+            video.pause();
             setIsTransitioning(true);
             if (onTransitionStart) onTransitionStart();
             // Match the shared reveal duration, including reduced-motion overrides.
@@ -58,22 +39,24 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd, onTransitionStart }) => {
 
         const startPlayback = async () => {
             try {
-                // console.log('Attempting to play video');
                 await video.play();
-                //console.log('Video playing successfully');
-            } catch (error) {
-                //console.error('Play error:', error);
+            } catch {
                 handleVideoEnded();
             }
         };
 
-        const handleLoadedMetadata = () => {
-            //console.log('Video metadata loaded');
-            startPlayback();
+        const handlePlaying = () => {
+            if (finished || disposed) return;
+            clearTimeout(waitTimer);
+            waitTimer = null;
+            setIsFadedIn(true);
         };
 
-        video.removeAttribute('src');
-        video.load();
+        // Bound both startup and subsequent buffering without cutting off playback.
+        const handleWaiting = () => {
+            if (finished || disposed || waitTimer != null) return;
+            waitTimer = setTimeout(handleVideoEnded, PLAYBACK_WAIT_MS);
+        };
 
         Object.assign(video, {
             muted: true,
@@ -86,39 +69,40 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd, onTransitionStart }) => {
         video.setAttribute('playsinline', '');
         video.setAttribute('webkit-playsinline', '');
 
-        video.addEventListener('loadedmetadata', handleLoadedMetadata);
+        video.addEventListener('playing', handlePlaying);
+        video.addEventListener('waiting', handleWaiting);
         video.addEventListener('ended', handleVideoEnded);
         video.addEventListener('error', handleVideoEnded);
 
-        //console.log('Setting video source:', videoSrc);
+        setIsFadedIn(false);
         video.src = videoSrc;
-        video.load();
+        handleWaiting();
+        startPlayback();
 
         return () => {
-            // console.log('Cleanup effect');
             disposed = true;
             clearTimeout(endTimer);
+            clearTimeout(waitTimer);
             video.removeEventListener('error', handleVideoEnded);
-            video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+            video.removeEventListener('playing', handlePlaying);
+            video.removeEventListener('waiting', handleWaiting);
             video.removeEventListener('ended', handleVideoEnded);
             video.pause();
             video.removeAttribute('src');
             video.load();
         };
-    }, [videoSrc, isReady, onEnd, onTransitionStart]);
+    }, [videoSrc, onEnd, onTransitionStart]);
 
     if (!showSplash) return null;
 
     return (
         <div className={`splash-screen ${isTransitioning ? 'transitioning' : ''} ${isMobile ? 'Mobile' : ''}`}>
             <div className="video-container">
-                {isReady && (
                     <video
                         ref={videoRef}
                         className={`splash-video ${isFadedIn ? 'fade-in' : ''}`}
                         muted
                         playsInline
-                        webkit-playsinline=""
                         autoPlay
                         preload="auto"
                         style={{
@@ -127,7 +111,6 @@ const SplashScreen = ({ videoSrc, isMobile, onEnd, onTransitionStart }) => {
                             WebkitUserSelect: 'none',
                         }}
                     />
-                )}
             </div>
         </div>
     );

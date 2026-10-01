@@ -160,7 +160,7 @@ const Modal = () => {
             <div className={`modal-backlay ${overlayOpen ? 'open' : ''}`} role="presentation">
                 <div
                     ref={panelRef}
-                    className={`modals-content ${overlayOpen ? 'open' : ''} ${overlayClose ? 'close minimize' : ''} ${modalTransition ? 'transition' : ''} ${darkMode ? 'dark' : ''} ${currentModalSize === 'Small' ? 'small' : ''} ${currentModalSize === 'Medium' ? 'medium' : ''} ${isExperienceModal ? 'experience-modal' : ''}`}
+                    className={`modals-content ${overlayOpen ? 'open' : ''} ${overlayClose ? 'close minimize' : ''} ${modalTransition ? 'transition' : ''} ${darkMode ? 'dark' : ''} ${currentModalSize === 'Small' ? 'small' : ''} ${currentModalSize === 'Medium' ? 'medium' : ''} ${isExperienceModal ? 'experience-modal' : ''} ${modalTitle === 'Contact' ? 'contact-modal' : ''}`}
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div className={`modal-header ${darkMode ? 'dark' : ''}`}>

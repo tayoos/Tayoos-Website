@@ -1,3 +1,9 @@
+.music-widget {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+}
+
 .MusicWidgetContainer {
     display: flex;
     flex-direction: row;
@@ -214,6 +220,8 @@
 /* Last Played */
 
 .LPContainer {
+    --lp-art-size: 100px;
+    position: relative;
     display: flex;
     flex-direction: column;
 
@@ -231,24 +239,27 @@
 }
 
 .LPHeader {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center; /* Centers the content horizontally */
     align-items: center; /* Centers the content vertically */
     font-size: 13px;
     font-weight: 700;
     padding: 2px;
-    height: 20% !important;
+    min-height: 24px;
     /*background-color: rgba(0, 255, 255, 0.151);*/
     box-sizing: border-box;
     margin-bottom: 0;
     width: 100%;
-    padding-left: 5px;
 }
 
 .LPMusicWidgetContainer {
     display: flex;
     flex-direction: row;
-    height: 80% !important;
+    height: 100%;
+    min-height: 0;
     /*align-items: center;
     justify-content: center;*/
     align-items: center;
@@ -279,29 +290,37 @@
 
 .LPAlbumArt {
     display: flex;
-    height: 100px;
-    width: 100px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: var(--lp-art-size);
+    width: var(--lp-art-size);
 }
 
 .LPAlbumImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     padding: 10px;
     box-sizing: border-box;
 }
 
 .LPMusicCoreContent {
+    box-sizing: border-box;
+    min-width: 0;
+    flex: 1;
     max-height: 100%;
-    display: flex;
-    flex-direction: column;
-
-    font-size: auto;
-    height: 100px;
-    width: 100%;
-
-    justify-self: center;
+    /* Match the visible artwork, excluding its 10px padding on each side. */
+    height: calc(var(--lp-art-size) - 20px);
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 6px;
 }
 
 .LPAlbumNameContainer {
-    height: 70% !important;
+    min-height: 0;
+    transform: translateY(-2px);
     overflow: hidden;
     display: flex;
     align-items: center; /* Vertically center the content */
@@ -309,6 +328,7 @@
 }
 
 .LPAlbumName {
+    margin: 0;
     width: 100%; /* Ensure the text takes full width for proper truncation */
 
     /* Auto-adjust text size */
@@ -325,7 +345,7 @@
 }
 
 .LPAlbumArtistContainer {
-    height: 30% !important;
+    transform: translateY(-2px);
     overflow: hidden; /* Prevent text from overflowing */
 
     display: -webkit-box;
@@ -336,7 +356,7 @@
 }
 
 .LPAlbumArtist {
-    margin-top: 0px;
+    margin: 0;
     /* Auto-adjust text size */
     font-size: calc(100%); /* Adjust dynamically */
     line-height: 1.1; /* Prevent overflow */
@@ -351,6 +371,9 @@
 
 .LPServiceLogo {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
     width: 45px;
     height: 45px;
     margin-left: auto;
@@ -359,6 +382,10 @@
 }
 
 .LPServiceImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     box-sizing: border-box;
 }
 
@@ -369,16 +396,14 @@
 }
 
 @media (max-width: 1200px) {
-    .LPAlbumArt {
-        height: 110px;
-        width: 110px;
+    .LPContainer {
+        --lp-art-size: 110px;
     }
 }
 
 @media (max-width: 768px) {
-    .LPAlbumArt {
-        height: 75px;
-        width: 75px;
+    .LPContainer {
+        --lp-art-size: 75px;
     }
     .LPServiceLogo {
         width: 30px;
@@ -387,10 +412,6 @@
 }
 
 @media (max-width: 480px) {
-    .LPAlbumArt {
-        height: 75px;
-        width: 75px;
-    }
     .LPServiceLogo {
         width: 40px;
         height: 40px;

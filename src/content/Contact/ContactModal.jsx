@@ -1,142 +1,158 @@
-import React, { useContext, useState } from 'react';
+﻿import { useContext, useEffect, useId, useRef, useState } from 'react';
+import { ArrowUpRight, Check, LoaderCircle, Mail, Send } from 'lucide-react';
 import { ModalContext } from '../../utitlites/ModalContext.jsx';
 import './ContactModal.css';
 
 const WEBHOOK_URL = 'https://admin.tayoos.com/api/contact/webhook';
 const WEBHOOK_SECRET = import.meta.env.VITE_CONTACT_WEBHOOK_SECRET ?? '';
 const FALLBACK_EMAIL = 'dtoshidero@gmail.com';
+const EMPTY_FORM = { name: '', email: '', message: '' };
 
 const ContactModal = () => {
     const { darkMode } = useContext(ModalContext);
-
-    const [form, setForm] = useState({ name: '', email: '', message: '' });
-    // Bots love filling every field. Real users leave `hp` (honeypot) empty.
+    const id = useId();
+    const [form, setForm] = useState(EMPTY_FORM);
+    const [touched, setTouched] = useState({});
     const [hp, setHp] = useState('');
-    const [status, setStatus] = useState({ state: 'idle', error: null });
+    const [status, setStatus] = useState('idle');
+    const [sentEmail, setSentEmail] = useState('');
+    const formRef = useRef(null);
+    const successRef = useRef(null);
+    const requestRef = useRef(null);
+    const sending = status === 'sending';
+    const errors = {
+        name: form.name.trim() ? '' : 'Please enter your name.',
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) ? '' : 'Enter a valid email so I can reply.',
+        message: form.message.trim().length >= 4 ? '' : 'Add a little more detail (at least 4 characters).',
+    };
 
-    const canSubmit =
-        form.name.trim().length > 0 &&
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) &&
-        form.message.trim().length >= 4 &&
-        status.state !== 'sending';
+    useEffect(() => () => requestRef.current?.abort(), []);
+    useEffect(() => {
+        if (status === 'sent') successRef.current?.focus();
+    }, [status]);
 
-    const onField = (field) => (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    const onField = (field) => (event) => {
+        setForm((previous) => ({ ...previous, [field]: event.target.value }));
+        if (status === 'error') setStatus('idle');
+    };
+    const fieldProps = (field) => ({
+        id: `${id}-${field}`, name: field, value: form[field],
+        onChange: onField(field),
+        onBlur: () => setTouched((previous) => ({ ...previous, [field]: true })),
+        'aria-invalid': Boolean(touched[field] && errors[field]),
+        'aria-describedby': touched[field] && errors[field] ? `${id}-${field}-error` : undefined,
+        required: true, readOnly: sending,
+    });
+    const fieldError = (field) => touched[field] && errors[field] && (
+        <span className="ContactModal-field-error" id={`${id}-${field}-error`}>{errors[field]}</span>
+    );
 
-    const submit = async (e) => {
-        e.preventDefault();
-        if (!canSubmit) return;
-        if (hp) return; // silently drop bot submissions
-
-        setStatus({ state: 'sending', error: null });
-
+    const submit = async (event) => {
+        event.preventDefault();
+        if (requestRef.current || sending || hp) return;
+        setTouched({ name: true, email: true, message: true });
+        const invalid = Object.keys(errors).find((field) => errors[field]);
+        if (invalid) {
+            formRef.current.elements.namedItem(invalid)?.focus();
+            return;
+        }
+        setStatus('sending');
+        const controller = new AbortController();
+        requestRef.current = controller;
+        const timeout = setTimeout(() => controller.abort(), 15000);
         try {
-            const res = await fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Webhook-Secret': WEBHOOK_SECRET,
-                },
+            const response = await fetch(WEBHOOK_URL, {
+                method: 'POST', signal: controller.signal,
+                headers: { 'Content-Type': 'application/json', 'X-Webhook-Secret': WEBHOOK_SECRET },
                 body: JSON.stringify({
-                    name: form.name.trim(),
-                    email: form.email.trim(),
-                    message: form.message.trim(),
-                    source: 'tayoos.com',
-                    userAgent: navigator.userAgent,
+                    name: form.name.trim(), email: form.email.trim(), message: form.message.trim(),
+                    source: 'tayoos.com', userAgent: navigator.userAgent,
                 }),
             });
-
-            if (!res.ok) {
-                throw new Error(`Webhook returned ${res.status}`);
-            }
-
-            setStatus({ state: 'sent', error: null });
-            setForm({ name: '', email: '', message: '' });
-        } catch (err) {
-            console.error('Contact webhook failed:', err);
-            setStatus({ state: 'error', error: err.message });
+            if (!response.ok) throw new Error(`Contact request returned ${response.status}`);
+            setSentEmail(form.email.trim());
+            setStatus('sent');
+            setForm(EMPTY_FORM);
+            setTouched({});
+        } catch {
+            setStatus('error');
+        } finally {
+            clearTimeout(timeout);
+            requestRef.current = null;
         }
     };
 
+    const emailLink = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent('Hello from tayoos.com')}&body=${encodeURIComponent(form.message)}`;
+
     return (
         <div className={`ContactModal ${darkMode ? 'dark' : ''}`}>
-            {status.state === 'sent' ? (
-                <div className="ContactModal-sent">
-                    <h3>Message sent.</h3>
-                    <p>I'll get back to you at the email you provided.</p>
-                    <button
-                        type="button"
-                        className="ContactModal-secondary"
-                        onClick={() => setStatus({ state: 'idle', error: null })}
-                    >
-                        Send another
+            {status === 'sent' ? (
+                <section className="ContactModal-sent" aria-labelledby={`${id}-success`}>
+                    <span className="ContactModal-icon ContactModal-icon-success"><Check aria-hidden="true" /></span>
+                    <p className="ContactModal-eyebrow">Thanks for reaching out</p>
+                    <h3 id={`${id}-success`} ref={successRef} tabIndex={-1}>Your message is on its way.</h3>
+                    <p>I’ll reply to <strong>{sentEmail}</strong>. Looking forward to the conversation.</p>
+                    <button type="button" className="ContactModal-submit" onClick={() => setStatus('idle')}>
+                        Write another message <ArrowUpRight size={17} aria-hidden="true" />
                     </button>
-                </div>
+                </section>
             ) : (
-                <form className="ContactModal-form" onSubmit={submit} noValidate>
-                    <label className="ContactModal-field">
-                        <span>Name</span>
-                        <input
-                            type="text"
-                            value={form.name}
-                            onChange={onField('name')}
-                            autoComplete="name"
-                            maxLength={100}
-                            required
-                        />
-                    </label>
-
-                    <label className="ContactModal-field">
-                        <span>Email</span>
-                        <input
-                            type="email"
-                            value={form.email}
-                            onChange={onField('email')}
-                            autoComplete="email"
-                            maxLength={200}
-                            required
-                        />
-                    </label>
-
-                    <label className="ContactModal-field">
-                        <span>Message</span>
-                        <textarea
-                            value={form.message}
-                            onChange={onField('message')}
-                            rows={6}
-                            maxLength={4000}
-                            required
-                        />
-                    </label>
-
-                    {/* Honeypot — hidden from real users, catches naive form-fillers. */}
-                    <label className="ContactModal-hp" aria-hidden="true">
-                        Leave this field blank
-                        <input
-                            type="text"
-                            tabIndex={-1}
-                            autoComplete="off"
-                            value={hp}
-                            onChange={(e) => setHp(e.target.value)}
-                        />
-                    </label>
-
-                    {status.state === 'error' && (
-                        <p className="ContactModal-error">
-                            Couldn't send — {status.error}. You can also email{' '}
-                            <a href={`mailto:${FALLBACK_EMAIL}`}>{FALLBACK_EMAIL}</a>.
-                        </p>
-                    )}
-
-                    <div className="ContactModal-actions">
-                        <a className="ContactModal-secondary" href={`mailto:${FALLBACK_EMAIL}`}>
-                            Prefer email? {FALLBACK_EMAIL}
+                <>
+                    <header className="ContactModal-intro">
+                        <a className="ContactModal-icon ContactModal-email-icon" href={emailLink} aria-label={`Send an email to ${FALLBACK_EMAIL}`} title="Send an email instead">
+                            <Mail size={23} aria-hidden="true" />
                         </a>
-                        <button type="submit" className="ContactModal-submit" disabled={!canSubmit}>
-                            {status.state === 'sending' ? 'Sending…' : 'Send'}
-                        </button>
-                    </div>
-                </form>
+                        <div>
+                            <h3>Start a conversation.</h3>
+                            <p>Have a project in mind, a question or want to connect?</p>
+                        </div>
+                    </header>
+                    <form ref={formRef} className="ContactModal-form" onSubmit={submit} noValidate aria-busy={sending}>
+                        <p className="ContactModal-required">All fields are required.</p>
+                        <div className="ContactModal-row">
+                            <div className="ContactModal-field">
+                                <label htmlFor={`${id}-name`}>Your name</label>
+                                <input {...fieldProps('name')} type="text" autoComplete="name" maxLength={100} placeholder="How should I address you?" />
+                                {fieldError('name')}
+                            </div>
+                            <div className="ContactModal-field">
+                                <label htmlFor={`${id}-email`}>Email address</label>
+                                <input {...fieldProps('email')} type="email" autoComplete="email" maxLength={200} placeholder="you@example.com" spellCheck={false} autoCapitalize="none" />
+                                {fieldError('email')}
+                            </div>
+                        </div>
+                        <div className="ContactModal-field">
+                            <label htmlFor={`${id}-message`}>Your message</label>
+                            <textarea {...fieldProps('message')} rows={5} maxLength={4000} placeholder="Tell me a little about what you have in mind…" />
+                            <div className="ContactModal-message-meta">
+                                <span>{fieldError('message')}</span>
+                                <span className="ContactModal-count">{form.message.length.toLocaleString()} / 4,000</span>
+                            </div>
+                        </div>
+                        <label className="ContactModal-hp" aria-hidden="true">
+                            Leave this field blank
+                            <input type="text" name="website" tabIndex={-1} autoComplete="off" value={hp} onChange={(event) => setHp(event.target.value)} />
+                        </label>
+                        <div className="ContactModal-feedback" role="alert" aria-atomic="true">
+                            <div className={`ContactModal-error ${status !== 'error' ? 'ContactModal-error-placeholder' : ''}`} aria-hidden={status !== 'error'}>
+                                <strong>We couldn’t confirm your message was sent.</strong>
+                                <p>Your message is still here. Try again, or <a href={emailLink}>send it by email</a>.</p>
+                            </div>
+                        </div>
+                        <div className="ContactModal-actions">
+                            <button type="submit" className="ContactModal-submit" disabled={sending}>
+                                {sending ? <LoaderCircle className="ContactModal-spinner" size={17} aria-hidden="true" /> : <Send size={17} aria-hidden="true" />}
+                                {sending ? 'Sending…' : status === 'error' ? 'Try again' : 'Send message'}
+                            </button>
+                        </div>
+                        <span className="ContactModal-sr-only" role="status">{sending ? 'Sending your message. Please wait.' : ''}</span>
+                    </form>
+                </>
             )}
+            <footer className="ContactModal-footer">
+                <span>Prefer email?</span>
+                <a href={emailLink}><span>{FALLBACK_EMAIL}</span><ArrowUpRight size={15} aria-hidden="true" /></a>
+            </footer>
         </div>
     );
 };
